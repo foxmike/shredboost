@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-b.1",
+  "plan_version": "task-b.2",
   "active_phase": "B",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "b.1",
-      "title": "Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
+      "task_id": "b.2",
+      "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
       "phase": "B",
-      "status": "completed",
-      "backend": "pi_cli",
-      "last_run": "2026-07-25T15:57:18.257744",
+      "status": "planned",
+      "backend": "antigravity_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
