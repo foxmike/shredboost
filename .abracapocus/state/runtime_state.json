@@ -9,9 +9,9 @@
       "task_id": "a.3",
       "title": "Create CMake build configuration with product identity and three Linux target formats",
       "phase": "A",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T15:55:45.381617",
       "notes": ""
     }
   ],
@@ -51,6 +51,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:54:13.600489"
+    },
+    {
+      "run_id": "de3e55f6-b826-45fc-aaad-ea3af25d6f41",
+      "task_id": "a.3",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:55:45.381694"
     }
   ],
   "operator_overrides": {},
