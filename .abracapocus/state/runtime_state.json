@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-d.2",
+  "plan_version": "task-d.3",
   "active_phase": "D",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "d.2",
-      "title": "Implement multi topology non linear clipping engine with equal power topology crossfade",
+      "task_id": "d.3",
+      "title": "Implement 1st order DC blocker and 2nd order post drive tone LPF",
       "phase": "D",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T16:45:11.410254",
+      "status": "planned",
+      "backend": "antigravity_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
