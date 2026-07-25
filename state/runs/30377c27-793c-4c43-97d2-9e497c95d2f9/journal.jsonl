@@ -1,0 +1,1 @@
+{"task_id":"h.1","phase_id":"H","run_id":"30377c27-793c-4c43-97d2-9e497c95d2f9","accepted_at":"2026-07-25T20:37:34.727070","files_added":["scripts/validate_plugin.sh"],"files_modified":[],"public_symbols_added":[],"public_symbols_removed":[],"dependencies_added":[],"description_summary":"Create full validation script with build test and artifact checks"}

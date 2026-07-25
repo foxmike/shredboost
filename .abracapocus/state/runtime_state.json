@@ -9,9 +9,9 @@
       "task_id": "h.1",
       "title": "Create full validation script with build test and artifact checks",
       "phase": "H",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:37:34.750155",
       "notes": ""
     }
   ],
@@ -312,6 +312,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T20:36:40.881875"
+    },
+    {
+      "run_id": "30377c27-793c-4c43-97d2-9e497c95d2f9",
+      "task_id": "h.1",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:37:34.750347"
     }
   ],
   "operator_overrides": {},
