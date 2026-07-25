@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-a.4",
+  "plan_version": "task-a.5",
   "active_phase": "A",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "a.4",
-      "title": "Create paste and run build script and gitignore",
+      "task_id": "a.5",
+      "title": "Write phase a scaffold verification document",
       "phase": "A",
-      "status": "completed",
+      "status": "planned",
       "backend": "pi_cli",
-      "last_run": "2026-07-25T15:56:20.971261",
+      "last_run": null,
       "notes": ""
     }
   ],

@@ -1,0 +1,134 @@
+{
+  "path": null,
+  "run_id": "1e564ed4-31f0-4a2a-95b3-8f9eedf4edf3",
+  "task_id": "a.5",
+  "phase_name": "A",
+  "task_title": "Write phase a scaffold verification document",
+  "task_file": null,
+  "acceptance_criteria": [
+    "docs/verification/phase_a_scaffold.md exists",
+    "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+    "The document lists the three supported bus layouts and states others are rejected",
+    "The document includes the paste-and-run cmake configure and build commands",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "Created `docs/verification/phase_a_scaffold.md`.\n\nThe document includes:\n- **§1 Overview** of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- **§2 Frozen identity table** with all required values: ShredBoost, nSpace Systems, 1.0.0, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone — sourced from the actual `CMakeLists.txt`.\n- **§3 Bus-layout contract** listing the three accepted layouts (mono/mono, mono/stereo, stereo/stereo) and stating all others are rejected, matching `PluginProcessor.cpp`.\n- **§4 Paste-and-run commands** `cmake --preset linux-release` and `cmake --build build/linux-release --config Release` (plus `bash scripts/build_all.sh`), matching `CMakePresets.json` and the build script.\n- **§5 Artifact locations** under `build/linux-release/ShredBoost_artifacts/`.\n\nOnly the file in the allowed scope was created; no other files were modified.\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 33.33114171028137,
+  "changed_files": [
+    {
+      "path": "docs/verification/phase_a_scaffold.md",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "git diff reported no changes",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 33.33114171028137,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "a.5",
+    "acceptance_criteria": [
+      "docs/verification/phase_a_scaffold.md exists",
+      "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+      "The document lists the three supported bus layouts and states others are rejected",
+      "The document includes the paste-and-run cmake configure and build commands",
+      "No file outside allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "docs/verification/phase_a_scaffold.md exists",
+      "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+      "The document lists the three supported bus layouts and states others are rejected",
+      "The document includes the paste-and-run cmake configure and build commands",
+      "No file outside allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 5 of 5 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "Created `docs/verification/phase_a_scaffold.md`.\n\nThe document includes:\n- **§1 Overview** of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- **§2 Frozen identity table** with all required values: ShredBoost, nSpace Systems, 1.0.0, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone — sourced from the actual `CMakeLists.txt`.\n- **§3 Bus-layout contract** listing the three accepted layouts (mono/mono, mono/stereo, stereo/stereo) and stating all others are rejected, matching `PluginProcessor.cpp`.\n- **§4 Paste-and-run commands** `cmake --preset linux-release` and `cmake --build build/linux-release --config Release` (plus `bash scripts/build_all.sh`), matching `CMakePresets.json` and the build script.\n- **§5 Artifact locations** under `build/linux-release/ShredBoost_artifacts/`.\n\nOnly the file in the allowed scope was created; no other files were modified.\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 33.33114171028137,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "docs/verification/phase_a_scaffold.md"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "docs/verification/phase_a_scaffold.md exists",
+        "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+        "The document lists the three supported bus layouts and states others are rejected",
+        "The document includes the paste-and-run cmake configure and build commands",
+        "No file outside allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "docs/verification/phase_a_scaffold.md exists",
+        "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+        "The document lists the three supported bus layouts and states others are rejected",
+        "The document includes the paste-and-run cmake configure and build commands",
+        "No file outside allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 33.33114171028137,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-1e564ed4-31f0-4a2a-95b3-8f9eedf4edf3.json"
+  ],
+  "created_at": "2026-07-25T15:56:54.602686",
+  "lifecycle_state": "accepted"
+}
