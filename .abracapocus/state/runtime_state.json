@@ -9,9 +9,9 @@
       "task_id": "d.3",
       "title": "Implement 1st order DC blocker and 2nd order post drive tone LPF",
       "phase": "D",
-      "status": "planned",
+      "status": "completed",
       "backend": "antigravity_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:46:45.135162",
       "notes": ""
     }
   ],
@@ -177,6 +177,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:45:11.410422"
+    },
+    {
+      "run_id": "94ff25af-c6d0-46d1-9359-ba8a2ba1f167",
+      "task_id": "d.3",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:46:45.135320"
     }
   ],
   "operator_overrides": {},
