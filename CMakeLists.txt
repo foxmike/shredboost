@@ -102,11 +102,14 @@ add_executable(ShredBoostTests
     tests/TestMain.cpp
     tests/FilterTests.cpp
     tests/WaveshaperTests.cpp
+    tests/OversamplingTests.cpp
     Source/DSP/TightFilter.cpp
     Source/DSP/MidVoicingFilter.cpp
     Source/DSP/InputTrimStage.cpp
     Source/DSP/NonlinearClipper.cpp
     Source/DSP/DcBlocker.cpp
+    Source/DSP/OversamplingEngine.cpp
+    Source/DSP/AutoGainBypass.cpp
 )
 
 target_compile_definitions(ShredBoostTests PRIVATE
@@ -129,3 +132,4 @@ target_link_libraries(ShredBoostTests PRIVATE
 
 add_test(NAME FilterTests COMMAND ShredBoostTests)
 add_test(NAME WaveshaperTests COMMAND ShredBoostTests)
+add_test(NAME OversamplingTests COMMAND ShredBoostTests)

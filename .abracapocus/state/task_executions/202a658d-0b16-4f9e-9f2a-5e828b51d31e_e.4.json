@@ -1,0 +1,145 @@
+{
+  "path": null,
+  "run_id": "202a658d-0b16-4f9e-9f2a-5e828b51d31e",
+  "task_id": "e.4",
+  "phase_name": "E",
+  "task_title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
+  "task_file": null,
+  "acceptance_criteria": [
+    "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+    "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+    "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+    "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+    "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "All acceptance criteria are met. Summary of the work:\n\n## Files created/modified\n\n**`tests/OversamplingTests.cpp`** (created) — pure `juce::UnitTest`, three test classes registered statically:\n- `OversamplingAliasTests` — drives a 10 kHz sine through `upsample → SoftClipper (cubic) → downsample`, computes a Hann-windowed magnitude spectrum via `juce::dsp::FFT`, and asserts the inharmonic alias floor is rejected below **-60 dB** for the 4x path. It also runs a 1x baseline that must alias above -45 dB (proving the test exercises the alias path), and asserts 4x is ≥15 dB cleaner than 1x.\n- `OversamplingPDCTests` — pumps audio blocks through the engine to complete the 10 ms mute-fade factor handoff, then asserts **exact** `getLatencySamples()` integer values for 1x/2x/4x (literals 0/49/61), cross-checked against an independent reference `juce::dsp::Oversampling` built with identical `filterHalfBandFIREquiripple` + `useIntegerLatency=true` parameters, plus `getOversamplingFactor()` reflection.\n- `AutoGainBypassLoudnessTests` — smoke check that after RMS tracking converges (wet = dry×2.0), bypassing reproduces the wet loudness (output RMS within ±1.5 dB of wet RMS).\n\n**`CMakeLists.txt`** (modified) — registered `Source/DSP/OversamplingEngine.cpp`, `Source/DSP/AutoGainBypass.cpp`, and `tests/OversamplingTests.cpp` with the existing `ShredBoostTests` juce::UnitTest console runner target, and added `add_test(NAME OversamplingTests COMMAND ShredBoostTests)` for CTest.\n\n## Verification\n```\ncmake --build build --target ShredBoostTests   # clean build, no warnings\nctest --test-dir build --output-on-failure     # 4/4 tests Passed, incl. OversamplingTests\n```\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 513.8711082935333,
+  "changed_files": [
+    {
+      "path": "CMakeLists.txt",
+      "status": "modified",
+      "code": null
+    },
+    {
+      "path": "tests/OversamplingTests.cpp",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "CMakeLists.txt | 4 ++++\n 1 file changed, 4 insertions(+)",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 513.8711082935333,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "e.4",
+    "acceptance_criteria": [
+      "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+      "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+      "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+      "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+      "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+      "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+      "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+      "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+      "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 6 of 6 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "All acceptance criteria are met. Summary of the work:\n\n## Files created/modified\n\n**`tests/OversamplingTests.cpp`** (created) — pure `juce::UnitTest`, three test classes registered statically:\n- `OversamplingAliasTests` — drives a 10 kHz sine through `upsample → SoftClipper (cubic) → downsample`, computes a Hann-windowed magnitude spectrum via `juce::dsp::FFT`, and asserts the inharmonic alias floor is rejected below **-60 dB** for the 4x path. It also runs a 1x baseline that must alias above -45 dB (proving the test exercises the alias path), and asserts 4x is ≥15 dB cleaner than 1x.\n- `OversamplingPDCTests` — pumps audio blocks through the engine to complete the 10 ms mute-fade factor handoff, then asserts **exact** `getLatencySamples()` integer values for 1x/2x/4x (literals 0/49/61), cross-checked against an independent reference `juce::dsp::Oversampling` built with identical `filterHalfBandFIREquiripple` + `useIntegerLatency=true` parameters, plus `getOversamplingFactor()` reflection.\n- `AutoGainBypassLoudnessTests` — smoke check that after RMS tracking converges (wet = dry×2.0), bypassing reproduces the wet loudness (output RMS within ±1.5 dB of wet RMS).\n\n**`CMakeLists.txt`** (modified) — registered `Source/DSP/OversamplingEngine.cpp`, `Source/DSP/AutoGainBypass.cpp`, and `tests/OversamplingTests.cpp` with the existing `ShredBoostTests` juce::UnitTest console runner target, and added `add_test(NAME OversamplingTests COMMAND ShredBoostTests)` for CTest.\n\n## Verification\n```\ncmake --build build --target ShredBoostTests   # clean build, no warnings\nctest --test-dir build --output-on-failure     # 4/4 tests Passed, incl. OversamplingTests\n```\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 513.8711082935333,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "CMakeLists.txt",
+      "tests/OversamplingTests.cpp"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+        "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+        "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+        "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+        "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+        "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+        "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+        "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+        "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 513.8711082935333,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-202a658d-0b16-4f9e-9f2a-5e828b51d31e.json"
+  ],
+  "created_at": "2026-07-25T19:40:14.173381",
+  "lifecycle_state": "accepted"
+}

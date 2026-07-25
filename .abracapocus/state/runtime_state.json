@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-e.3",
+  "plan_version": "task-e.4",
   "active_phase": "E",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "e.3",
-      "title": "Implement auto loudness matched bypass RMS tracking and dry compensation",
+      "task_id": "e.4",
+      "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
       "phase": "E",
-      "status": "completed",
-      "backend": "antigravity_cli",
-      "last_run": "2026-07-25T19:31:39.893170",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
