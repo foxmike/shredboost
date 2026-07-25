@@ -1,0 +1,1 @@
+{"task_id":"a.1","phase_id":"A","run_id":"6d5c40d9-b0ee-4890-8b46-417137c34d10","accepted_at":"2026-07-25T15:53:46.824434","files_added":[],"files_modified":["Source/PluginProcessor.cpp"],"public_symbols_added":[],"public_symbols_removed":[],"dependencies_added":[],"description_summary":"Create processor shell with bus layout contract and deterministic channel clearing"}

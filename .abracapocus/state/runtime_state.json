@@ -9,9 +9,9 @@
       "task_id": "a.1",
       "title": "Create processor shell with bus layout contract and deterministic channel clearing",
       "phase": "A",
-      "status": "planned",
+      "status": "completed",
       "backend": "antigravity_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T15:53:46.850051",
       "notes": ""
     }
   ],
@@ -33,6 +33,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:30:10.835551"
+    },
+    {
+      "run_id": "6d5c40d9-b0ee-4890-8b46-417137c34d10",
+      "task_id": "a.1",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:53:46.850177"
     }
   ],
   "operator_overrides": {},
