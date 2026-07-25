@@ -9,9 +9,9 @@
       "task_id": "d.4",
       "title": "Compose pre filter shaper clipper DC blocker and tone filter in processing chain",
       "phase": "D",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:48:48.847399",
       "notes": ""
     }
   ],
@@ -186,6 +186,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:46:45.135320"
+    },
+    {
+      "run_id": "7de3217c-1329-4e9d-bbf1-c1a5b085c322",
+      "task_id": "d.4",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:48:48.847607"
     }
   ],
   "operator_overrides": {},
