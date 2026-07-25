@@ -914,5 +914,60 @@
       "version": "task-c.4",
       "created_at": "2026-07-25T16:23:52.597170"
     }
+  },
+  {
+    "created_at": "2026-07-25T16:42:21.174329",
+    "project_name": "shredboost",
+    "goal": "Create Source/DSP/TransientShaper.h and Source/DSP/TransientShaper.cpp implementing a level-independent transient pick-attack shaper.\n\nImplement a dual envelope follower with tau_fast=1ms and tau_slow=15ms (one-pole followers whose coefficients are computed from the sample rate in a prepare()/prepareToPlay-style setup). Compute the relative attack delta as delta_rel = clamp((e_fast - e_slow) / (e_slow + epsilon), 0.0, 2.0) so the effect is independent of absolute signal level. Apply a gain shaped by delta_rel scaled by the smoothed pick_attack amount to emphasize transients.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction inside the per-sample/processBlock path; instantiate juce::ScopedNoDenormals at the top of any block-processing method; allocate all state during prepare. Use linear juce::SmoothedValue for the pick_attack dB amount. Provide a class TransientShaper with prepare(double sampleRate, int maxBlockSize), reset(), and a processing method operating on a juce::dsp::AudioBlock or float buffers.\n\nBefore editing, inspect:\n- CMakeLists.txt to see how Source/DSP module files are added to the target and the juce_add_plugin/target_link_libraries setup.\n- Source/DSP/ for existing header/cpp conventions (namespace, include guards, prepare/reset signatures) from earlier phases.\n- JUCE/modules/juce_dsp for juce::dsp::AudioBlock and juce::SmoothedValue usage (read only; do not modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths. Do not modify CMakeLists.txt in this task.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement level independent transient pick attack shaper",
+      "phases": [
+        {
+          "name": "D",
+          "objective": "Create Source/DSP/TransientShaper.h and Source/DSP/TransientShaper.cpp implementing a level-independent transient pick-attack shaper.\n\nImplement a dual envelope follower with tau_fast=1ms and tau_slow=15ms (one-pole followers whose coefficients are computed from the sample rate in a prepare()/prepareToPlay-style setup). Compute the relative attack delta as delta_rel = clamp((e_fast - e_slow) / (e_slow + epsilon), 0.0, 2.0) so the effect is independent of absolute signal level. Apply a gain shaped by delta_rel scaled by the smoothed pick_attack amount to emphasize transients.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction inside the per-sample/processBlock path; instantiate juce::ScopedNoDenormals at the top of any block-processing method; allocate all state during prepare. Use linear juce::SmoothedValue for the pick_attack dB amount. Provide a class TransientShaper with prepare(double sampleRate, int maxBlockSize), reset(), and a processing method operating on a juce::dsp::AudioBlock or float buffers.\n\nBefore editing, inspect:\n- CMakeLists.txt to see how Source/DSP module files are added to the target and the juce_add_plugin/target_link_libraries setup.\n- Source/DSP/ for existing header/cpp conventions (namespace, include guards, prepare/reset signatures) from earlier phases.\n- JUCE/modules/juce_dsp for juce::dsp::AudioBlock and juce::SmoothedValue usage (read only; do not modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths. Do not modify CMakeLists.txt in this task.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "d.1",
+                "title": "Implement level independent transient pick attack shaper",
+                "description": "Create Source/DSP/TransientShaper.h and Source/DSP/TransientShaper.cpp implementing a level-independent transient pick-attack shaper.\n\nImplement a dual envelope follower with tau_fast=1ms and tau_slow=15ms (one-pole followers whose coefficients are computed from the sample rate in a prepare()/prepareToPlay-style setup). Compute the relative attack delta as delta_rel = clamp((e_fast - e_slow) / (e_slow + epsilon), 0.0, 2.0) so the effect is independent of absolute signal level. Apply a gain shaped by delta_rel scaled by the smoothed pick_attack amount to emphasize transients.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction inside the per-sample/processBlock path; instantiate juce::ScopedNoDenormals at the top of any block-processing method; allocate all state during prepare. Use linear juce::SmoothedValue for the pick_attack dB amount. Provide a class TransientShaper with prepare(double sampleRate, int maxBlockSize), reset(), and a processing method operating on a juce::dsp::AudioBlock or float buffers.\n\nBefore editing, inspect:\n- CMakeLists.txt to see how Source/DSP module files are added to the target and the juce_add_plugin/target_link_libraries setup.\n- Source/DSP/ for existing header/cpp conventions (namespace, include guards, prepare/reset signatures) from earlier phases.\n- JUCE/modules/juce_dsp for juce::dsp::AudioBlock and juce::SmoothedValue usage (read only; do not modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths. Do not modify CMakeLists.txt in this task.",
+                "phase": "D",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/DSP/TransientShaper.h and Source/DSP/TransientShaper.cpp exist and declare/define a TransientShaper class with prepare, reset, and a process method",
+                  "delta_rel is computed as clamp((e_fast - e_slow)/(e_slow + epsilon), 0.0, 2.0) with tau_fast=1ms and tau_slow=15ms",
+                  "juce::ScopedNoDenormals is instantiated at the top of the block-processing method and no heap allocation occurs in the per-sample path",
+                  "cmake --build build --target ShredBoost succeeds after these files are wired in (verified in the compose/verification tasks)",
+                  "No file outside allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T16:40:21.531499",
+                "selected_backend": "codex_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/DSP/TransientShaper.h",
+                  "Source/DSP/TransientShaper.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T16:42:21.068155",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-d.1",
+      "created_at": "2026-07-25T16:40:21.632190"
+    }
   }
 ]

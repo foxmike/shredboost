@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-d.1",
+  "plan_version": "task-d.2",
   "active_phase": "D",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "d.1",
-      "title": "Implement level independent transient pick attack shaper",
+      "task_id": "d.2",
+      "title": "Implement multi topology non linear clipping engine with equal power topology crossfade",
       "phase": "D",
-      "status": "completed",
+      "status": "planned",
       "backend": "codex_cli",
-      "last_run": "2026-07-25T16:42:21.089254",
+      "last_run": null,
       "notes": ""
     }
   ],
