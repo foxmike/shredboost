@@ -9,9 +9,9 @@
       "task_id": "f.2",
       "title": "Create real time memory allocation and denormal audit tests",
       "phase": "F",
-      "status": "planned",
+      "status": "blocked",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:05:39.509615",
       "notes": ""
     }
   ],
@@ -249,6 +249,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T19:45:37.638307"
+    },
+    {
+      "run_id": "64ea95c7-a237-4566-9c41-156d3ba0f2f1",
+      "task_id": "f.2",
+      "backend": "pi_cli",
+      "status": "failed",
+      "reviewer_status": "changes_requested",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:05:39.509751"
     }
   ],
   "operator_overrides": {},
