@@ -9,9 +9,9 @@
       "task_id": "f.1",
       "title": "Integrate complete DSP signal chain into PluginProcessor processBlock",
       "phase": "F",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T19:45:37.638084",
       "notes": ""
     }
   ],
@@ -240,6 +240,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T19:40:14.859165"
+    },
+    {
+      "run_id": "68731f2b-de4e-48a7-872e-206a3fd31e16",
+      "task_id": "f.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:45:37.638307"
     }
   ],
   "operator_overrides": {},
