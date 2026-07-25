@@ -9,9 +9,9 @@
       "task_id": "d.1",
       "title": "Implement level independent transient pick attack shaper",
       "phase": "D",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:42:21.089254",
       "notes": ""
     }
   ],
@@ -159,6 +159,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:28:10.448066"
+    },
+    {
+      "run_id": "c180a11f-9ebe-45de-a543-9c6245f38653",
+      "task_id": "d.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:42:21.089442"
     }
   ],
   "operator_overrides": {},
