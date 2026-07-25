@@ -9,9 +9,9 @@
       "task_id": "c.1",
       "title": "Implement pre drive tight HPF with Q 1 2 resonant bump option",
       "phase": "C",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:19:40.489801",
       "notes": ""
     }
   ],
@@ -123,6 +123,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:15:19.807806"
+    },
+    {
+      "run_id": "d0585b08-8bce-443b-a0d7-7d7437418cbf",
+      "task_id": "c.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:19:40.490016"
     }
   ],
   "operator_overrides": {},

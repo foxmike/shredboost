@@ -1,0 +1,1 @@
+{"task_id":"c.1","phase_id":"C","run_id":"d0585b08-8bce-443b-a0d7-7d7437418cbf","accepted_at":"2026-07-25T16:19:40.462131","files_added":["Source/DSP/TightFilter.cpp","Source/DSP/TightFilter.h"],"files_modified":[],"public_symbols_added":[],"public_symbols_removed":[],"dependencies_added":[],"description_summary":"Implement pre drive tight HPF with Q 1 2 resonant bump option"}
