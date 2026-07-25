@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-b.2",
+  "plan_version": "task-b.3",
   "active_phase": "B",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "b.2",
-      "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
+      "task_id": "b.3",
+      "title": "Create domain correct smoothed parameter snapshot engine",
       "phase": "B",
-      "status": "completed",
-      "backend": "antigravity_cli",
-      "last_run": "2026-07-25T15:58:45.332660",
+      "status": "planned",
+      "backend": "codex_cli",
+      "last_run": null,
       "notes": ""
     }
   ],

@@ -454,5 +454,62 @@
       "version": "task-b.1",
       "created_at": "2026-07-25T15:56:55.480714"
     }
+  },
+  {
+    "created_at": "2026-07-25T15:58:45.386415",
+    "project_name": "shredboost",
+    "goal": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Create parameter layout with APVTS definitions for all ShredBoost parameters",
+      "phases": [
+        {
+          "name": "B",
+          "objective": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "b.2",
+                "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
+                "description": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+                "phase": "B",
+                "dependencies": [
+                  "b.1"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp exist",
+                  "createParameterLayout returns a juce::AudioProcessorValueTreeState::ParameterLayout with exactly the 11 parameters from ParameterIDs.h",
+                  "voicing_mode and oversampling are AudioParameterChoice with defaults Yng-Grey and 2x respectively; auto_gain is AudioParameterBool defaulting to false",
+                  "Each parameter's range and default match the values documented in ParameterIDs.h",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T15:57:18.343291",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/Parameters/ParameterLayout.h",
+                  "Source/Parameters/ParameterLayout.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T15:58:45.307393",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-b.2",
+      "created_at": "2026-07-25T15:57:18.420137"
+    }
   }
 ]
