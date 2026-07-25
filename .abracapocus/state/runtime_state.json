@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-g.5",
-  "active_phase": "G",
+  "plan_version": "task-h.1",
+  "active_phase": "H",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "g.5",
-      "title": "Integrate full editor UI components layout and resizable window",
-      "phase": "G",
-      "status": "completed",
-      "backend": "antigravity_cli",
-      "last_run": "2026-07-25T20:36:40.881701",
+      "task_id": "h.1",
+      "title": "Create full validation script with build test and artifact checks",
+      "phase": "H",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -317,6 +317,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "G"
+    "H"
   ]
 }

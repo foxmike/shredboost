@@ -1,0 +1,133 @@
+{
+  "run_at": "2026-07-25T20:36:41.131488",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g",
+  "status": "passed",
+  "counts": {
+    "passed": 5,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "g.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "1faaf077-1c5b-4f71-acec-5298860d2e51",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "g.1:Review complete"
+    },
+    {
+      "task_id": "g.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "f1eba2b2-9b27-4f49-984c-bacd6be15f3f",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "g.2:Review complete"
+    },
+    {
+      "task_id": "g.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "a9f38ebd-0dda-4d05-b7e9-56459ebcfad1",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "g.3:Review complete"
+    },
+    {
+      "task_id": "g.4",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "f494a500-a062-4d97-8b8a-89273fa54f8b",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "g.4:Review complete"
+    },
+    {
+      "task_id": "g.5",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "391efb2c-1665-49e0-a7c8-2880430858b6",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "g.5:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "configure",
+        "status": "failed",
+        "detail": "CMake Error: The source directory \"/home/mike/dev/mike/abracapocus/python/abracapocus_2\" does not appear to contain CMakeLists.txt.\nSpecify --help for usage, or press the help button on the CMake GUI.",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build-vst3",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost_VST3"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build-standalone",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost_Standalone"
+        ],
+        "exit_code": 1
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}

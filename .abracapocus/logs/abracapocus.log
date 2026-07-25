@@ -64,3 +64,5 @@
 2026-07-25 16:34:27 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
 2026-07-25 16:34:28 | INFO | abracapocus | run=f494a500-a062-4d97-8b8a-89273fa54f8b phases=1 verification=passed
 2026-07-25 16:36:39 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
+2026-07-25 16:36:40 | INFO | abracapocus | run=391efb2c-1665-49e0-a7c8-2880430858b6 phases=1 verification=passed
+2026-07-25 16:37:33 | INFO | abracapocus.backends.pi_cli | backend=pi_cli retry_count=0

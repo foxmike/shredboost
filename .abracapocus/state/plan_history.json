@@ -1,62 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T16:19:40.590311",
-    "project_name": "shredboost",
-    "goal": "Create Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp implementing a 2nd-order RBJ high-pass filter used as the pre-drive tight low-end control.\n\nRequirements:\n- Class TightFilter with prepare(double sampleRate), reset(), and process/processBlock methods operating on a single mono channel of samples (buffers pre-allocated in prepare()).\n- Cutoff (tight_cut) parameter constrained to 80-400 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain) \u2014 do NOT construct the SmoothedValue inside the process loop.\n- Two Q modes: standard Butterworth Q=0.707, and Precision Tight resonant mode Q=1.2 producing a +1.8 dB overshoot at cutoff.\n- RBJ biquad coefficient computation recomputed on sample-rate change and on smoothed-frequency movement; coefficients derived only in prepare()/coefficient-update paths, never allocating in process.\n- Flush denormals: apply juce::ScopedNoDenormals discipline at the call site and add a tiny-value flush (or use JUCE denormal-safe state) in the recursive state to prevent denormal stalls.\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are added to the target; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and juce::ScopedNoDenormals (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Implement pre drive tight HPF with Q 1 2 resonant bump option",
-      "phases": [
-        {
-          "name": "C",
-          "objective": "Create Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp implementing a 2nd-order RBJ high-pass filter used as the pre-drive tight low-end control.\n\nRequirements:\n- Class TightFilter with prepare(double sampleRate), reset(), and process/processBlock methods operating on a single mono channel of samples (buffers pre-allocated in prepare()).\n- Cutoff (tight_cut) parameter constrained to 80-400 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain) \u2014 do NOT construct the SmoothedValue inside the process loop.\n- Two Q modes: standard Butterworth Q=0.707, and Precision Tight resonant mode Q=1.2 producing a +1.8 dB overshoot at cutoff.\n- RBJ biquad coefficient computation recomputed on sample-rate change and on smoothed-frequency movement; coefficients derived only in prepare()/coefficient-update paths, never allocating in process.\n- Flush denormals: apply juce::ScopedNoDenormals discipline at the call site and add a tiny-value flush (or use JUCE denormal-safe state) in the recursive state to prevent denormal stalls.\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are added to the target; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and juce::ScopedNoDenormals (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "c.1",
-                "title": "Implement pre drive tight HPF with Q 1 2 resonant bump option",
-                "description": "Create Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp implementing a 2nd-order RBJ high-pass filter used as the pre-drive tight low-end control.\n\nRequirements:\n- Class TightFilter with prepare(double sampleRate), reset(), and process/processBlock methods operating on a single mono channel of samples (buffers pre-allocated in prepare()).\n- Cutoff (tight_cut) parameter constrained to 80-400 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain) \u2014 do NOT construct the SmoothedValue inside the process loop.\n- Two Q modes: standard Butterworth Q=0.707, and Precision Tight resonant mode Q=1.2 producing a +1.8 dB overshoot at cutoff.\n- RBJ biquad coefficient computation recomputed on sample-rate change and on smoothed-frequency movement; coefficients derived only in prepare()/coefficient-update paths, never allocating in process.\n- Flush denormals: apply juce::ScopedNoDenormals discipline at the call site and add a tiny-value flush (or use JUCE denormal-safe state) in the recursive state to prevent denormal stalls.\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are added to the target; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and juce::ScopedNoDenormals (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-                "phase": "C",
-                "dependencies": [],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp exist and declare/define class TightFilter",
-                  "TightFilter uses a multiplicative juce::SmoothedValue for the tight_cut frequency and does not construct it inside the process loop",
-                  "TightFilter supports Q=0.707 Butterworth and Q=1.2 Precision Tight modes with a +1.8 dB overshoot at cutoff in the resonant mode",
-                  "RBJ biquad coefficients are recomputed on sample-rate change and denormals are flushed in the recursive state",
-                  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
-                  "cmake --build build --target ShredBoost compiles Source/DSP/TightFilter.cpp without errors",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T16:15:21.004629",
-                "selected_backend": "codex_cli",
-                "model": null,
-                "task_timeout_seconds": 1800.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "Source/DSP/TightFilter.h",
-                  "Source/DSP/TightFilter.cpp"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T16:19:40.463419",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-c.1",
-      "created_at": "2026-07-25T16:15:21.105359"
-    }
-  },
-  {
     "created_at": "2026-07-25T16:21:54.569660",
     "project_name": "shredboost",
     "goal": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
@@ -1131,6 +1074,68 @@
       ],
       "version": "task-g.4",
       "created_at": "2026-07-25T20:31:21.370224"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:36:40.965243",
+    "project_name": "shredboost",
+    "goal": "Wire all UI components into the plugin editor and register the new UI sources in the build. Update Source/PluginEditor.h and Source/PluginEditor.cpp so the editor: instantiates and applies ShredLookAndFeel; creates and lays out TransferCurveScope, SpectrumOverlay, and LevelMeters plus the parameter rotaries; connects every parameter control to the APVTS via SliderAttachment/ButtonAttachment/ComboBoxAttachment; adds a gain-matched bypass button bound to the bypass parameter; and makes the window resizable (setResizable with a constrainer / sensible min/max, laying out in resized()). Pass the processor's atomic/FIFO telemetry handles into the scope, spectrum, and meter components. Update CMakeLists.txt to add all Source/UI/*.cpp files (ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, LevelMeters) to the target sources. GUI code must only read atomic telemetry / lock-free FIFOs; it must never lock or block the audio thread.\n\nBefore editing, inspect:\n- Source/UI/ShredLookAndFeel.h, Source/UI/TransferCurveScope.h, Source/UI/SpectrumOverlay.h, Source/UI/LevelMeters.h (public APIs produced by g.1-g.4)\n- Source/PluginProcessor.h (APVTS accessor, parameter IDs, and telemetry handles to bind)\n- Source/PluginEditor.h and Source/PluginEditor.cpp (current editor structure)\n- CMakeLists.txt (existing target sources block and Source/UI file list)",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Integrate full editor UI components layout and resizable window",
+      "phases": [
+        {
+          "name": "G",
+          "objective": "Wire all UI components into the plugin editor and register the new UI sources in the build. Update Source/PluginEditor.h and Source/PluginEditor.cpp so the editor: instantiates and applies ShredLookAndFeel; creates and lays out TransferCurveScope, SpectrumOverlay, and LevelMeters plus the parameter rotaries; connects every parameter control to the APVTS via SliderAttachment/ButtonAttachment/ComboBoxAttachment; adds a gain-matched bypass button bound to the bypass parameter; and makes the window resizable (setResizable with a constrainer / sensible min/max, laying out in resized()). Pass the processor's atomic/FIFO telemetry handles into the scope, spectrum, and meter components. Update CMakeLists.txt to add all Source/UI/*.cpp files (ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, LevelMeters) to the target sources. GUI code must only read atomic telemetry / lock-free FIFOs; it must never lock or block the audio thread.\n\nBefore editing, inspect:\n- Source/UI/ShredLookAndFeel.h, Source/UI/TransferCurveScope.h, Source/UI/SpectrumOverlay.h, Source/UI/LevelMeters.h (public APIs produced by g.1-g.4)\n- Source/PluginProcessor.h (APVTS accessor, parameter IDs, and telemetry handles to bind)\n- Source/PluginEditor.h and Source/PluginEditor.cpp (current editor structure)\n- CMakeLists.txt (existing target sources block and Source/UI file list)",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "g.5",
+                "title": "Integrate full editor UI components layout and resizable window",
+                "description": "Wire all UI components into the plugin editor and register the new UI sources in the build. Update Source/PluginEditor.h and Source/PluginEditor.cpp so the editor: instantiates and applies ShredLookAndFeel; creates and lays out TransferCurveScope, SpectrumOverlay, and LevelMeters plus the parameter rotaries; connects every parameter control to the APVTS via SliderAttachment/ButtonAttachment/ComboBoxAttachment; adds a gain-matched bypass button bound to the bypass parameter; and makes the window resizable (setResizable with a constrainer / sensible min/max, laying out in resized()). Pass the processor's atomic/FIFO telemetry handles into the scope, spectrum, and meter components. Update CMakeLists.txt to add all Source/UI/*.cpp files (ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, LevelMeters) to the target sources. GUI code must only read atomic telemetry / lock-free FIFOs; it must never lock or block the audio thread.\n\nBefore editing, inspect:\n- Source/UI/ShredLookAndFeel.h, Source/UI/TransferCurveScope.h, Source/UI/SpectrumOverlay.h, Source/UI/LevelMeters.h (public APIs produced by g.1-g.4)\n- Source/PluginProcessor.h (APVTS accessor, parameter IDs, and telemetry handles to bind)\n- Source/PluginEditor.h and Source/PluginEditor.cpp (current editor structure)\n- CMakeLists.txt (existing target sources block and Source/UI file list)",
+                "phase": "G",
+                "dependencies": [
+                  "g.1",
+                  "g.2",
+                  "g.3",
+                  "g.4"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/PluginEditor.cpp instantiates ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, and LevelMeters and lays them out in resized()",
+                  "Every parameter control is connected to the APVTS via an attachment and a gain-matched bypass button is bound to the bypass parameter",
+                  "The editor window is resizable via setResizable with a bounded constrainer",
+                  "CMakeLists.txt lists Source/UI/ShredLookAndFeel.cpp, Source/UI/TransferCurveScope.cpp, Source/UI/SpectrumOverlay.cpp, and Source/UI/LevelMeters.cpp in the target sources",
+                  "cmake -S . -B build succeeds and cmake --build build --target ShredBoost_VST3 succeeds",
+                  "No file outside this task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:34:28.291520",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1800.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/PluginEditor.h",
+                  "Source/PluginEditor.cpp",
+                  "CMakeLists.txt"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:36:40.853338",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-g.5",
+      "created_at": "2026-07-25T20:34:28.362633"
     }
   }
 ]
