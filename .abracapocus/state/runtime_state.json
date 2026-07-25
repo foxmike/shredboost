@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-c.4",
-  "active_phase": "C",
+  "plan_version": "task-d.1",
+  "active_phase": "D",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "c.4",
-      "title": "Create filter unit tests for HPF mid bell and input trim",
-      "phase": "C",
-      "status": "completed",
-      "backend": "pi_cli",
-      "last_run": "2026-07-25T16:28:10.447927",
+      "task_id": "d.1",
+      "title": "Implement level independent transient pick attack shaper",
+      "phase": "D",
+      "status": "planned",
+      "backend": "codex_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -164,6 +164,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "C"
+    "D"
   ]
 }

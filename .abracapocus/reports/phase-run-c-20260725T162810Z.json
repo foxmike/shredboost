@@ -1,0 +1,133 @@
+{
+  "run_at": "2026-07-25T16:28:10.729233",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c",
+  "status": "passed",
+  "counts": {
+    "passed": 4,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "c.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "d0585b08-8bce-443b-a0d7-7d7437418cbf",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "c.1:Review complete"
+    },
+    {
+      "task_id": "c.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "166bde9a-3ecf-4403-9440-1c9c11c7b296",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "c.2:Review complete"
+    },
+    {
+      "task_id": "c.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "4979c05e-a14f-449b-b4ab-ff1008076825",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "c.3:Review complete"
+    },
+    {
+      "task_id": "c.4",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "ea2d1afa-5cdc-4626-839a-142db210ab4e",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "c.4:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "configure",
+        "status": "failed",
+        "detail": "CMake Error: The source directory \"/home/mike/dev/mike/abracapocus/python/abracapocus_2\" does not appear to contain CMakeLists.txt.\nSpecify --help for usage, or press the help button on the CMake GUI.",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build",
+          "-DCMAKE_BUILD_TYPE=Release"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build-plugin",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build-tests",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoostTests"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "ctest-filters",
+        "status": "failed",
+        "detail": "Failed to change working directory to \"/home/mike/dev/mike/abracapocus/python/abracapocus_2/build\": No such file or directory",
+        "command": [
+          "ctest",
+          "--test-dir",
+          "build",
+          "-R",
+          "FilterTests",
+          "--output-on-failure"
+        ],
+        "exit_code": 1
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}
