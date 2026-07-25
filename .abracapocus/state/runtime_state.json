@@ -9,9 +9,9 @@
       "task_id": "h.2",
       "title": "Create factory presets spanning thrash rhythm and singing lead voicings",
       "phase": "H",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:40:12.845519",
       "notes": ""
     }
   ],
@@ -321,6 +321,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T20:37:34.750347"
+    },
+    {
+      "run_id": "c6a06fbd-eb9f-48fc-97a7-015958469c10",
+      "task_id": "h.2",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:40:12.845648"
     }
   ],
   "operator_overrides": {},
