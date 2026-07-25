@@ -9,9 +9,9 @@
       "task_id": "g.2",
       "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
       "phase": "G",
-      "status": "planned",
+      "status": "completed",
       "backend": "antigravity_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:26:48.214750",
       "notes": ""
     }
   ],
@@ -276,6 +276,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T20:22:25.824344"
+    },
+    {
+      "run_id": "f1eba2b2-9b27-4f49-984c-bacd6be15f3f",
+      "task_id": "g.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:26:48.214927"
     }
   ],
   "operator_overrides": {},
