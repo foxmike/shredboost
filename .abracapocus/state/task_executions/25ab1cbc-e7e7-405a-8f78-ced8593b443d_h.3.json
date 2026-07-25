@@ -1,0 +1,139 @@
+{
+  "path": null,
+  "run_id": "25ab1cbc-e7e7-405a-8f78-ced8593b443d",
+  "task_id": "h.3",
+  "phase_name": "H",
+  "task_title": "Write phase h release verification document",
+  "task_file": null,
+  "acceptance_criteria": [
+    "docs/verification/phase_h_release.md exists",
+    "The document records the exact validation command(s) executed",
+    "The document reports real CTest results including tests run/passed/failed counts",
+    "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+    "The document states an overall PASS/FAIL conclusion with the execution date",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "The Phase H release verification document has been written to `docs/verification/phase_h_release.md`, recording the real results from executing `scripts/validate_plugin.sh`.\n\nSummary of what was actually executed and recorded:\n\n**Command run:** `bash scripts/validate_plugin.sh` (which internally runs `rm -rf build`, `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, `cmake --build build --config Release`, `ctest --test-dir build --output-on-failure`, and filesystem artifact checks). Exit code: `0`.\n\n**Real results captured in the document:**\n1. **Build:** PASS — all targets linked (`ShredBoost`, `ShredBoost_VST3`, `ShredBoost_LV2`, `ShredBoost_Standalone`, `ShredBoostUnitTests`, `ShredBoostTests`).\n2. **CTest:** 5 tests run, 5 passed, 0 failed — summary line `100% tests passed out of 5` (total time 0.12s). Tests: `ShredBoostParameterTests`, `ProcessBlockRealtimeTests`, `FilterTests`, `WaveshaperTests`, `OversamplingTests`.\n3. **Artifacts:** all three found under `build/ShredBoost_artefacts/Release/` — VST3 (`ShredBoost.vst3`), LV2 (`ShredBoost.lv2`), Standalone (`ShredBoost` executable, 6,231,616 bytes).\n4. **FactoryPresets.xml:** present (3381 bytes, 4 presets: Thrash Chug, Yngwie Lead, SD-1 Rhythm, Clean Tight Attack), registered in `CMakeLists.txt` via `juce_add_binary_data(ShredBoostResources ...)`, and confirmed bundled (`Built target ShredBoostResources`, `BinaryData.h` generated, `libShredBoostResources.a` linked into `ShredBoost`).\n5. **Overall:** PASS, executed 2026-07-25.\n\nThe document follows the heading style and format of the prior `docs/verification/phase_a_scaffold.md` and `phase_f_integration.md`. No file outside `docs/verification/phase_h_release.md` was created or modified.\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 549.0469968318939,
+  "changed_files": [
+    {
+      "path": "docs/verification/phase_h_release.md",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "git diff reported no changes",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 549.0469968318939,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "h.3",
+    "acceptance_criteria": [
+      "docs/verification/phase_h_release.md exists",
+      "The document records the exact validation command(s) executed",
+      "The document reports real CTest results including tests run/passed/failed counts",
+      "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+      "The document states an overall PASS/FAIL conclusion with the execution date",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "docs/verification/phase_h_release.md exists",
+      "The document records the exact validation command(s) executed",
+      "The document reports real CTest results including tests run/passed/failed counts",
+      "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+      "The document states an overall PASS/FAIL conclusion with the execution date",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 6 of 6 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "The Phase H release verification document has been written to `docs/verification/phase_h_release.md`, recording the real results from executing `scripts/validate_plugin.sh`.\n\nSummary of what was actually executed and recorded:\n\n**Command run:** `bash scripts/validate_plugin.sh` (which internally runs `rm -rf build`, `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, `cmake --build build --config Release`, `ctest --test-dir build --output-on-failure`, and filesystem artifact checks). Exit code: `0`.\n\n**Real results captured in the document:**\n1. **Build:** PASS — all targets linked (`ShredBoost`, `ShredBoost_VST3`, `ShredBoost_LV2`, `ShredBoost_Standalone`, `ShredBoostUnitTests`, `ShredBoostTests`).\n2. **CTest:** 5 tests run, 5 passed, 0 failed — summary line `100% tests passed out of 5` (total time 0.12s). Tests: `ShredBoostParameterTests`, `ProcessBlockRealtimeTests`, `FilterTests`, `WaveshaperTests`, `OversamplingTests`.\n3. **Artifacts:** all three found under `build/ShredBoost_artefacts/Release/` — VST3 (`ShredBoost.vst3`), LV2 (`ShredBoost.lv2`), Standalone (`ShredBoost` executable, 6,231,616 bytes).\n4. **FactoryPresets.xml:** present (3381 bytes, 4 presets: Thrash Chug, Yngwie Lead, SD-1 Rhythm, Clean Tight Attack), registered in `CMakeLists.txt` via `juce_add_binary_data(ShredBoostResources ...)`, and confirmed bundled (`Built target ShredBoostResources`, `BinaryData.h` generated, `libShredBoostResources.a` linked into `ShredBoost`).\n5. **Overall:** PASS, executed 2026-07-25.\n\nThe document follows the heading style and format of the prior `docs/verification/phase_a_scaffold.md` and `phase_f_integration.md`. No file outside `docs/verification/phase_h_release.md` was created or modified.\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 549.0469968318939,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "docs/verification/phase_h_release.md"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "docs/verification/phase_h_release.md exists",
+        "The document records the exact validation command(s) executed",
+        "The document reports real CTest results including tests run/passed/failed counts",
+        "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+        "The document states an overall PASS/FAIL conclusion with the execution date",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "docs/verification/phase_h_release.md exists",
+        "The document records the exact validation command(s) executed",
+        "The document reports real CTest results including tests run/passed/failed counts",
+        "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+        "The document states an overall PASS/FAIL conclusion with the execution date",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 549.0469968318939,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-25ab1cbc-e7e7-405a-8f78-ced8593b443d.json"
+  ],
+  "created_at": "2026-07-25T20:49:22.276035",
+  "lifecycle_state": "accepted"
+}

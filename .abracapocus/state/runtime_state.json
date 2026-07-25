@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-h.2",
+  "plan_version": "task-h.3",
   "active_phase": "H",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "h.2",
-      "title": "Create factory presets spanning thrash rhythm and singing lead voicings",
+      "task_id": "h.3",
+      "title": "Write phase h release verification document",
       "phase": "H",
-      "status": "completed",
+      "status": "planned",
       "backend": "pi_cli",
-      "last_run": "2026-07-25T20:40:12.845519",
+      "last_run": null,
       "notes": ""
     }
   ],

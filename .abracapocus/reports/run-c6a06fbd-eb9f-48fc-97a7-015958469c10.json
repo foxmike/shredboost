@@ -1,0 +1,163 @@
+{
+  "plan_summary": "Task run: Create factory presets spanning thrash rhythm and singing lead voicings",
+  "backend_executions": [
+    {
+      "backend": "pi_cli",
+      "command": [
+        "pi",
+        "-p",
+        "--provider",
+        "openrouter",
+        "--model",
+        "z-ai/glm-5.2",
+        "Task: Create factory presets spanning thrash rhythm and singing lead voicings\nDescription: Create Resources/Presets/FactoryPresets.xml containing four factory presets for ShredBoost 1.0 and register the presets resource in CMakeLists.txt so it is bundled with the plugin.\n\nThe four presets, each a distinct plugin state, must cover:\n1. \"Thrash Chug\" — aggressive high-gain rhythm: tight low end (higher tight_cut / Precision Tight HPF), strong drive, pronounced pick_attack, mid voicing set for chug articulation.\n2. \"Yngwie Lead\" — singing fast lead: Yng-Grey clip voicing, smoother mids, moderate tight_cut, level-appropriate for lead.\n3. \"SD-1 Rhythm\" — SD-1 clip voicing mid-hump rhythm tone.\n4. \"Clean Tight Attack\" — Clean voicing, low drive, emphasizing the transient pick-attack shaper and low-end tightening.\n\nEach preset must set the plugin's named parameters (input_trim, tight_cut, mid_freq, mid_amount, drive, pick_attack, tone, level, voicing_mode, and oversampling if state-serialized) to values consistent with the parameter ranges and IDs defined in the existing parameter layout. Use valid, well-formed XML matching the plugin's state serialization format (juce::ValueTree/AudioProcessorValueTreeState style).\n\nThen edit CMakeLists.txt to register Resources/Presets/FactoryPresets.xml as a bundled binary/data resource for the ShredBoost target, following the existing resource-embedding pattern in that file.\n\nBefore editing, inspect:\n- The parameter layout source (ParameterLayout.* / ParameterIDs) for exact parameter IDs, ranges, and voicing_mode enum values\n- PluginProcessor state get/setStateInformation to match the serialized XML tag/attribute structure\n- CMakeLists.txt to follow the existing resource/binary-data embedding pattern\nPhase: H\nAcceptance criteria:\n  - Resources/Presets/FactoryPresets.xml exists and is well-formed XML\n  - xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)\n  - FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack\n  - Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout\n  - CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target\n  - No file outside the task's allowed_write_paths is created or modified\nContext: AGENTS.md guidance:\n# AGENTS.md\n## Purpose\nThis repository is operated by an autonomous multi-agent system (abracapocus_2).\nAll agents must follow these rules when modifying the codebase.\n---\n## Core Principles\n- Minimal blast radius: only modify what is required for the task\n- Deterministic verification: all changes must be verifiable via code (tests, compile, scripts)\n- No architecture drift: do not introduce new frameworks or major design changes unless explicitly required\n- No unrelated refactors\n- All changes must be reproducible from a clean clone\n---\n## Project Structure\n- docs/ → design, plans, architecture constraints\n- plans/ → master plans\n- phases/ → phase definitions\n- tasks/ → executable task documents\n- backends/ → CLI backend adapters\n- agents/ → specialist agents\n- runtime/ → orchestration, routing, state\n...(truncated)\nAGENTS.md:\n# AGENTS.md\n\n## Purpose\n\nThis repository is operated by an autonomous multi-agent system (abracapocus_2).\nAll agents must follow these rules when modifying the codebase.\n\n---\n\n## Core Principles\n\n- Minimal blast radius: only modify what is required for the task\n- Deterministic verification: all changes must be verifiable via code (tests, compile, scripts)\n- No architecture drift: do not introduce new frameworks or major design changes unless explicitly required\n- No unrelated refactors\n- All changes must be reproducible from a clean clone\n\n---\n\n## Project Structure\n\n- docs/ → design, plans, architecture constraints\n- plans/ → master plans\n- phases/ → phase definitions\n- tasks/ → executable task documents\n- backends/ → CLI backend adapters\n- agents/ → specialist agents\n- runtime/ → orchestration, routing, state\n- reports/ → execution reports (DO NOT MODIFY MANUALLY)\n- state/runtime_state.json → runtime state (DO NOT COMMIT)\n\n---\n\n## Task Execution Rules\n\n- Always operate from a task document when available\n- Respect:\n  - selected_backend\n  - verification_profile\n  - acceptance_criteria\n- If a task conflicts with architecture constraints or phase scope:\n  - STOP and report conflict\n\n---\n\n## Backend Rules\n\n- Backends must:\n  - execute commands deterministically\n  - capture stdout, stderr, exit_code\n  - not silently fail\n- Do not invent backend interfaces; use existing adapters\n- Codex CLI, Aider, Gemini, Claude Code should be invoked through backends only\n\n---\n\n## Verification Rules\n\n- Verification must be deterministic\n- Preferred checks:\n  - pytest\n  - python -m py_compile\n- Do not rely on model self-evaluation\n\n---\n\n## Git Rules\n\n- Do not commit:\n  - runtime_state.json\n  - reports/\n  - logs/\n  - virtual environments\n- Do not modify .gitignore unless required by task\n- Do not create excessive commits; prefer grouped logical commits\n\n---\n\n## Allowed Changes\n\n- Implement task requirements\n- Fix failing verification\n- Update relevant tests\n- Improve documentation tied to the task\n\n---\n\n## Forbidden Changes\n\n- Changing architecture without explicit instruction\n- Adding dependencies without justification\n- Modifying unrelated files\n- Deleting important files\n- Bypassing verification\n\n---\n\n## Planning Rules\n\n- Plans are multi-phase\n- Completed sections are immutable\n- Remaining sections may be updated\n- Tasks must align with:\n  - project brief\n  - architecture constraints\n  - active phase\n\n---\n\n## Reporting\n\n- All executions must produce structured reports\n- Reports must include:\n  - changed files\n  - verification results\n  - assessment\n\n---\n\n## Behavior\n\n- Do not ask unnecessary questions\n- Do not stall execution\n- Do not perform broad scans unless required\n- Prefer direct action over analysis\n\n---\n\n## Priority Order\n\n1. Architecture constraints\n2. Task definition\n3. Verification results\n4. Plan guidance\n\nIf conflicts occur, follow this order.\n\nAGENTS metadata:\n{\"loaded\": true, \"path\": \"/home/mike/dev/mike/abracapocus/python/abracapocus_2/AGENTS.md\", \"rule_count\": 76, \"sha256_12\": \"3678fbe37c64\"}\n"
+      ],
+      "stdout": "All acceptance criteria are satisfied. Summary of changes:\n\n## Files modified/created\n\n### `Resources/Presets/FactoryPresets.xml` (new)\nWell-formed XML containing four factory presets for ShredBoost 1.0. Each `<Preset>` wraps a `<ShredBoostState schemaVersion=\"1\">` element matching the `AudioProcessorValueTreeState` / `juce::ValueTree` serialization format produced by `ShredBoostAudioProcessor::getStateInformation()`:\n- Each child element tag is a frozen parameter ID from `ParameterIDs.h`\n- `value` attribute holds the raw float (float params), choice index (voicing_mode/oversampling), or 0/1 (auto_gain)\n- Voicing modes used: `1` Precision Tight (Thrash Chug), `0` Yng-Grey (Yngwie Lead), `2` SD-1 (SD-1 Rhythm), `3` Clean (Clean Tight Attack)\n- All values fall within the ranges defined in `ParameterLayout.cpp`\n\nPresets:\n1. **Thrash Chug** — Precision Tight voicing, high `tight_cut` (280 Hz), strong `drive` (24 dB), pronounced `pick_attack` (5 dB), low-mid chug voicing.\n2. **Yngwie Lead** — Yng-Grey voicing, smoother mids (mid_amount 5), moderate tight_cut (150 Hz), lead `level` (+3 dB), 4x oversampling.\n3. **SD-1 Rhythm** — SD-1 voicing with mid-hump (mid_amount 6), moderate drive.\n4. **Clean Tight Attack** — Clean voicing, low drive (3 dB), high pick_attack (7 dB), tightened low end.\n\n`xmllint --noout` passes.\n\n### `CMakeLists.txt` (edited)\nAdded a `juce_add_binary_data(ShredBoostResources ...)` block registering `Resources/Presets/FactoryPresets.xml`, and linked `ShredBoostResources` into the `ShredBoost` target via `target_link_libraries`. Verified by a real CMake configure + building the `ShredBoostResources` target, which generated `BinaryData1.cpp`/`BinaryData.h` and `libShredBoostResources.a` containing the embedded `FactoryPresets_xml` blob.\n\nNo other files were modified. The throwaway configure-check build directory was removed.\n",
+      "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+      "exit_code": 0,
+      "duration_seconds": 156.87635827064514,
+      "model": "openrouter/z-ai/glm-5.2",
+      "model_tags": [],
+      "task_type": "coding",
+      "working_directory": "/home/mike/dev/mike/music/plugins/shredboost",
+      "changed_files": [
+        {
+          "path": "CMakeLists.txt",
+          "status": "modified",
+          "code": "M"
+        },
+        {
+          "path": "Resources/Presets/FactoryPresets.xml",
+          "status": "untracked",
+          "code": "??"
+        }
+      ],
+      "diff_summary": "CMakeLists.txt | 16 ++++++++++++++++\n 1 file changed, 16 insertions(+)",
+      "model_attempts": [
+        {
+          "backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.2",
+          "exit_code": 0,
+          "stdout": "All acceptance criteria are satisfied. Summary of changes:\n\n## Files modified/created\n\n### `Resources/Presets/FactoryPresets.xml` (new)\nWell-formed XML containing four factory presets for ShredBoost 1.0. Each `<Preset>` wraps a `<ShredBoostState schemaVersion=\"1\">` element matching the `AudioProcessorValueTreeState` / `juce::ValueTree` serialization format produced by `ShredBoostAudioProcessor::getStateInformation()`:\n- Each child element tag is a frozen parameter ID from `ParameterIDs.h`\n- `value` attribute holds the raw float (float params), choice index (voicing_mode/oversampling), or 0/1 (auto_gain)\n- Voicing modes used: `1` Precision Tight (Thrash Chug), `0` Yng-Grey (Yngwie Lead), `2` SD-1 (SD-1 Rhythm), `3` Clean (Clean Tight Attack)\n- All values fall within the ranges defined in `ParameterLayout.cpp`\n\nPresets:\n1. **Thrash Chug** — Precision Tight voicing, high `tight_cut` (280 Hz), strong `drive` (24 dB), pronounced `pick_attack` (5 dB), low-mid chug voicing.\n2. **Yngwie Lead** — Yng-Grey voicing, smoother mids (mid_amount 5), moderate tight_cut (150 Hz), lead `level` (+3 dB), 4x oversampling.\n3. **SD-1 Rhythm** — SD-1 voicing with mid-hump (mid_amount 6), moderate drive.\n4. **Clean Tight Attack** — Clean voicing, low drive (3 dB), high pick_attack (7 dB), tightened low end.\n\n`xmllint --noout` passes.\n\n### `CMakeLists.txt` (edited)\nAdded a `juce_add_binary_data(ShredBoostResources ...)` block registering `Resources/Presets/FactoryPresets.xml`, and linked `ShredBoostResources` into the `ShredBoost` target via `target_link_libraries`. Verified by a real CMake configure + building the `ShredBoostResources` target, which generated `BinaryData1.cpp`/`BinaryData.h` and `libShredBoostResources.a` containing the embedded `FactoryPresets_xml` blob.\n\nNo other files were modified. The throwaway configure-check build directory was removed.\n",
+          "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+          "duration_seconds": 156.87635827064514,
+          "changed_files": [
+            {
+              "path": "CMakeLists.txt",
+              "status": "modified",
+              "code": "M"
+            },
+            {
+              "path": "Resources/Presets/FactoryPresets.xml",
+              "status": "untracked",
+              "code": "??"
+            }
+          ],
+          "diff_summary": "CMakeLists.txt | 16 ++++++++++++++++\n 1 file changed, 16 insertions(+)",
+          "outcome_classification": "backend_completed_with_changes",
+          "backend_timeout": false,
+          "backend_verification_timeout": false,
+          "timeout_seconds": null
+        }
+      ],
+      "write_policy_violations": [],
+      "outcome_classification": "backend_completed_with_changes",
+      "backend_timeout": false,
+      "backend_verification_timeout": false,
+      "timeout_seconds": null,
+      "changed_files_at_timeout_exit": [],
+      "abracapocus_verification_ran_after_backend_timeout": false,
+      "verification_owner": "task",
+      "verification_result": "passed"
+    }
+  ],
+  "review": {
+    "status": "approved",
+    "findings": [],
+    "summary": "h.2:Review complete",
+    "created_at": "2026-07-25T20:40:12.879251"
+  },
+  "verification": {
+    "status": "passed",
+    "checks": [],
+    "created_at": "2026-07-25T20:40:12.879259",
+    "notes": "H:passed",
+    "profile": "focused"
+  },
+  "change_assessment": {
+    "task_intent": "Create Resources/Presets/FactoryPresets.xml containing four factory presets for ShredBoost 1.0 and register the presets resource in CMakeLists.txt so it is bundled with the plugin.\n\nThe four presets, each a distinct plugin state, must cover:\n1. \"Thrash Chug\" — aggressive high-gain rhythm: tight low end (higher tight_cut / Precision Tight HPF), strong drive, pronounced pick_attack, mid voicing set for chug articulation.\n2. \"Yngwie Lead\" — singing fast lead: Yng-Grey clip voicing, smoother mids, moderate tight_cut, level-appropriate for lead.\n3. \"SD-1 Rhythm\" — SD-1 clip voicing mid-hump rhythm tone.\n4. \"Clean Tight Attack\" — Clean voicing, low drive, emphasizing the transient pick-attack shaper and low-end tightening.\n\nEach preset must set the plugin's named parameters (input_trim, tight_cut, mid_freq, mid_amount, drive, pick_attack, tone, level, voicing_mode, and oversampling if state-serialized) to values consistent with the parameter ranges and IDs defined in the existing parameter layout. Use valid, well-formed XML matching the plugin's state serialization format (juce::ValueTree/AudioProcessorValueTreeState style).\n\nThen edit CMakeLists.txt to register Resources/Presets/FactoryPresets.xml as a bundled binary/data resource for the ShredBoost target, following the existing resource-embedding pattern in that file.\n\nBefore editing, inspect:\n- The parameter layout source (ParameterLayout.* / ParameterIDs) for exact parameter IDs, ranges, and voicing_mode enum values\n- PluginProcessor state get/setStateInformation to match the serialized XML tag/attribute structure\n- CMakeLists.txt to follow the existing resource/binary-data embedding pattern",
+    "changed_files_summary": "Change assessment disabled",
+    "verification_summary": "passed",
+    "assessment_status": "skipped",
+    "notes": "Change assessment disabled; set ABRACAPOCUS_CHANGE_ASSESSMENT_ENABLED=true to enable advisory telemetry",
+    "matches_intent": null,
+    "scope_status": "unknown",
+    "architecture_violation": false,
+    "affected_modules": [
+      "CMakeLists.txt",
+      "Resources"
+    ],
+    "boundary_crossings": [],
+    "risk_level": "unknown",
+    "unrelated_changes": [],
+    "public_contract_changes": [],
+    "new_dependencies": [],
+    "assessment_summary": "change_assessment disabled"
+  },
+  "metadata": {
+    "run_id": "c6a06fbd-eb9f-48fc-97a7-015958469c10",
+    "project_name": "shredboost",
+    "plan_version": "task-h.2",
+    "task_id": "h.2",
+    "task_title": "Create factory presets spanning thrash rhythm and singing lead voicings",
+    "task_status": "completed",
+    "selected_backend": "pi_cli",
+    "verification_profile": "focused",
+    "backend_reason": "phase_based",
+    "frame_failures": [],
+    "agents_md": {
+      "loaded": true,
+      "path": "/home/mike/dev/mike/abracapocus/python/abracapocus_2/AGENTS.md",
+      "rule_count": 76,
+      "sha256_12": "3678fbe37c64"
+    },
+    "phase_results": [
+      {
+        "phase_name": "H",
+        "status": "passed",
+        "verification": "passed",
+        "task_results": [
+          {
+            "task_id": "h.2",
+            "status": "passed",
+            "acceptance_status": "accepted",
+            "backend": "pi_cli",
+            "backend_outcome_classification": "backend_completed_with_changes",
+            "changed_files": [
+              {
+                "path": "CMakeLists.txt",
+                "status": "modified",
+                "code": "M"
+              },
+              {
+                "path": "Resources/Presets/FactoryPresets.xml",
+                "status": "untracked",
+                "code": "??"
+              }
+            ],
+            "reconciliation_status": "satisfied",
+            "backend_timeout": false,
+            "backend_elapsed_seconds": 156.87635827064514,
+            "backend_timeout_seconds": null,
+            "changed_files_at_timeout_exit": [],
+            "abracapocus_verification_ran_after_backend_timeout": false,
+            "verification_owner": "task",
+            "verification_result": "passed",
+            "frame_failure": false,
+            "retry_attempts": []
+          }
+        ]
+      }
+    ]
+  }
+}
