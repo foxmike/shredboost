@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-d.4",
+  "plan_version": "task-d.5",
   "active_phase": "D",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "d.4",
-      "title": "Compose pre filter shaper clipper DC blocker and tone filter in processing chain",
+      "task_id": "d.5",
+      "title": "Create waveshaper unit tests with DC offset and topology switch bounds",
       "phase": "D",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T16:48:48.847399",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],

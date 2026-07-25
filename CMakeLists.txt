@@ -101,9 +101,12 @@ add_test(NAME ShredBoostParameterTests COMMAND ShredBoostUnitTests)
 add_executable(ShredBoostTests
     tests/TestMain.cpp
     tests/FilterTests.cpp
+    tests/WaveshaperTests.cpp
     Source/DSP/TightFilter.cpp
     Source/DSP/MidVoicingFilter.cpp
     Source/DSP/InputTrimStage.cpp
+    Source/DSP/NonlinearClipper.cpp
+    Source/DSP/DcBlocker.cpp
 )
 
 target_compile_definitions(ShredBoostTests PRIVATE
@@ -117,6 +120,7 @@ target_include_directories(ShredBoostTests PRIVATE
 
 target_link_libraries(ShredBoostTests PRIVATE
     juce::juce_audio_basics
+    juce::juce_dsp
     juce::juce_core
     juce::juce_events
     juce::juce_recommended_config_flags
@@ -124,3 +128,4 @@ target_link_libraries(ShredBoostTests PRIVATE
 )
 
 add_test(NAME FilterTests COMMAND ShredBoostTests)
+add_test(NAME WaveshaperTests COMMAND ShredBoostTests)
