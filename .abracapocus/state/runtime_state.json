@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-h.1",
+  "plan_version": "task-h.2",
   "active_phase": "H",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "h.1",
-      "title": "Create full validation script with build test and artifact checks",
+      "task_id": "h.2",
+      "title": "Create factory presets spanning thrash rhythm and singing lead voicings",
       "phase": "H",
-      "status": "completed",
+      "status": "planned",
       "backend": "pi_cli",
-      "last_run": "2026-07-25T20:37:34.750155",
+      "last_run": null,
       "notes": ""
     }
   ],

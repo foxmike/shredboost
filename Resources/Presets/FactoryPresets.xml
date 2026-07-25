@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ShredBoost 1.0 - Factory Presets
+
+  Each <Preset> element contains a complete plugin state serialized in the
+  AudioProcessorValueTreeState / juce::ValueTree format produced by
+  ShredBoostAudioProcessor::getStateInformation().
+
+  The inner <ShredBoostState> element is the root of a single plugin state:
+    - the `schemaVersion` attribute mirrors ShredBoost::ParamID::kParameterSchemaVersion
+    - each child element tag is a frozen parameter ID from ParameterIDs.h
+    - the `value` attribute holds the parameter value:
+        * float parameters (input_trim, tight_cut, mid_freq, mid_amount,
+          drive, tone, level, pick_attack) store the raw float value
+        * AudioParameterChoice parameters (voicing_mode, oversampling) store
+          the choice index as a number
+        * AudioParameterBool (auto_gain) stores 0 / 1
+
+  voicing_mode choices: 0 = Yng-Grey, 1 = Precision Tight, 2 = SD-1, 3 = Clean
+  oversampling choices: 0 = 1x, 1 = 2x, 2 = 4x
+-->
+<FactoryPresets>
+
+  <!-- 1. Thrash Chug: aggressive high-gain rhythm, tight low end via the
+       Precision Tight HPF voicing, strong drive, pronounced pick attack,
+       mid voicing set for chug articulation. -->
+  <Preset name="Thrash Chug">
+    <ShredBoostState schemaVersion="1">
+      <input_trim value="0.0"/>
+      <tight_cut value="280.0"/>
+      <mid_freq value="620.0"/>
+      <mid_amount value="3.0"/>
+      <drive value="24.0"/>
+      <tone value="6.5"/>
+      <level value="0.0"/>
+      <pick_attack value="5.0"/>
+      <voicing_mode value="1"/>
+      <oversampling value="1"/>
+      <auto_gain value="0"/>
+    </ShredBoostState>
+  </Preset>
+
+  <!-- 2. Yngwie Lead: singing fast lead with the Yng-Grey clip voicing,
+       smoother mids, moderate tight_cut, level-appropriate for lead. -->
+  <Preset name="Yngwie Lead">
+    <ShredBoostState schemaVersion="1">
+      <input_trim value="0.0"/>
+      <tight_cut value="150.0"/>
+      <mid_freq value="720.0"/>
+      <mid_amount value="5.0"/>
+      <drive value="20.0"/>
+      <tone value="7.0"/>
+      <level value="3.0"/>
+      <pick_attack value="2.0"/>
+      <voicing_mode value="0"/>
+      <oversampling value="2"/>
+      <auto_gain value="0"/>
+    </ShredBoostState>
+  </Preset>
+
+  <!-- 3. SD-1 Rhythm: SD-1 clip voicing with a mid-hump rhythm tone. -->
+  <Preset name="SD-1 Rhythm">
+    <ShredBoostState schemaVersion="1">
+      <input_trim value="0.0"/>
+      <tight_cut value="180.0"/>
+      <mid_freq value="720.0"/>
+      <mid_amount value="6.0"/>
+      <drive value="16.0"/>
+      <tone value="6.0"/>
+      <level value="0.0"/>
+      <pick_attack value="2.0"/>
+      <voicing_mode value="2"/>
+      <oversampling value="1"/>
+      <auto_gain value="0"/>
+    </ShredBoostState>
+  </Preset>
+
+  <!-- 4. Clean Tight Attack: Clean voicing with low drive, emphasizing the
+       transient pick-attack shaper and low-end tightening. -->
+  <Preset name="Clean Tight Attack">
+    <ShredBoostState schemaVersion="1">
+      <input_trim value="0.0"/>
+      <tight_cut value="220.0"/>
+      <mid_freq value="720.0"/>
+      <mid_amount value="2.0"/>
+      <drive value="3.0"/>
+      <tone value="8.0"/>
+      <level value="0.0"/>
+      <pick_attack value="7.0"/>
+      <voicing_mode value="3"/>
+      <oversampling value="1"/>
+      <auto_gain value="0"/>
+    </ShredBoostState>
+  </Preset>
+
+</FactoryPresets>

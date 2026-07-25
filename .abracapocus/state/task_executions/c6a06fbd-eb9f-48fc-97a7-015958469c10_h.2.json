@@ -1,0 +1,145 @@
+{
+  "path": null,
+  "run_id": "c6a06fbd-eb9f-48fc-97a7-015958469c10",
+  "task_id": "h.2",
+  "phase_name": "H",
+  "task_title": "Create factory presets spanning thrash rhythm and singing lead voicings",
+  "task_file": null,
+  "acceptance_criteria": [
+    "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+    "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+    "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+    "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+    "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "All acceptance criteria are satisfied. Summary of changes:\n\n## Files modified/created\n\n### `Resources/Presets/FactoryPresets.xml` (new)\nWell-formed XML containing four factory presets for ShredBoost 1.0. Each `<Preset>` wraps a `<ShredBoostState schemaVersion=\"1\">` element matching the `AudioProcessorValueTreeState` / `juce::ValueTree` serialization format produced by `ShredBoostAudioProcessor::getStateInformation()`:\n- Each child element tag is a frozen parameter ID from `ParameterIDs.h`\n- `value` attribute holds the raw float (float params), choice index (voicing_mode/oversampling), or 0/1 (auto_gain)\n- Voicing modes used: `1` Precision Tight (Thrash Chug), `0` Yng-Grey (Yngwie Lead), `2` SD-1 (SD-1 Rhythm), `3` Clean (Clean Tight Attack)\n- All values fall within the ranges defined in `ParameterLayout.cpp`\n\nPresets:\n1. **Thrash Chug** — Precision Tight voicing, high `tight_cut` (280 Hz), strong `drive` (24 dB), pronounced `pick_attack` (5 dB), low-mid chug voicing.\n2. **Yngwie Lead** — Yng-Grey voicing, smoother mids (mid_amount 5), moderate tight_cut (150 Hz), lead `level` (+3 dB), 4x oversampling.\n3. **SD-1 Rhythm** — SD-1 voicing with mid-hump (mid_amount 6), moderate drive.\n4. **Clean Tight Attack** — Clean voicing, low drive (3 dB), high pick_attack (7 dB), tightened low end.\n\n`xmllint --noout` passes.\n\n### `CMakeLists.txt` (edited)\nAdded a `juce_add_binary_data(ShredBoostResources ...)` block registering `Resources/Presets/FactoryPresets.xml`, and linked `ShredBoostResources` into the `ShredBoost` target via `target_link_libraries`. Verified by a real CMake configure + building the `ShredBoostResources` target, which generated `BinaryData1.cpp`/`BinaryData.h` and `libShredBoostResources.a` containing the embedded `FactoryPresets_xml` blob.\n\nNo other files were modified. The throwaway configure-check build directory was removed.\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 156.87635827064514,
+  "changed_files": [
+    {
+      "path": "CMakeLists.txt",
+      "status": "modified",
+      "code": null
+    },
+    {
+      "path": "Resources/Presets/FactoryPresets.xml",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "CMakeLists.txt | 16 ++++++++++++++++\n 1 file changed, 16 insertions(+)",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 156.87635827064514,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "h.2",
+    "acceptance_criteria": [
+      "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+      "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+      "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+      "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+      "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+      "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+      "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+      "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+      "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 6 of 6 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "All acceptance criteria are satisfied. Summary of changes:\n\n## Files modified/created\n\n### `Resources/Presets/FactoryPresets.xml` (new)\nWell-formed XML containing four factory presets for ShredBoost 1.0. Each `<Preset>` wraps a `<ShredBoostState schemaVersion=\"1\">` element matching the `AudioProcessorValueTreeState` / `juce::ValueTree` serialization format produced by `ShredBoostAudioProcessor::getStateInformation()`:\n- Each child element tag is a frozen parameter ID from `ParameterIDs.h`\n- `value` attribute holds the raw float (float params), choice index (voicing_mode/oversampling), or 0/1 (auto_gain)\n- Voicing modes used: `1` Precision Tight (Thrash Chug), `0` Yng-Grey (Yngwie Lead), `2` SD-1 (SD-1 Rhythm), `3` Clean (Clean Tight Attack)\n- All values fall within the ranges defined in `ParameterLayout.cpp`\n\nPresets:\n1. **Thrash Chug** — Precision Tight voicing, high `tight_cut` (280 Hz), strong `drive` (24 dB), pronounced `pick_attack` (5 dB), low-mid chug voicing.\n2. **Yngwie Lead** — Yng-Grey voicing, smoother mids (mid_amount 5), moderate tight_cut (150 Hz), lead `level` (+3 dB), 4x oversampling.\n3. **SD-1 Rhythm** — SD-1 voicing with mid-hump (mid_amount 6), moderate drive.\n4. **Clean Tight Attack** — Clean voicing, low drive (3 dB), high pick_attack (7 dB), tightened low end.\n\n`xmllint --noout` passes.\n\n### `CMakeLists.txt` (edited)\nAdded a `juce_add_binary_data(ShredBoostResources ...)` block registering `Resources/Presets/FactoryPresets.xml`, and linked `ShredBoostResources` into the `ShredBoost` target via `target_link_libraries`. Verified by a real CMake configure + building the `ShredBoostResources` target, which generated `BinaryData1.cpp`/`BinaryData.h` and `libShredBoostResources.a` containing the embedded `FactoryPresets_xml` blob.\n\nNo other files were modified. The throwaway configure-check build directory was removed.\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 156.87635827064514,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "CMakeLists.txt",
+      "Resources/Presets/FactoryPresets.xml"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+        "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+        "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+        "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+        "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+        "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+        "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+        "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+        "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 156.87635827064514,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-c6a06fbd-eb9f-48fc-97a7-015958469c10.json"
+  ],
+  "created_at": "2026-07-25T20:40:12.013512",
+  "lifecycle_state": "accepted"
+}

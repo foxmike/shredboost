@@ -1,62 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T16:21:54.569660",
-    "project_name": "shredboost",
-    "goal": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Implement pre clip midrange peaking bell voicing filter",
-      "phases": [
-        {
-          "name": "C",
-          "objective": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "c.2",
-                "title": "Implement pre clip midrange peaking bell voicing filter",
-                "description": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-                "phase": "C",
-                "dependencies": [],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp exist and declare/define class MidVoicingFilter",
-                  "MidVoicingFilter uses a multiplicative SmoothedValue for mid_freq (500-1200 Hz) and a linear SmoothedValue for mid_amount (dB, up to +9 dB)",
-                  "The filter is a 2nd-order RBJ peaking bell with fixed Q_m = 0.9",
-                  "RBJ coefficients are recomputed on sample-rate change and denormals are flushed in the recursive state",
-                  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
-                  "cmake --build build --target ShredBoost compiles Source/DSP/MidVoicingFilter.cpp without errors",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T16:19:40.627127",
-                "selected_backend": "codex_cli",
-                "model": null,
-                "task_timeout_seconds": 1800.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "Source/DSP/MidVoicingFilter.h",
-                  "Source/DSP/MidVoicingFilter.cpp"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T16:21:54.454251",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-c.2",
-      "created_at": "2026-07-25T16:19:40.704009"
-    }
-  },
-  {
     "created_at": "2026-07-25T16:23:52.478166",
     "project_name": "shredboost",
     "goal": "Create Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp implementing the input trim / calibration stage at chain position [0].\n\nRequirements:\n- Class InputTrimStage with prepare(double sampleRate), reset(), and process/processBlock on a single mono channel; all state allocated in prepare().\n- Applies smoothed gain Gin = 10^(trim/20) where the input_trim value (in dB) is driven by a linear SmoothedValue (dB domain). Do not construct the SmoothedValue in the process loop.\n- Telemetry metering: track per-block peak and RMS signal levels, exposed via lock-free atomic getters (e.g. std::atomic<float>) readable by the message/GUI thread. Metering must not allocate, lock, or construct strings in process().\n- No heap allocation, locks, file IO, or GUI calls inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and RMS helpers (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
@@ -1136,6 +1079,61 @@
       ],
       "version": "task-g.5",
       "created_at": "2026-07-25T20:34:28.362633"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:37:34.821412",
+    "project_name": "shredboost",
+    "goal": "Create scripts/validate_plugin.sh, a self-contained release validation script for ShredBoost 1.0.\n\nThe script must, in order and with `set -euo pipefail`:\n1. Configure and build the project from a clean build directory using CMake (e.g. `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release` then `cmake --build build --config Release`).\n2. Execute the full test suite via CTest (`ctest --test-dir build --output-on-failure`), which drives the juce::UnitTest console runner target. No third-party testing frameworks.\n3. Perform binary artifact existence checks: verify that the built VST3, LV2, and Standalone artifacts for ShredBoost exist under the build tree, failing with a clear message and non-zero exit if any is missing.\n4. Print a final human-readable PASS/FAIL summary and exit non-zero on any failure.\n\nThe script must be POSIX/bash and marked conceptually executable (chmod note in a comment). Use the binding product identity: plugin name ShredBoost, bundle com.nspacesystems.shredboost. Do NOT modify anything under JUCE/.\n\nBefore editing, inspect:\n- CMakeLists.txt (to learn the target names, build output layout, and format targets VST3/LV2/Standalone)\n- Any existing scripts/ directory conventions if present\n- docs/verification/ prior phase documents for expected check style",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Create full validation script with build test and artifact checks",
+      "phases": [
+        {
+          "name": "H",
+          "objective": "Create scripts/validate_plugin.sh, a self-contained release validation script for ShredBoost 1.0.\n\nThe script must, in order and with `set -euo pipefail`:\n1. Configure and build the project from a clean build directory using CMake (e.g. `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release` then `cmake --build build --config Release`).\n2. Execute the full test suite via CTest (`ctest --test-dir build --output-on-failure`), which drives the juce::UnitTest console runner target. No third-party testing frameworks.\n3. Perform binary artifact existence checks: verify that the built VST3, LV2, and Standalone artifacts for ShredBoost exist under the build tree, failing with a clear message and non-zero exit if any is missing.\n4. Print a final human-readable PASS/FAIL summary and exit non-zero on any failure.\n\nThe script must be POSIX/bash and marked conceptually executable (chmod note in a comment). Use the binding product identity: plugin name ShredBoost, bundle com.nspacesystems.shredboost. Do NOT modify anything under JUCE/.\n\nBefore editing, inspect:\n- CMakeLists.txt (to learn the target names, build output layout, and format targets VST3/LV2/Standalone)\n- Any existing scripts/ directory conventions if present\n- docs/verification/ prior phase documents for expected check style",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "h.1",
+                "title": "Create full validation script with build test and artifact checks",
+                "description": "Create scripts/validate_plugin.sh, a self-contained release validation script for ShredBoost 1.0.\n\nThe script must, in order and with `set -euo pipefail`:\n1. Configure and build the project from a clean build directory using CMake (e.g. `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release` then `cmake --build build --config Release`).\n2. Execute the full test suite via CTest (`ctest --test-dir build --output-on-failure`), which drives the juce::UnitTest console runner target. No third-party testing frameworks.\n3. Perform binary artifact existence checks: verify that the built VST3, LV2, and Standalone artifacts for ShredBoost exist under the build tree, failing with a clear message and non-zero exit if any is missing.\n4. Print a final human-readable PASS/FAIL summary and exit non-zero on any failure.\n\nThe script must be POSIX/bash and marked conceptually executable (chmod note in a comment). Use the binding product identity: plugin name ShredBoost, bundle com.nspacesystems.shredboost. Do NOT modify anything under JUCE/.\n\nBefore editing, inspect:\n- CMakeLists.txt (to learn the target names, build output layout, and format targets VST3/LV2/Standalone)\n- Any existing scripts/ directory conventions if present\n- docs/verification/ prior phase documents for expected check style",
+                "phase": "H",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "scripts/validate_plugin.sh exists",
+                  "bash -n scripts/validate_plugin.sh passes (no syntax errors)",
+                  "scripts/validate_plugin.sh runs cmake configure and build steps for a Release build",
+                  "scripts/validate_plugin.sh invokes ctest to execute the test suite",
+                  "scripts/validate_plugin.sh checks existence of the VST3, LV2, and Standalone build artifacts and exits non-zero if any is missing",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:36:41.673341",
+                "selected_backend": "pi_cli",
+                "model": "openrouter/z-ai/glm-5.2",
+                "task_timeout_seconds": 900.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "scripts/validate_plugin.sh"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:37:34.728262",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-h.1",
+      "created_at": "2026-07-25T20:36:41.772749"
     }
   }
 ]

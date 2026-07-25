@@ -77,6 +77,22 @@ target_link_libraries(ShredBoost
 )
 
 # -----------------------------------------------------------------------------
+# Embedded binary resources (factory presets, etc.)
+# -----------------------------------------------------------------------------
+# JUCE binary-data target bundling runtime resources into the plugin binary so
+# they ship with every build format. Source paths are relative to
+# CMAKE_CURRENT_SOURCE_DIR and are recompiled into a generated C++ accessor.
+juce_add_binary_data(ShredBoostResources
+    SOURCES
+        Resources/Presets/FactoryPresets.xml
+)
+
+target_link_libraries(ShredBoost
+    PRIVATE
+        ShredBoostResources
+)
+
+# -----------------------------------------------------------------------------
 # Unit tests (juce::UnitTest only, no third-party frameworks)
 # -----------------------------------------------------------------------------
 enable_testing()
