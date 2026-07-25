@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-e.1",
+  "plan_version": "task-e.2",
   "active_phase": "E",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "e.1",
-      "title": "Implement polyphase FIR oversampling engine with PDC latency reporting",
+      "task_id": "e.2",
+      "title": "Implement message thread oversampling factor change with mute fade",
       "phase": "E",
-      "status": "completed",
+      "status": "planned",
       "backend": "codex_cli",
-      "last_run": "2026-07-25T19:24:43.268122",
+      "last_run": null,
       "notes": ""
     }
   ],

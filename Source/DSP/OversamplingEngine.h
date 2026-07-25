@@ -12,8 +12,10 @@ namespace ShredBoost
 /**
     Polyphase FIR half-band oversampling for the nonlinear processing path.
 
-    prepare() constructs and sizes every supported oversampling path. Factor
-    changes and audio processing only select and use those preallocated paths.
+    Factor changes are prepared on the message thread in an inactive slot.
+    The audio thread fades out over 10 ms, adopts the prepared slot at silence,
+    and fades back in. No construction or buffer allocation takes place in
+    upsample() or downsample().
 */
 class OversamplingEngine final
 {
@@ -30,8 +32,22 @@ public:
     void prepare (double sampleRate, int maximumBlockSize, int numberOfChannels = 2);
     void reset() noexcept;
 
-    void setOversamplingFactor (int factor) noexcept;
-    void setOversamplingFactor (Factor factor) noexcept;
+    /** Requests and prepares a factor change. Call this on the message thread. */
+    void setOversamplingFactor (int factor);
+    void setOversamplingFactor (Factor factor);
+
+    /** Records a desired factor without allocating. Safe to call from any thread. */
+    void requestFactorChange (int factor) noexcept;
+    void requestFactorChange (Factor factor) noexcept;
+
+    /**
+        Constructs and initialises a pending oversampler. Call on the message
+        thread after requestFactorChange(). Returns true when a new path was
+        prepared for the audio-thread mute-fade handoff.
+    */
+    bool applyPendingFactor();
+
+    [[nodiscard]] bool isFactorChangePending() const noexcept;
 
     [[nodiscard]] int getOversamplingFactor() const noexcept;
     [[nodiscard]] int getLatencySamples() const noexcept;
@@ -44,15 +60,27 @@ public:
 private:
     using Oversampler = juce::dsp::Oversampling<float>;
 
-    static constexpr std::size_t numberOfFactors = 3;
+    static constexpr std::size_t numberOfSlots = 2;
+    static constexpr double muteFadeSeconds = 0.01;
 
     [[nodiscard]] static int factorToIndex (int factor) noexcept;
     [[nodiscard]] static int indexToFactor (int index) noexcept;
+    [[nodiscard]] std::unique_ptr<Oversampler>
+    createPreparedOversampler (int factorIndex) const;
+    void applyMuteFade (juce::dsp::AudioBlock<float>& outputBlock) noexcept;
 
-    std::array<std::unique_ptr<Oversampler>, numberOfFactors> oversamplers;
-    std::atomic<int> selectedIndex { 0 };
+    std::array<std::unique_ptr<Oversampler>, numberOfSlots> oversamplers;
+    std::array<int, numberOfSlots> slotFactorIndices { 0, 0 };
+    std::array<int, numberOfSlots> slotLatencies { 0, 0 };
 
-    int activeProcessingIndex = 0;
+    std::atomic<int> requestedFactorIndex { 0 };
+    std::atomic<int> appliedFactorIndex { 0 };
+    std::atomic<int> activeSlot { 0 };
+    std::atomic<int> preparedPendingSlot { -1 };
+    std::atomic<int> reportedLatencySamples { 0 };
+
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> muteGain { 1.0f };
+    int activeProcessingSlot = 0;
     int preparedMaximumBlockSize = 0;
     int preparedNumberOfChannels = 0;
 };
