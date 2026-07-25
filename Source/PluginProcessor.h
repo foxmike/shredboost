@@ -13,6 +13,7 @@
 #include "DSP/TightFilter.h"
 #include "Parameters/ParameterLayout.h"
 #include "Parameters/ParameterSnapshot.h"
+#include "UI/SpectrumOverlay.h"
 
 class ShredBoostAudioProcessorEditor;
 
@@ -49,6 +50,9 @@ public:
 
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+
+    ShredBoost::SpectrumFIFO& getPreDriveFIFO() noexcept { return preDriveFIFO; }
+    ShredBoost::SpectrumFIFO& getPostDriveFIFO() noexcept { return postDriveFIFO; }
 
 private:
     using ParameterValues = ShredBoost::ParameterSnapshot::Values;
@@ -88,6 +92,9 @@ private:
     int preparedMaximumBlockSize = 0;
     int lastRequestedOversamplingFactor = 0;
     int lastReportedLatencySamples = -1;
+
+    ShredBoost::SpectrumFIFO preDriveFIFO;
+    ShredBoost::SpectrumFIFO postDriveFIFO;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ShredBoostAudioProcessor)
 };

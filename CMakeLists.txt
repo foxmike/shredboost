@@ -44,6 +44,7 @@ target_sources(ShredBoost
         Source/PluginEditor.cpp
         Source/UI/ShredLookAndFeel.cpp
         Source/UI/TransferCurveScope.cpp
+        Source/UI/SpectrumOverlay.cpp
         Source/Parameters/ParameterLayout.cpp
         Source/Parameters/ParameterSnapshot.cpp
         Source/DSP/TightFilter.cpp
@@ -84,10 +85,12 @@ add_executable(ShredBoostUnitTests
     tests/ParameterTests.cpp
     tests/ProcessBlockRealtimeTests.cpp
     tests/TransferCurveScopeTests.cpp
+    tests/SpectrumOverlayTests.cpp
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
     Source/UI/ShredLookAndFeel.cpp
     Source/UI/TransferCurveScope.cpp
+    Source/UI/SpectrumOverlay.cpp
     Source/Parameters/ParameterLayout.cpp
     Source/Parameters/ParameterSnapshot.cpp
     Source/DSP/TightFilter.cpp

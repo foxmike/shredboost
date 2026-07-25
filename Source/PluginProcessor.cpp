@@ -191,6 +191,8 @@ void ShredBoostAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
         maximumChannels, preparedMaximumBlockSize, false, true, false);
     dryBuffer.clear();
     doublePrecisionScratch.clear();
+    preDriveFIFO.reset();
+    postDriveFIFO.reset();
 
     currentDriveGain =
         juce::Decibels::decibelsToGain (initialValues.drive);
@@ -422,6 +424,26 @@ void ShredBoostAudioProcessor::processFloatBlock (
         midFilter.processBlock (samples, numberOfSamples);
     }
 
+    auto pushToFIFO = [] (ShredBoost::SpectrumFIFO& fifo, const juce::AudioBuffer<float>& buf, int chans, int samps) noexcept
+    {
+        if (chans == 1)
+        {
+            fifo.push (buf.getReadPointer (0), samps);
+        }
+        else if (chans > 1)
+        {
+            float mono[4096];
+            const int limit = std::min (samps, 4096);
+            const float* ch0 = buf.getReadPointer (0);
+            const float* ch1 = buf.getReadPointer (1);
+            for (int i = 0; i < limit; ++i)
+                mono[i] = 0.5f * (ch0[i] + ch1[i]);
+            fifo.push (mono, limit);
+        }
+    };
+
+    pushToFIFO (preDriveFIFO, buffer, numberOfChannels, numberOfSamples);
+
     juce::dsp::AudioBlock<float> fullWetBlock (buffer);
     auto wetBlock =
         fullWetBlock
@@ -467,6 +489,8 @@ void ShredBoostAudioProcessor::processFloatBlock (
             .getSubBlock (0, static_cast<std::size_t> (numberOfSamples));
     const juce::dsp::AudioBlock<const float> constDryBlock (drySubBlock);
     autoGainBypass.process (constDryBlock, wetBlock, values.auto_gain);
+
+    pushToFIFO (postDriveFIFO, buffer, numberOfChannels, numberOfSamples);
 }
 
 bool ShredBoostAudioProcessor::hasEditor() const

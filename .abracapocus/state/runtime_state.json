@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-g.2",
+  "plan_version": "task-g.3",
   "active_phase": "G",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "g.2",
-      "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
+      "task_id": "g.3",
+      "title": "Implement pre post FFT spectrum overlay visualizer",
       "phase": "G",
-      "status": "completed",
+      "status": "planned",
       "backend": "antigravity_cli",
-      "last_run": "2026-07-25T20:26:48.214750",
+      "last_run": null,
       "notes": ""
     }
   ],

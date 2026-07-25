@@ -1,62 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T16:01:25.976158",
-    "project_name": "shredboost",
-    "goal": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Create domain correct smoothed parameter snapshot engine",
-      "phases": [
-        {
-          "name": "B",
-          "objective": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "b.3",
-                "title": "Create domain correct smoothed parameter snapshot engine",
-                "description": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-                "phase": "B",
-                "dependencies": [
-                  "b.2"
-                ],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp exist",
-                  "dB parameters (input_trim, mid_amount, drive, level, pick_attack) use linear juce::SmoothedValue and frequency parameters (tight_cut, mid_freq, tone) use multiplicative juce::SmoothedValue",
-                  "A prepare(sampleRate) method exists for allocation during prepareToPlay and the value-advance path performs no heap allocation, locking, or string construction",
-                  "voicing_mode, oversampling, and auto_gain are carried as discrete current values and are not smoothed as continuous SmoothedValue",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T15:58:45.416019",
-                "selected_backend": "codex_cli",
-                "model": null,
-                "task_timeout_seconds": 1200.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "Source/Parameters/ParameterSnapshot.h",
-                  "Source/Parameters/ParameterSnapshot.cpp"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T16:01:25.867855",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-b.3",
-      "created_at": "2026-07-25T15:58:45.495380"
-    }
-  },
-  {
     "created_at": "2026-07-25T16:03:32.763095",
     "project_name": "shredboost",
     "goal": "Modify Source/PluginProcessor.h and Source/PluginProcessor.cpp to own the APVTS and snapshot infrastructure. Add a juce::AudioProcessorValueTreeState member constructed with createParameterLayout() from Source/Parameters/ParameterLayout.h. Add a ParameterSnapshot member and call its prepare(sampleRate) inside prepareToPlay so all smoothing buffers are allocated off the real-time path. Implement getStateInformation/setStateInformation using the APVTS ValueTree XML serialization, embedding the schema version constant (kParameterSchemaVersion) so future migrations can detect the version. Do NOT expose internal DSP states through the APVTS. Keep processBlock changes minimal (do not add DSP here); ScopedNoDenormals/allocation-free rules still apply to any code touched. If PluginProcessor.h/.cpp do not yet exist as full JUCE processors, create the minimal AudioProcessor skeleton needed to own the APVTS and state serialization.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterLayout.h (createParameterLayout signature)\n- Source/Parameters/ParameterSnapshot.h (prepare and snapshot API)\n- Source/Parameters/ParameterIDs.h (schema version constant)\n- CMakeLists.txt (JUCE modules and target sources)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
@@ -1138,6 +1081,61 @@
       ],
       "version": "task-g.1",
       "created_at": "2026-07-25T20:19:48.572336"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:26:48.293725",
+    "project_name": "shredboost",
+    "goal": "Create Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp. Implement a juce::Component subclass named TransferCurveScope that renders a live X-Y transfer curve plot y = f(v) across the input amplitude domain, plus a moving dot indicating the instantaneous input amplitude, and a smooth morphing crossfade of the curve during voicing-mode changes. The component is a Timer-driven repaint consumer only: it reads instantaneous input amplitude and the current/target transfer-curve state through atomic values or a lock-free FIFO snapshot that the processor exposes. It must NEVER lock, block, or call the audio thread; the GUI only reads atomic telemetry. Provide a public API (e.g. setCurvePoints/pushInputSample or a snapshot-pull method) so PluginEditor can feed it telemetry, but do not include PluginProcessor here \u2014 depend only on plain atomics/parameters passed in.\n\nBefore editing, inspect:\n- Source/PluginEditor.h (namespace/class naming, how editor holds references)\n- Source/PluginProcessor.h (what atomic telemetry / lock-free FIFO the DSP chain already exposes for the transfer curve and instantaneous amplitude; read only)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h and juce_events Timer API (do not modify anything under JUCE/)",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement live X Y transfer curve scope with moving dot and morphing crossfade",
+      "phases": [
+        {
+          "name": "G",
+          "objective": "Create Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp. Implement a juce::Component subclass named TransferCurveScope that renders a live X-Y transfer curve plot y = f(v) across the input amplitude domain, plus a moving dot indicating the instantaneous input amplitude, and a smooth morphing crossfade of the curve during voicing-mode changes. The component is a Timer-driven repaint consumer only: it reads instantaneous input amplitude and the current/target transfer-curve state through atomic values or a lock-free FIFO snapshot that the processor exposes. It must NEVER lock, block, or call the audio thread; the GUI only reads atomic telemetry. Provide a public API (e.g. setCurvePoints/pushInputSample or a snapshot-pull method) so PluginEditor can feed it telemetry, but do not include PluginProcessor here \u2014 depend only on plain atomics/parameters passed in.\n\nBefore editing, inspect:\n- Source/PluginEditor.h (namespace/class naming, how editor holds references)\n- Source/PluginProcessor.h (what atomic telemetry / lock-free FIFO the DSP chain already exposes for the transfer curve and instantaneous amplitude; read only)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h and juce_events Timer API (do not modify anything under JUCE/)",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "g.2",
+                "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
+                "description": "Create Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp. Implement a juce::Component subclass named TransferCurveScope that renders a live X-Y transfer curve plot y = f(v) across the input amplitude domain, plus a moving dot indicating the instantaneous input amplitude, and a smooth morphing crossfade of the curve during voicing-mode changes. The component is a Timer-driven repaint consumer only: it reads instantaneous input amplitude and the current/target transfer-curve state through atomic values or a lock-free FIFO snapshot that the processor exposes. It must NEVER lock, block, or call the audio thread; the GUI only reads atomic telemetry. Provide a public API (e.g. setCurvePoints/pushInputSample or a snapshot-pull method) so PluginEditor can feed it telemetry, but do not include PluginProcessor here \u2014 depend only on plain atomics/parameters passed in.\n\nBefore editing, inspect:\n- Source/PluginEditor.h (namespace/class naming, how editor holds references)\n- Source/PluginProcessor.h (what atomic telemetry / lock-free FIFO the DSP chain already exposes for the transfer curve and instantaneous amplitude; read only)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h and juce_events Timer API (do not modify anything under JUCE/)",
+                "phase": "G",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp exist and declare/define class TransferCurveScope deriving from juce::Component",
+                  "TransferCurveScope renders a transfer curve, a moving input-amplitude dot, and crossfades between voicing curves in paint()",
+                  "TransferCurveScope reads telemetry only through atomics or a lock-free snapshot and never locks or calls the audio thread",
+                  "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+                  "No file outside this task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:22:25.925314",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/UI/TransferCurveScope.h",
+                  "Source/UI/TransferCurveScope.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:26:48.186854",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-g.2",
+      "created_at": "2026-07-25T20:22:25.992485"
     }
   }
 ]
