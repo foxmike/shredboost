@@ -5,3 +5,7 @@
 2026-07-25 11:30:29 | INFO | abracapocus | run=784e6d1a-c336-4aa5-aa1a-3ec669302e09 phase=A adaptive_gate=blocked reason=task outcome at index 0 is not accepted (blocked)
 2026-07-25 11:30:29 | INFO | abracapocus | run=784e6d1a-c336-4aa5-aa1a-3ec669302e09 phases=1 verification=blocked
 2026-07-25 11:53:46 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
+2026-07-25 11:53:46 | INFO | abracapocus | run=6d5c40d9-b0ee-4890-8b46-417137c34d10 phases=1 verification=passed
+2026-07-25 11:54:13 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
+2026-07-25 11:54:13 | INFO | abracapocus | run=d43b7ade-16d2-4f46-afdb-4d45708f45fc phases=1 verification=passed
+2026-07-25 11:55:45 | INFO | abracapocus.backends.codex_cli | backend=codex_cli retry_count=0
