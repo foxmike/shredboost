@@ -1,0 +1,1 @@
+{"task_id":"b.1","phase_id":"B","run_id":"1dc81047-34df-4a32-a87b-2b4a6f182c57","accepted_at":"2026-07-25T15:57:18.231998","files_added":["Source/Parameters/ParameterIDs.h"],"files_modified":[],"public_symbols_added":[],"public_symbols_removed":[],"dependencies_added":[],"description_summary":"Create frozen parameter ID taxonomy in ParameterIDs header with schema version"}

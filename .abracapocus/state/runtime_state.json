@@ -9,9 +9,9 @@
       "task_id": "b.1",
       "title": "Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
       "phase": "B",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T15:57:18.257744",
       "notes": ""
     }
   ],
@@ -78,6 +78,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:56:54.681071"
+    },
+    {
+      "run_id": "1dc81047-34df-4a32-a87b-2b4a6f182c57",
+      "task_id": "b.1",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:57:18.257850"
     }
   ],
   "operator_overrides": {},
