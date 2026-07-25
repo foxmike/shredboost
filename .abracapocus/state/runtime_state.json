@@ -9,9 +9,9 @@
       "task_id": "b.3",
       "title": "Create domain correct smoothed parameter snapshot engine",
       "phase": "B",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:01:25.893652",
       "notes": ""
     }
   ],
@@ -96,6 +96,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:58:45.332761"
+    },
+    {
+      "run_id": "c84c97df-1f61-48a8-aee7-09d4273ee56a",
+      "task_id": "b.3",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:01:25.893793"
     }
   ],
   "operator_overrides": {},
