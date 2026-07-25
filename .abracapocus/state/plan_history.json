@@ -740,5 +740,62 @@
       "version": "task-c.1",
       "created_at": "2026-07-25T16:15:21.105359"
     }
+  },
+  {
+    "created_at": "2026-07-25T16:21:54.569660",
+    "project_name": "shredboost",
+    "goal": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement pre clip midrange peaking bell voicing filter",
+      "phases": [
+        {
+          "name": "C",
+          "objective": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "c.2",
+                "title": "Implement pre clip midrange peaking bell voicing filter",
+                "description": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+                "phase": "C",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp exist and declare/define class MidVoicingFilter",
+                  "MidVoicingFilter uses a multiplicative SmoothedValue for mid_freq (500-1200 Hz) and a linear SmoothedValue for mid_amount (dB, up to +9 dB)",
+                  "The filter is a 2nd-order RBJ peaking bell with fixed Q_m = 0.9",
+                  "RBJ coefficients are recomputed on sample-rate change and denormals are flushed in the recursive state",
+                  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+                  "cmake --build build --target ShredBoost compiles Source/DSP/MidVoicingFilter.cpp without errors",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T16:19:40.627127",
+                "selected_backend": "codex_cli",
+                "model": null,
+                "task_timeout_seconds": 1800.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/DSP/MidVoicingFilter.h",
+                  "Source/DSP/MidVoicingFilter.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T16:21:54.454251",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-c.2",
+      "created_at": "2026-07-25T16:19:40.704009"
+    }
   }
 ]
