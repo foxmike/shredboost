@@ -1,63 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T15:55:45.434766",
-    "project_name": "shredboost",
-    "goal": "Create CMakeLists.txt and CMakePresets.json configuring the ShredBoost plugin with the exact frozen product identity and Linux target formats.\n\nCMakeLists.txt requirements:\n- cmake_minimum_required(VERSION 3.22) and project(ShredBoost VERSION 1.0.0 LANGUAGES CXX).\n- set CMAKE_CXX_STANDARD 20 and CMAKE_CXX_STANDARD_REQUIRED ON.\n- add_subdirectory(JUCE) referencing the pinned JUCE submodule (do NOT modify JUCE/).\n- juce_add_plugin(ShredBoost ...) with EXACT values: PRODUCT_NAME ShredBoost, COMPANY_NAME \"nSpace Systems\", VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone, IS_SYNTH FALSE, NEEDS_MIDI_INPUT FALSE.\n- target_sources adding Source/PluginProcessor.cpp and Source/PluginEditor.cpp.\n- target_link_libraries linking juce recommended flags and juce_audio_utils.\n\nCMakePresets.json requirements:\n- version 3 (or appropriate) with two configure presets: \"linux-release\" (Unix Makefiles or Ninja, CMAKE_BUILD_TYPE Release) and \"windows-msvc\" (Visual Studio / MSVC generator) as configuration for later Windows tooling.\n\nNote: the frozen BUNDLE_ID is com.nspacesystems.shredboost per the binding product identity.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp and Source/PluginEditor.cpp for source file names to add to target_sources.\n- ./JUCE/CMakeLists.txt for the juce_add_plugin signature (do NOT modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Create CMake build configuration with product identity and three Linux target formats",
-      "phases": [
-        {
-          "name": "A",
-          "objective": "Create CMakeLists.txt and CMakePresets.json configuring the ShredBoost plugin with the exact frozen product identity and Linux target formats.\n\nCMakeLists.txt requirements:\n- cmake_minimum_required(VERSION 3.22) and project(ShredBoost VERSION 1.0.0 LANGUAGES CXX).\n- set CMAKE_CXX_STANDARD 20 and CMAKE_CXX_STANDARD_REQUIRED ON.\n- add_subdirectory(JUCE) referencing the pinned JUCE submodule (do NOT modify JUCE/).\n- juce_add_plugin(ShredBoost ...) with EXACT values: PRODUCT_NAME ShredBoost, COMPANY_NAME \"nSpace Systems\", VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone, IS_SYNTH FALSE, NEEDS_MIDI_INPUT FALSE.\n- target_sources adding Source/PluginProcessor.cpp and Source/PluginEditor.cpp.\n- target_link_libraries linking juce recommended flags and juce_audio_utils.\n\nCMakePresets.json requirements:\n- version 3 (or appropriate) with two configure presets: \"linux-release\" (Unix Makefiles or Ninja, CMAKE_BUILD_TYPE Release) and \"windows-msvc\" (Visual Studio / MSVC generator) as configuration for later Windows tooling.\n\nNote: the frozen BUNDLE_ID is com.nspacesystems.shredboost per the binding product identity.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp and Source/PluginEditor.cpp for source file names to add to target_sources.\n- ./JUCE/CMakeLists.txt for the juce_add_plugin signature (do NOT modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "a.3",
-                "title": "Create CMake build configuration with product identity and three Linux target formats",
-                "description": "Create CMakeLists.txt and CMakePresets.json configuring the ShredBoost plugin with the exact frozen product identity and Linux target formats.\n\nCMakeLists.txt requirements:\n- cmake_minimum_required(VERSION 3.22) and project(ShredBoost VERSION 1.0.0 LANGUAGES CXX).\n- set CMAKE_CXX_STANDARD 20 and CMAKE_CXX_STANDARD_REQUIRED ON.\n- add_subdirectory(JUCE) referencing the pinned JUCE submodule (do NOT modify JUCE/).\n- juce_add_plugin(ShredBoost ...) with EXACT values: PRODUCT_NAME ShredBoost, COMPANY_NAME \"nSpace Systems\", VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone, IS_SYNTH FALSE, NEEDS_MIDI_INPUT FALSE.\n- target_sources adding Source/PluginProcessor.cpp and Source/PluginEditor.cpp.\n- target_link_libraries linking juce recommended flags and juce_audio_utils.\n\nCMakePresets.json requirements:\n- version 3 (or appropriate) with two configure presets: \"linux-release\" (Unix Makefiles or Ninja, CMAKE_BUILD_TYPE Release) and \"windows-msvc\" (Visual Studio / MSVC generator) as configuration for later Windows tooling.\n\nNote: the frozen BUNDLE_ID is com.nspacesystems.shredboost per the binding product identity.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp and Source/PluginEditor.cpp for source file names to add to target_sources.\n- ./JUCE/CMakeLists.txt for the juce_add_plugin signature (do NOT modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
-                "phase": "A",
-                "dependencies": [
-                  "a.2"
-                ],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "CMakeLists.txt and CMakePresets.json exist",
-                  "CMakeLists.txt sets PRODUCT_NAME ShredBoost, COMPANY_NAME nSpace Systems, VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost",
-                  "CMakeLists.txt sets FORMATS to VST3 LV2 Standalone and CMAKE_CXX_STANDARD 20",
-                  "CMakePresets.json defines linux-release and windows-msvc configure presets",
-                  "cmake --preset linux-release -DSHREDBOOST_CONFIGURE_ONLY=ON generates a build tree without configuration errors",
-                  "No file outside allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T15:54:13.665345",
-                "selected_backend": "codex_cli",
-                "model": null,
-                "task_timeout_seconds": 1200.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "CMakeLists.txt",
-                  "CMakePresets.json"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T15:55:45.362098",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-a.3",
-      "created_at": "2026-07-25T15:54:13.738989"
-    }
-  },
-  {
     "created_at": "2026-07-25T15:56:21.019872",
     "project_name": "shredboost",
     "goal": "Create scripts/build_all.sh (a paste-and-run build script) and .gitignore for the ShredBoost project.\n\nscripts/build_all.sh requirements:\n- Bash script with '#!/usr/bin/env bash' and 'set -euo pipefail'.\n- Configure and build using the linux-release preset: 'cmake --preset linux-release' then 'cmake --build build --config Release' (match the binary/build dir used by CMakePresets.json from a.3).\n- Echo clear progress messages and be safe to paste-and-run from the repository root.\n\n.gitignore requirements:\n- Ignore CMake build output directories (build/, cmake-build-*/), IDE files (.vscode/, .idea/), and OS cruft (.DS_Store). Do NOT ignore the JUCE/ submodule.\n\nBefore editing, inspect:\n- CMakePresets.json from a.3 for the exact preset name (linux-release) and build directory.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
@@ -1134,6 +1076,65 @@
       ],
       "version": "task-e.3",
       "created_at": "2026-07-25T19:29:16.074559"
+    }
+  },
+  {
+    "created_at": "2026-07-25T19:40:14.930482",
+    "project_name": "shredboost",
+    "goal": "Create tests/OversamplingTests.cpp using the juce::UnitTest framework (binding rule 5: no third-party testing frameworks) and register the new DSP sources plus the test in CMakeLists.txt so the existing juce::UnitTest console runner target builds and runs them under CTest. The tests must (a) drive the OversamplingEngine with a high-frequency sine and assert that the inharmonic aliasing floor is rejected below a threshold, and (b) assert exact PDC latency reporting from getLatencySamples() for each 1x/2x/4x factor. Add a smoke check for AutoGainBypass loudness matching. This test proves the behavioral claims (alias rejection, exact PDC), so it must run and pass, not merely compile. Depends on e.2 and e.3. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- tests/ for existing juce::UnitTest test file structure and the console runner registration pattern\n- CMakeLists.txt for the existing UnitTest runner target and where Source/DSP/*.cpp sources and test sources are added, plus the add_test/CTest registration\n- Source/DSP/OversamplingEngine.h and Source/DSP/AutoGainBypass.h for the public surfaces under test",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Create oversampling and bypass unit tests verifying alias floor and PDC",
+      "phases": [
+        {
+          "name": "E",
+          "objective": "Create tests/OversamplingTests.cpp using the juce::UnitTest framework (binding rule 5: no third-party testing frameworks) and register the new DSP sources plus the test in CMakeLists.txt so the existing juce::UnitTest console runner target builds and runs them under CTest. The tests must (a) drive the OversamplingEngine with a high-frequency sine and assert that the inharmonic aliasing floor is rejected below a threshold, and (b) assert exact PDC latency reporting from getLatencySamples() for each 1x/2x/4x factor. Add a smoke check for AutoGainBypass loudness matching. This test proves the behavioral claims (alias rejection, exact PDC), so it must run and pass, not merely compile. Depends on e.2 and e.3. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- tests/ for existing juce::UnitTest test file structure and the console runner registration pattern\n- CMakeLists.txt for the existing UnitTest runner target and where Source/DSP/*.cpp sources and test sources are added, plus the add_test/CTest registration\n- Source/DSP/OversamplingEngine.h and Source/DSP/AutoGainBypass.h for the public surfaces under test",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "e.4",
+                "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
+                "description": "Create tests/OversamplingTests.cpp using the juce::UnitTest framework (binding rule 5: no third-party testing frameworks) and register the new DSP sources plus the test in CMakeLists.txt so the existing juce::UnitTest console runner target builds and runs them under CTest. The tests must (a) drive the OversamplingEngine with a high-frequency sine and assert that the inharmonic aliasing floor is rejected below a threshold, and (b) assert exact PDC latency reporting from getLatencySamples() for each 1x/2x/4x factor. Add a smoke check for AutoGainBypass loudness matching. This test proves the behavioral claims (alias rejection, exact PDC), so it must run and pass, not merely compile. Depends on e.2 and e.3. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- tests/ for existing juce::UnitTest test file structure and the console runner registration pattern\n- CMakeLists.txt for the existing UnitTest runner target and where Source/DSP/*.cpp sources and test sources are added, plus the add_test/CTest registration\n- Source/DSP/OversamplingEngine.h and Source/DSP/AutoGainBypass.h for the public surfaces under test",
+                "phase": "E",
+                "dependencies": [
+                  "e.2",
+                  "e.3"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+                  "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+                  "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+                  "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+                  "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T19:31:40.004073",
+                "selected_backend": "pi_cli",
+                "model": "openrouter/z-ai/glm-5.2",
+                "task_timeout_seconds": 1800.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "tests/OversamplingTests.cpp",
+                  "CMakeLists.txt"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T19:40:14.830412",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-e.4",
+      "created_at": "2026-07-25T19:31:40.076435"
     }
   }
 ]

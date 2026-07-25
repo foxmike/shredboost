@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-e.4",
-  "active_phase": "E",
+  "plan_version": "task-f.1",
+  "active_phase": "F",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "e.4",
-      "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
-      "phase": "E",
-      "status": "completed",
-      "backend": "pi_cli",
-      "last_run": "2026-07-25T19:40:14.858969",
+      "task_id": "f.1",
+      "title": "Integrate complete DSP signal chain into PluginProcessor processBlock",
+      "phase": "F",
+      "status": "planned",
+      "backend": "codex_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -245,6 +245,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "E"
+    "F"
   ]
 }
