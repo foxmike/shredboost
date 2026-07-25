@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-g.1",
+  "plan_version": "task-g.2",
   "active_phase": "G",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "g.1",
-      "title": "Implement custom LookAndFeel and industrial dark metal rotary knobs",
+      "task_id": "g.2",
+      "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
       "phase": "G",
-      "status": "completed",
+      "status": "planned",
       "backend": "antigravity_cli",
-      "last_run": "2026-07-25T20:22:25.824119",
+      "last_run": null,
       "notes": ""
     }
   ],

@@ -1,62 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T15:58:45.386415",
-    "project_name": "shredboost",
-    "goal": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Create parameter layout with APVTS definitions for all ShredBoost parameters",
-      "phases": [
-        {
-          "name": "B",
-          "objective": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "b.2",
-                "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
-                "description": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-                "phase": "B",
-                "dependencies": [
-                  "b.1"
-                ],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp exist",
-                  "createParameterLayout returns a juce::AudioProcessorValueTreeState::ParameterLayout with exactly the 11 parameters from ParameterIDs.h",
-                  "voicing_mode and oversampling are AudioParameterChoice with defaults Yng-Grey and 2x respectively; auto_gain is AudioParameterBool defaulting to false",
-                  "Each parameter's range and default match the values documented in ParameterIDs.h",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T15:57:18.343291",
-                "selected_backend": "antigravity_cli",
-                "model": null,
-                "task_timeout_seconds": 1200.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "Source/Parameters/ParameterLayout.h",
-                  "Source/Parameters/ParameterLayout.cpp"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T15:58:45.307393",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-b.2",
-      "created_at": "2026-07-25T15:57:18.420137"
-    }
-  },
-  {
     "created_at": "2026-07-25T16:01:25.976158",
     "project_name": "shredboost",
     "goal": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
@@ -1140,6 +1083,61 @@
       ],
       "version": "task-f.3",
       "created_at": "2026-07-25T20:05:39.671633"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:22:25.895619",
+    "project_name": "shredboost",
+    "goal": "Create Source/UI/ShredLookAndFeel.h and Source/UI/ShredLookAndFeel.cpp. Implement a custom juce::LookAndFeel_V4 subclass named ShredLookAndFeel providing a dark industrial visual theme (dark metal background, cool desaturated palette, accent glow) and a custom rotary slider renderer (the 'ShredKnob' style) via overridden drawRotarySlider. The knob draws a machined-metal body, tick marks, an indicator line, and a value arc. Also override component colours (label, slider, button) so the whole plugin adopts the theme. This is a pure new-file GUI module: it must NOT reference PluginProcessor, APVTS, or any DSP telemetry. All drawing must happen on the message thread using only the juce::Graphics passed in; do not lock, block, or read from the audio thread.\n\nBefore editing, inspect:\n- CMakeLists.txt (target name, existing Source/UI structure, juce_gui_basics/juce_graphics module usage)\n- Source/PluginEditor.h (to learn the plugin's namespace/class naming conventions)\n- JUCE/modules/juce_gui_basics/lookandfeel/juce_LookAndFeel_V4.h (base class API; do not modify anything under JUCE/)",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement custom LookAndFeel and industrial dark metal rotary knobs",
+      "phases": [
+        {
+          "name": "G",
+          "objective": "Create Source/UI/ShredLookAndFeel.h and Source/UI/ShredLookAndFeel.cpp. Implement a custom juce::LookAndFeel_V4 subclass named ShredLookAndFeel providing a dark industrial visual theme (dark metal background, cool desaturated palette, accent glow) and a custom rotary slider renderer (the 'ShredKnob' style) via overridden drawRotarySlider. The knob draws a machined-metal body, tick marks, an indicator line, and a value arc. Also override component colours (label, slider, button) so the whole plugin adopts the theme. This is a pure new-file GUI module: it must NOT reference PluginProcessor, APVTS, or any DSP telemetry. All drawing must happen on the message thread using only the juce::Graphics passed in; do not lock, block, or read from the audio thread.\n\nBefore editing, inspect:\n- CMakeLists.txt (target name, existing Source/UI structure, juce_gui_basics/juce_graphics module usage)\n- Source/PluginEditor.h (to learn the plugin's namespace/class naming conventions)\n- JUCE/modules/juce_gui_basics/lookandfeel/juce_LookAndFeel_V4.h (base class API; do not modify anything under JUCE/)",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "g.1",
+                "title": "Implement custom LookAndFeel and industrial dark metal rotary knobs",
+                "description": "Create Source/UI/ShredLookAndFeel.h and Source/UI/ShredLookAndFeel.cpp. Implement a custom juce::LookAndFeel_V4 subclass named ShredLookAndFeel providing a dark industrial visual theme (dark metal background, cool desaturated palette, accent glow) and a custom rotary slider renderer (the 'ShredKnob' style) via overridden drawRotarySlider. The knob draws a machined-metal body, tick marks, an indicator line, and a value arc. Also override component colours (label, slider, button) so the whole plugin adopts the theme. This is a pure new-file GUI module: it must NOT reference PluginProcessor, APVTS, or any DSP telemetry. All drawing must happen on the message thread using only the juce::Graphics passed in; do not lock, block, or read from the audio thread.\n\nBefore editing, inspect:\n- CMakeLists.txt (target name, existing Source/UI structure, juce_gui_basics/juce_graphics module usage)\n- Source/PluginEditor.h (to learn the plugin's namespace/class naming conventions)\n- JUCE/modules/juce_gui_basics/lookandfeel/juce_LookAndFeel_V4.h (base class API; do not modify anything under JUCE/)",
+                "phase": "G",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/UI/ShredLookAndFeel.h and Source/UI/ShredLookAndFeel.cpp exist and declare/define class ShredLookAndFeel deriving from juce::LookAndFeel_V4",
+                  "ShredLookAndFeel overrides drawRotarySlider to render the custom dark industrial ShredKnob",
+                  "ShredLookAndFeel.cpp does not reference the audio thread, DSP telemetry, locks, or PluginProcessor",
+                  "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+                  "No file outside this task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:19:48.472608",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/UI/ShredLookAndFeel.h",
+                  "Source/UI/ShredLookAndFeel.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:22:25.797893",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-g.1",
+      "created_at": "2026-07-25T20:19:48.572336"
     }
   }
 ]

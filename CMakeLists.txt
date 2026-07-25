@@ -43,6 +43,7 @@ target_sources(ShredBoost
         Source/PluginProcessor.cpp
         Source/PluginEditor.cpp
         Source/UI/ShredLookAndFeel.cpp
+        Source/UI/TransferCurveScope.cpp
         Source/Parameters/ParameterLayout.cpp
         Source/Parameters/ParameterSnapshot.cpp
         Source/DSP/TightFilter.cpp
@@ -60,6 +61,7 @@ target_sources(ShredBoost
 target_compile_definitions(ShredBoost PRIVATE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
+    JUCE_VST3_CAN_REPLACE_VST2=0
 )
 
 target_link_libraries(ShredBoost
@@ -81,9 +83,11 @@ add_executable(ShredBoostUnitTests
     tests/TestMain.cpp
     tests/ParameterTests.cpp
     tests/ProcessBlockRealtimeTests.cpp
+    tests/TransferCurveScopeTests.cpp
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
     Source/UI/ShredLookAndFeel.cpp
+    Source/UI/TransferCurveScope.cpp
     Source/Parameters/ParameterLayout.cpp
     Source/Parameters/ParameterSnapshot.cpp
     Source/DSP/TightFilter.cpp
