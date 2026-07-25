@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-g.3",
+  "plan_version": "task-g.4",
   "active_phase": "G",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "g.3",
-      "title": "Implement pre post FFT spectrum overlay visualizer",
+      "task_id": "g.4",
+      "title": "Implement peak and RMS input output level meters and drive saturation readout",
       "phase": "G",
-      "status": "completed",
+      "status": "planned",
       "backend": "antigravity_cli",
-      "last_run": "2026-07-25T20:31:21.194873",
+      "last_run": null,
       "notes": ""
     }
   ],
