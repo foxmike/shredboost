@@ -797,5 +797,61 @@
       "version": "task-c.2",
       "created_at": "2026-07-25T16:19:40.704009"
     }
+  },
+  {
+    "created_at": "2026-07-25T16:23:52.478166",
+    "project_name": "shredboost",
+    "goal": "Create Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp implementing the input trim / calibration stage at chain position [0].\n\nRequirements:\n- Class InputTrimStage with prepare(double sampleRate), reset(), and process/processBlock on a single mono channel; all state allocated in prepare().\n- Applies smoothed gain Gin = 10^(trim/20) where the input_trim value (in dB) is driven by a linear SmoothedValue (dB domain). Do not construct the SmoothedValue in the process loop.\n- Telemetry metering: track per-block peak and RMS signal levels, exposed via lock-free atomic getters (e.g. std::atomic<float>) readable by the message/GUI thread. Metering must not allocate, lock, or construct strings in process().\n- No heap allocation, locks, file IO, or GUI calls inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and RMS helpers (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement Input Trim calibration stage with telemetry metering",
+      "phases": [
+        {
+          "name": "C",
+          "objective": "Create Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp implementing the input trim / calibration stage at chain position [0].\n\nRequirements:\n- Class InputTrimStage with prepare(double sampleRate), reset(), and process/processBlock on a single mono channel; all state allocated in prepare().\n- Applies smoothed gain Gin = 10^(trim/20) where the input_trim value (in dB) is driven by a linear SmoothedValue (dB domain). Do not construct the SmoothedValue in the process loop.\n- Telemetry metering: track per-block peak and RMS signal levels, exposed via lock-free atomic getters (e.g. std::atomic<float>) readable by the message/GUI thread. Metering must not allocate, lock, or construct strings in process().\n- No heap allocation, locks, file IO, or GUI calls inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and RMS helpers (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "c.3",
+                "title": "Implement Input Trim calibration stage with telemetry metering",
+                "description": "Create Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp implementing the input trim / calibration stage at chain position [0].\n\nRequirements:\n- Class InputTrimStage with prepare(double sampleRate), reset(), and process/processBlock on a single mono channel; all state allocated in prepare().\n- Applies smoothed gain Gin = 10^(trim/20) where the input_trim value (in dB) is driven by a linear SmoothedValue (dB domain). Do not construct the SmoothedValue in the process loop.\n- Telemetry metering: track per-block peak and RMS signal levels, exposed via lock-free atomic getters (e.g. std::atomic<float>) readable by the message/GUI thread. Metering must not allocate, lock, or construct strings in process().\n- No heap allocation, locks, file IO, or GUI calls inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and RMS helpers (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+                "phase": "C",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp exist and declare/define class InputTrimStage",
+                  "InputTrimStage applies smoothed gain Gin = 10^(trim/20) using a linear SmoothedValue for input_trim in dB",
+                  "Per-block peak and RMS metering is exposed via lock-free atomic getters and computed without allocation or locks in process()",
+                  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+                  "cmake --build build --target ShredBoost compiles Source/DSP/InputTrimStage.cpp without errors",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T16:21:54.618577",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1500.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/DSP/InputTrimStage.h",
+                  "Source/DSP/InputTrimStage.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T16:23:52.385587",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-c.3",
+      "created_at": "2026-07-25T16:21:54.692911"
+    }
   }
 ]

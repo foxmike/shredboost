@@ -42,6 +42,9 @@ target_sources(ShredBoost
     PRIVATE
         Source/PluginProcessor.cpp
         Source/PluginEditor.cpp
+        Source/DSP/TightFilter.cpp
+        Source/DSP/MidVoicingFilter.cpp
+        Source/DSP/InputTrimStage.cpp
 )
 
 target_link_libraries(ShredBoost
@@ -89,3 +92,35 @@ target_link_libraries(ShredBoostUnitTests PRIVATE
 )
 
 add_test(NAME ShredBoostParameterTests COMMAND ShredBoostUnitTests)
+
+# -----------------------------------------------------------------------------
+# DSP filter/stage unit tests (juce::UnitTest console runner, no third-party
+# frameworks). Compiled into a dedicated ShredBoostTests executable that runs
+# only the FilterTests via the shared tests/TestMain.cpp runner.
+# -----------------------------------------------------------------------------
+add_executable(ShredBoostTests
+    tests/TestMain.cpp
+    tests/FilterTests.cpp
+    Source/DSP/TightFilter.cpp
+    Source/DSP/MidVoicingFilter.cpp
+    Source/DSP/InputTrimStage.cpp
+)
+
+target_compile_definitions(ShredBoostTests PRIVATE
+    JUCE_WEB_BROWSER=0
+    JUCE_USE_CURL=0
+)
+
+target_include_directories(ShredBoostTests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(ShredBoostTests PRIVATE
+    juce::juce_audio_basics
+    juce::juce_core
+    juce::juce_events
+    juce::juce_recommended_config_flags
+    juce::juce_recommended_warning_flags
+)
+
+add_test(NAME FilterTests COMMAND ShredBoostTests)
