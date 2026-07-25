@@ -9,9 +9,9 @@
       "task_id": "e.2",
       "title": "Implement message thread oversampling factor change with mute fade",
       "phase": "E",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T19:29:15.835617",
       "notes": ""
     }
   ],
@@ -213,6 +213,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T19:24:43.268321"
+    },
+    {
+      "run_id": "7bac2b97-24ba-451a-9eb2-8bf0158a79e4",
+      "task_id": "e.2",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:29:15.835811"
     }
   ],
   "operator_overrides": {},
