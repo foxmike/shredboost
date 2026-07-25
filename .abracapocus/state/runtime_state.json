@@ -9,9 +9,9 @@
       "task_id": "e.4",
       "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
       "phase": "E",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T19:40:14.858969",
       "notes": ""
     }
   ],
@@ -231,6 +231,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T19:31:39.893307"
+    },
+    {
+      "run_id": "202a658d-0b16-4f9e-9f2a-5e828b51d31e",
+      "task_id": "e.4",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:40:14.859165"
     }
   ],
   "operator_overrides": {},
