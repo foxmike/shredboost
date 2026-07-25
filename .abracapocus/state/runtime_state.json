@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-e.2",
+  "plan_version": "task-e.3",
   "active_phase": "E",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "e.2",
-      "title": "Implement message thread oversampling factor change with mute fade",
+      "task_id": "e.3",
+      "title": "Implement auto loudness matched bypass RMS tracking and dry compensation",
       "phase": "E",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T19:29:15.835617",
+      "status": "planned",
+      "backend": "antigravity_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
