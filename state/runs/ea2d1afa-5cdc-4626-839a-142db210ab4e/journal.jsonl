@@ -1,0 +1,1 @@
+{"task_id":"c.4","phase_id":"C","run_id":"ea2d1afa-5cdc-4626-839a-142db210ab4e","accepted_at":"2026-07-25T16:28:10.421139","files_added":["tests/FilterTests.cpp"],"files_modified":["CMakeLists.txt"],"public_symbols_added":[],"public_symbols_removed":[],"dependencies_added":[],"description_summary":"Create filter unit tests for HPF mid bell and input trim"}
