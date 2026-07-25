@@ -1,0 +1,13 @@
+{
+  "run_id": "391efb2c-1665-49e0-a7c8-2880430858b6",
+  "task_id": "g.5",
+  "phase": "G",
+  "subtype": "context_completeness",
+  "mode": "advisory",
+  "reason_codes": [
+    "empty_context_package"
+  ],
+  "detail": "ContextPackage.files or ContextPackage.summaries must be non-empty.",
+  "blocking": false,
+  "created_at": "2026-07-25T20:34:28.503938"
+}

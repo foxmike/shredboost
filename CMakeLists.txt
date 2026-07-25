@@ -45,6 +45,7 @@ target_sources(ShredBoost
         Source/UI/ShredLookAndFeel.cpp
         Source/UI/TransferCurveScope.cpp
         Source/UI/SpectrumOverlay.cpp
+        Source/UI/LevelMeters.cpp
         Source/Parameters/ParameterLayout.cpp
         Source/Parameters/ParameterSnapshot.cpp
         Source/DSP/TightFilter.cpp
@@ -91,6 +92,7 @@ add_executable(ShredBoostUnitTests
     Source/UI/ShredLookAndFeel.cpp
     Source/UI/TransferCurveScope.cpp
     Source/UI/SpectrumOverlay.cpp
+    Source/UI/LevelMeters.cpp
     Source/Parameters/ParameterLayout.cpp
     Source/Parameters/ParameterSnapshot.cpp
     Source/DSP/TightFilter.cpp

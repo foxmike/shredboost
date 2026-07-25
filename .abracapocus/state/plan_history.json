@@ -1,63 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T16:15:20.284451",
-    "project_name": "shredboost",
-    "goal": "Create tests/TestMain.cpp as a juce::UnitTestRunner console entry point (int main that runs all registered juce::UnitTest instances and returns non-zero on any failure) and tests/ParameterTests.cpp implementing a juce::UnitTest that validates the parameter taxonomy and state round-trip. Tests must: (1) confirm createParameterLayout() produces exactly the 11 expected parameters with correct IDs, ranges, and defaults; (2) confirm voicing_mode default is Yng-Grey, oversampling default is 2x, auto_gain default is Off; (3) round-trip APVTS state via getStateInformation/setStateInformation and assert restored values are identical to the pre-save values, and assert the embedded schema version equals 1. Register a CTest target in CMakeLists.txt: add the unit-test executable linking JUCE + the Source parameter files, and register it with add_test so it runs under ctest. Do not use any third-party testing framework \u2014 juce::UnitTest only.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h, ParameterLayout.h, ParameterSnapshot.h (APIs under test)\n- Source/PluginProcessor.h/.cpp (getStateInformation/setStateInformation)\n- CMakeLists.txt (existing targets, JUCE target linkage, where to add the test executable and add_test)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Create unit test runner and parameter state tests",
-      "phases": [
-        {
-          "name": "B",
-          "objective": "Create tests/TestMain.cpp as a juce::UnitTestRunner console entry point (int main that runs all registered juce::UnitTest instances and returns non-zero on any failure) and tests/ParameterTests.cpp implementing a juce::UnitTest that validates the parameter taxonomy and state round-trip. Tests must: (1) confirm createParameterLayout() produces exactly the 11 expected parameters with correct IDs, ranges, and defaults; (2) confirm voicing_mode default is Yng-Grey, oversampling default is 2x, auto_gain default is Off; (3) round-trip APVTS state via getStateInformation/setStateInformation and assert restored values are identical to the pre-save values, and assert the embedded schema version equals 1. Register a CTest target in CMakeLists.txt: add the unit-test executable linking JUCE + the Source parameter files, and register it with add_test so it runs under ctest. Do not use any third-party testing framework \u2014 juce::UnitTest only.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h, ParameterLayout.h, ParameterSnapshot.h (APIs under test)\n- Source/PluginProcessor.h/.cpp (getStateInformation/setStateInformation)\n- CMakeLists.txt (existing targets, JUCE target linkage, where to add the test executable and add_test)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "b.5",
-                "title": "Create unit test runner and parameter state tests",
-                "description": "Create tests/TestMain.cpp as a juce::UnitTestRunner console entry point (int main that runs all registered juce::UnitTest instances and returns non-zero on any failure) and tests/ParameterTests.cpp implementing a juce::UnitTest that validates the parameter taxonomy and state round-trip. Tests must: (1) confirm createParameterLayout() produces exactly the 11 expected parameters with correct IDs, ranges, and defaults; (2) confirm voicing_mode default is Yng-Grey, oversampling default is 2x, auto_gain default is Off; (3) round-trip APVTS state via getStateInformation/setStateInformation and assert restored values are identical to the pre-save values, and assert the embedded schema version equals 1. Register a CTest target in CMakeLists.txt: add the unit-test executable linking JUCE + the Source parameter files, and register it with add_test so it runs under ctest. Do not use any third-party testing framework \u2014 juce::UnitTest only.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h, ParameterLayout.h, ParameterSnapshot.h (APIs under test)\n- Source/PluginProcessor.h/.cpp (getStateInformation/setStateInformation)\n- CMakeLists.txt (existing targets, JUCE target linkage, where to add the test executable and add_test)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-                "phase": "B",
-                "dependencies": [
-                  "b.4"
-                ],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
-                  "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
-                  "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
-                  "cmake --preset linux configure succeeds and ctest runs the parameter test target",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T16:03:32.792711",
-                "selected_backend": "pi_cli",
-                "model": "openrouter/z-ai/glm-5.2",
-                "task_timeout_seconds": 1500.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "tests/TestMain.cpp",
-                  "tests/ParameterTests.cpp",
-                  "CMakeLists.txt"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T16:15:19.783203",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-b.5",
-      "created_at": "2026-07-25T16:03:32.863195"
-    }
-  },
-  {
     "created_at": "2026-07-25T16:19:40.590311",
     "project_name": "shredboost",
     "goal": "Create Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp implementing a 2nd-order RBJ high-pass filter used as the pre-drive tight low-end control.\n\nRequirements:\n- Class TightFilter with prepare(double sampleRate), reset(), and process/processBlock methods operating on a single mono channel of samples (buffers pre-allocated in prepare()).\n- Cutoff (tight_cut) parameter constrained to 80-400 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain) \u2014 do NOT construct the SmoothedValue inside the process loop.\n- Two Q modes: standard Butterworth Q=0.707, and Precision Tight resonant mode Q=1.2 producing a +1.8 dB overshoot at cutoff.\n- RBJ biquad coefficient computation recomputed on sample-rate change and on smoothed-frequency movement; coefficients derived only in prepare()/coefficient-update paths, never allocating in process.\n- Flush denormals: apply juce::ScopedNoDenormals discipline at the call site and add a tiny-value flush (or use JUCE denormal-safe state) in the recursive state to prevent denormal stalls.\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are added to the target; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and juce::ScopedNoDenormals (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
@@ -1134,6 +1076,61 @@
       ],
       "version": "task-g.3",
       "created_at": "2026-07-25T20:26:48.406300"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:34:28.260758",
+    "project_name": "shredboost",
+    "goal": "Create Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp. Implement a juce::Component subclass named LevelMeters that renders Peak + RMS input and output level meters (with ballistic decay) and a Drive Saturation readout showing peak reduction in dB. The GUI reads instantaneous peak/RMS/reduction telemetry exclusively through std::atomic<float> values that the processor updates on the audio thread; the component runs a Timer to sample those atomics and repaint. It must NEVER lock, block, or call the audio thread. Provide a public API so PluginEditor can bind the atomic telemetry handles, but do not include PluginProcessor here.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h (existing atomic peak/RMS I/O and gain-reduction/saturation telemetry members; read only)\n- Source/PluginEditor.h (naming conventions and how editor passes telemetry handles)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h (do not modify anything under JUCE/)",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Implement peak and RMS input output level meters and drive saturation readout",
+      "phases": [
+        {
+          "name": "G",
+          "objective": "Create Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp. Implement a juce::Component subclass named LevelMeters that renders Peak + RMS input and output level meters (with ballistic decay) and a Drive Saturation readout showing peak reduction in dB. The GUI reads instantaneous peak/RMS/reduction telemetry exclusively through std::atomic<float> values that the processor updates on the audio thread; the component runs a Timer to sample those atomics and repaint. It must NEVER lock, block, or call the audio thread. Provide a public API so PluginEditor can bind the atomic telemetry handles, but do not include PluginProcessor here.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h (existing atomic peak/RMS I/O and gain-reduction/saturation telemetry members; read only)\n- Source/PluginEditor.h (naming conventions and how editor passes telemetry handles)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h (do not modify anything under JUCE/)",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "g.4",
+                "title": "Implement peak and RMS input output level meters and drive saturation readout",
+                "description": "Create Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp. Implement a juce::Component subclass named LevelMeters that renders Peak + RMS input and output level meters (with ballistic decay) and a Drive Saturation readout showing peak reduction in dB. The GUI reads instantaneous peak/RMS/reduction telemetry exclusively through std::atomic<float> values that the processor updates on the audio thread; the component runs a Timer to sample those atomics and repaint. It must NEVER lock, block, or call the audio thread. Provide a public API so PluginEditor can bind the atomic telemetry handles, but do not include PluginProcessor here.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h (existing atomic peak/RMS I/O and gain-reduction/saturation telemetry members; read only)\n- Source/PluginEditor.h (naming conventions and how editor passes telemetry handles)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h (do not modify anything under JUCE/)",
+                "phase": "G",
+                "dependencies": [],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp exist and declare/define class LevelMeters deriving from juce::Component",
+                  "LevelMeters renders peak and RMS input/output meters with decay ballistics and a drive saturation (peak reduction) readout",
+                  "LevelMeters reads telemetry only through std::atomic values and never locks or calls the audio thread",
+                  "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+                  "No file outside this task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:31:21.294361",
+                "selected_backend": "antigravity_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/UI/LevelMeters.h",
+                  "Source/UI/LevelMeters.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:34:28.153778",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-g.4",
+      "created_at": "2026-07-25T20:31:21.370224"
     }
   }
 ]

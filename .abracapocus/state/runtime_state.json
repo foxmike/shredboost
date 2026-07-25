@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-g.4",
+  "plan_version": "task-g.5",
   "active_phase": "G",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "g.4",
-      "title": "Implement peak and RMS input output level meters and drive saturation readout",
+      "task_id": "g.5",
+      "title": "Integrate full editor UI components layout and resizable window",
       "phase": "G",
-      "status": "completed",
+      "status": "planned",
       "backend": "antigravity_cli",
-      "last_run": "2026-07-25T20:34:28.179782",
+      "last_run": null,
       "notes": ""
     }
   ],

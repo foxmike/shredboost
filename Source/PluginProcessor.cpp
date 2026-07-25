@@ -194,6 +194,18 @@ void ShredBoostAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     preDriveFIFO.reset();
     postDriveFIFO.reset();
 
+    inputPeakLeft.store (0.0f, std::memory_order_release);
+    inputPeakRight.store (0.0f, std::memory_order_release);
+    inputRmsLeft.store (0.0f, std::memory_order_release);
+    inputRmsRight.store (0.0f, std::memory_order_release);
+    outputPeakLeft.store (0.0f, std::memory_order_release);
+    outputPeakRight.store (0.0f, std::memory_order_release);
+    outputRmsLeft.store (0.0f, std::memory_order_release);
+    outputRmsRight.store (0.0f, std::memory_order_release);
+    peakReductionDb.store (0.0f, std::memory_order_release);
+    telemetryAmplitude.store (0.0f, std::memory_order_release);
+    telemetryVoicingMode.store (initialValues.voicing_mode, std::memory_order_release);
+
     currentDriveGain =
         juce::Decibels::decibelsToGain (initialValues.drive);
     currentOutputGain =
@@ -403,6 +415,45 @@ void ShredBoostAudioProcessor::processFloatBlock (
         dryBuffer.copyFrom (
             channel, 0, buffer, channel, 0, numberOfSamples);
 
+    float peakInL = 0.0f;
+    float rmsInL = 0.0f;
+    if (numberOfChannels > 0)
+    {
+        float sumSq = 0.0f;
+        const float* data = dryBuffer.getReadPointer (0);
+        for (int s = 0; s < numberOfSamples; ++s)
+        {
+            float val = data[s];
+            float absVal = std::abs (val);
+            if (absVal > peakInL) peakInL = absVal;
+            sumSq += val * val;
+        }
+        rmsInL = std::sqrt (sumSq / static_cast<float> (numberOfSamples));
+    }
+    inputPeakLeft.store (peakInL, std::memory_order_relaxed);
+    inputRmsLeft.store (rmsInL, std::memory_order_relaxed);
+
+    float peakInR = 0.0f;
+    float rmsInR = 0.0f;
+    if (numberOfChannels > 1)
+    {
+        float sumSq = 0.0f;
+        const float* data = dryBuffer.getReadPointer (1);
+        for (int s = 0; s < numberOfSamples; ++s)
+        {
+            float val = data[s];
+            float absVal = std::abs (val);
+            if (absVal > peakInR) peakInR = absVal;
+            sumSq += val * val;
+        }
+        rmsInR = std::sqrt (sumSq / static_cast<float> (numberOfSamples));
+    }
+    inputPeakRight.store (peakInR, std::memory_order_relaxed);
+    inputRmsRight.store (rmsInR, std::memory_order_relaxed);
+
+    telemetryAmplitude.store (std::max (peakInL, peakInR), std::memory_order_relaxed);
+    telemetryVoicingMode.store (values.voicing_mode, std::memory_order_relaxed);
+
     for (int channel = 0; channel < numberOfChannels; ++channel)
     {
         auto* samples = buffer.getWritePointer (channel);
@@ -464,6 +515,15 @@ void ShredBoostAudioProcessor::processFloatBlock (
         currentDriveGain,
         juce::Decibels::decibelsToGain (values.drive));
 
+    float peakBeforeClip = 0.0f;
+    for (std::size_t channel = 0; channel < oversampledBlock.getNumChannels(); ++channel)
+    {
+        const float* samples = oversampledBlock.getChannelPointer (channel);
+        const int numSamps = static_cast<int> (oversampledBlock.getNumSamples());
+        for (int s = 0; s < numSamps; ++s)
+            peakBeforeClip = std::max (peakBeforeClip, std::abs (samples[s]));
+    }
+
     const auto factorIndex =
         oversamplingFactorToIndex (
             oversamplingEngine.getOversamplingFactor());
@@ -473,6 +533,22 @@ void ShredBoostAudioProcessor::processFloatBlock (
     engine.setVoicingMode (values.voicing_mode);
     engine.setTone (values.tone);
     engine.process (oversampledBlock);
+
+    float peakAfterClip = 0.0f;
+    for (std::size_t channel = 0; channel < oversampledBlock.getNumChannels(); ++channel)
+    {
+        const float* samples = oversampledBlock.getChannelPointer (channel);
+        const int numSamps = static_cast<int> (oversampledBlock.getNumSamples());
+        for (int s = 0; s < numSamps; ++s)
+            peakAfterClip = std::max (peakAfterClip, std::abs (samples[s]));
+    }
+
+    float diffDb = 0.0f;
+    if (peakBeforeClip > peakAfterClip && peakAfterClip > 1e-5f)
+    {
+        diffDb = 20.0f * std::log10 (peakBeforeClip / peakAfterClip);
+    }
+    peakReductionDb.store (diffDb, std::memory_order_relaxed);
 
     oversamplingEngine.downsample (wetBlock);
 
@@ -491,6 +567,42 @@ void ShredBoostAudioProcessor::processFloatBlock (
     autoGainBypass.process (constDryBlock, wetBlock, values.auto_gain);
 
     pushToFIFO (postDriveFIFO, buffer, numberOfChannels, numberOfSamples);
+
+    float peakOutL = 0.0f;
+    float rmsOutL = 0.0f;
+    if (numberOfChannels > 0)
+    {
+        float sumSq = 0.0f;
+        const float* data = buffer.getReadPointer (0);
+        for (int s = 0; s < numberOfSamples; ++s)
+        {
+            float val = data[s];
+            float absVal = std::abs (val);
+            if (absVal > peakOutL) peakOutL = absVal;
+            sumSq += val * val;
+        }
+        rmsOutL = std::sqrt (sumSq / static_cast<float> (numberOfSamples));
+    }
+    outputPeakLeft.store (peakOutL, std::memory_order_relaxed);
+    outputRmsLeft.store (rmsOutL, std::memory_order_relaxed);
+
+    float peakOutR = 0.0f;
+    float rmsOutR = 0.0f;
+    if (numberOfChannels > 1)
+    {
+        float sumSq = 0.0f;
+        const float* data = buffer.getReadPointer (1);
+        for (int s = 0; s < numberOfSamples; ++s)
+        {
+            float val = data[s];
+            float absVal = std::abs (val);
+            if (absVal > peakOutR) peakOutR = absVal;
+            sumSq += val * val;
+        }
+        rmsOutR = std::sqrt (sumSq / static_cast<float> (numberOfSamples));
+    }
+    outputPeakRight.store (peakOutR, std::memory_order_relaxed);
+    outputRmsRight.store (rmsOutR, std::memory_order_relaxed);
 }
 
 bool ShredBoostAudioProcessor::hasEditor() const

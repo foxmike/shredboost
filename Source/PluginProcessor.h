@@ -53,6 +53,19 @@ public:
 
     ShredBoost::SpectrumFIFO& getPreDriveFIFO() noexcept { return preDriveFIFO; }
     ShredBoost::SpectrumFIFO& getPostDriveFIFO() noexcept { return postDriveFIFO; }
+    juce::AudioProcessorValueTreeState& getAPVTS() noexcept { return apvts; }
+
+    const std::atomic<float>* getInputPeakLeft() const noexcept { return &inputPeakLeft; }
+    const std::atomic<float>* getInputPeakRight() const noexcept { return &inputPeakRight; }
+    const std::atomic<float>* getInputRmsLeft() const noexcept { return &inputRmsLeft; }
+    const std::atomic<float>* getInputRmsRight() const noexcept { return &inputRmsRight; }
+    const std::atomic<float>* getOutputPeakLeft() const noexcept { return &outputPeakLeft; }
+    const std::atomic<float>* getOutputPeakRight() const noexcept { return &outputPeakRight; }
+    const std::atomic<float>* getOutputRmsLeft() const noexcept { return &outputRmsLeft; }
+    const std::atomic<float>* getOutputRmsRight() const noexcept { return &outputRmsRight; }
+    const std::atomic<float>* getPeakReductionDb() const noexcept { return &peakReductionDb; }
+    const std::atomic<float>* getTelemetryAmplitude() const noexcept { return &telemetryAmplitude; }
+    const std::atomic<int>* getTelemetryVoicingMode() const noexcept { return &telemetryVoicingMode; }
 
 private:
     using ParameterValues = ShredBoost::ParameterSnapshot::Values;
@@ -95,6 +108,18 @@ private:
 
     ShredBoost::SpectrumFIFO preDriveFIFO;
     ShredBoost::SpectrumFIFO postDriveFIFO;
+
+    std::atomic<float> inputPeakLeft { 0.0f };
+    std::atomic<float> inputPeakRight { 0.0f };
+    std::atomic<float> inputRmsLeft { 0.0f };
+    std::atomic<float> inputRmsRight { 0.0f };
+    std::atomic<float> outputPeakLeft { 0.0f };
+    std::atomic<float> outputPeakRight { 0.0f };
+    std::atomic<float> outputRmsLeft { 0.0f };
+    std::atomic<float> outputRmsRight { 0.0f };
+    std::atomic<float> peakReductionDb { 0.0f };
+    std::atomic<float> telemetryAmplitude { 0.0f };
+    std::atomic<int> telemetryVoicingMode { 0 };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ShredBoostAudioProcessor)
 };
