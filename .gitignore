@@ -1,8 +1,14 @@
+# CMake build output
 build/
 cmake-build-*/
+
+# IDE files
+.vscode/
 .idea/
 .vs/
 .cache/
+
+# Build artifacts
 *.o
 *.obj
 *.so
@@ -11,4 +17,6 @@ cmake-build-*/
 *.vst3
 *.lv2
 *.a
+
+# OS cruft
 .DS_Store

@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-a.3",
+  "plan_version": "task-a.4",
   "active_phase": "A",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "a.3",
-      "title": "Create CMake build configuration with product identity and three Linux target formats",
+      "task_id": "a.4",
+      "title": "Create paste and run build script and gitignore",
       "phase": "A",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T15:55:45.381617",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
