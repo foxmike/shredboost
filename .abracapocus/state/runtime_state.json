@@ -9,9 +9,9 @@
       "task_id": "h.3",
       "title": "Write phase h release verification document",
       "phase": "H",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:49:23.124997",
       "notes": ""
     }
   ],
@@ -330,6 +330,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T20:40:12.845648"
+    },
+    {
+      "run_id": "25ab1cbc-e7e7-405a-8f78-ced8593b443d",
+      "task_id": "h.3",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:49:23.125223"
     }
   ],
   "operator_overrides": {},
