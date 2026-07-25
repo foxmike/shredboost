@@ -9,9 +9,9 @@
       "task_id": "e.1",
       "title": "Implement polyphase FIR oversampling engine with PDC latency reporting",
       "phase": "E",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T19:24:43.268122",
       "notes": ""
     }
   ],
@@ -204,6 +204,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:52:19.090234"
+    },
+    {
+      "run_id": "ff7cf5c7-96a9-4fb2-9a2e-c266b0736057",
+      "task_id": "e.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:24:43.268321"
     }
   ],
   "operator_overrides": {},
