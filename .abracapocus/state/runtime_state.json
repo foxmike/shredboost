@@ -9,9 +9,9 @@
       "task_id": "b.4",
       "title": "Wire APVTS state schema and snapshot allocation into processor",
       "phase": "B",
-      "status": "planned",
+      "status": "completed",
       "backend": "codex_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:03:32.699620",
       "notes": ""
     }
   ],
@@ -105,6 +105,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:01:25.893793"
+    },
+    {
+      "run_id": "bca7772e-7cfc-4b1d-b71b-bc6e2c6062c2",
+      "task_id": "b.4",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:03:32.699717"
     }
   ],
   "operator_overrides": {},
