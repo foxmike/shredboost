@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-d.3",
+  "plan_version": "task-d.4",
   "active_phase": "D",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "d.3",
-      "title": "Implement 1st order DC blocker and 2nd order post drive tone LPF",
+      "task_id": "d.4",
+      "title": "Compose pre filter shaper clipper DC blocker and tone filter in processing chain",
       "phase": "D",
-      "status": "completed",
-      "backend": "antigravity_cli",
-      "last_run": "2026-07-25T16:46:45.135162",
+      "status": "planned",
+      "backend": "codex_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
