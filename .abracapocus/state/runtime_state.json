@@ -9,9 +9,9 @@
       "task_id": "g.4",
       "title": "Implement peak and RMS input output level meters and drive saturation readout",
       "phase": "G",
-      "status": "planned",
+      "status": "completed",
       "backend": "antigravity_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T20:34:28.179782",
       "notes": ""
     }
   ],
@@ -294,6 +294,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T20:31:21.195000"
+    },
+    {
+      "run_id": "f494a500-a062-4d97-8b8a-89273fa54f8b",
+      "task_id": "g.4",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:34:28.179913"
     }
   ],
   "operator_overrides": {},
