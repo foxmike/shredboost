@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-c.1",
+  "plan_version": "task-c.2",
   "active_phase": "C",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "c.1",
-      "title": "Implement pre drive tight HPF with Q 1 2 resonant bump option",
+      "task_id": "c.2",
+      "title": "Implement pre clip midrange peaking bell voicing filter",
       "phase": "C",
-      "status": "completed",
+      "status": "planned",
       "backend": "codex_cli",
-      "last_run": "2026-07-25T16:19:40.489801",
+      "last_run": null,
       "notes": ""
     }
   ],
