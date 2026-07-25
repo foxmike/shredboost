@@ -2,6 +2,9 @@
 
 #include <juce_audio_processors/juce_audio_processors.h>
 
+#include "Parameters/ParameterLayout.h"
+#include "Parameters/ParameterSnapshot.h"
+
 class ShredBoostAudioProcessorEditor;
 
 class ShredBoostAudioProcessor : public juce::AudioProcessor
@@ -38,5 +41,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    juce::AudioProcessorValueTreeState apvts;
+    ShredBoost::ParameterSnapshot parameterSnapshot;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ShredBoostAudioProcessor)
 };

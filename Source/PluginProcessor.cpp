@@ -1,11 +1,21 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#include "Parameters/ParameterIDs.h"
+
+namespace
+{
+constexpr auto stateTreeType = "ShredBoostState";
+constexpr auto schemaVersionProperty = "schemaVersion";
+} // namespace
+
 ShredBoostAudioProcessor::ShredBoostAudioProcessor()
     : juce::AudioProcessor (BusesProperties()
                             .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                            .withOutput ("Output", juce::AudioChannelSet::stereo(), true))
+                            .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
+      apvts (*this, nullptr, stateTreeType, ShredBoost::createParameterLayout())
 {
+    parameterSnapshot.bindTo (apvts);
 }
 
 ShredBoostAudioProcessor::~ShredBoostAudioProcessor() = default;
@@ -63,7 +73,8 @@ void ShredBoostAudioProcessor::changeProgramName (int index, const juce::String&
 
 void ShredBoostAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    juce::ignoreUnused (sampleRate, samplesPerBlock);
+    juce::ignoreUnused (samplesPerBlock);
+    parameterSnapshot.prepare (sampleRate);
 }
 
 void ShredBoostAudioProcessor::releaseResources()
@@ -117,12 +128,26 @@ juce::AudioProcessorEditor* ShredBoostAudioProcessor::createEditor()
 
 void ShredBoostAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    juce::ignoreUnused (destData);
+    auto state = apvts.copyState();
+    state.setProperty (schemaVersionProperty,
+                       ShredBoost::ParamID::kParameterSchemaVersion,
+                       nullptr);
+
+    if (const auto xml = state.createXml())
+        copyXmlToBinary (*xml, destData);
 }
 
 void ShredBoostAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    juce::ignoreUnused (data, sizeInBytes);
+    const auto xml = getXmlFromBinary (data, sizeInBytes);
+
+    if (xml == nullptr)
+        return;
+
+    const auto state = juce::ValueTree::fromXml (*xml);
+
+    if (state.isValid() && state.hasType (apvts.state.getType()))
+        apvts.replaceState (state);
 }
 
 // This creates new instances of the plugin..

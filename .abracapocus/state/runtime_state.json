@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-b.3",
+  "plan_version": "task-b.4",
   "active_phase": "B",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "b.3",
-      "title": "Create domain correct smoothed parameter snapshot engine",
+      "task_id": "b.4",
+      "title": "Wire APVTS state schema and snapshot allocation into processor",
       "phase": "B",
-      "status": "completed",
+      "status": "planned",
       "backend": "codex_cli",
-      "last_run": "2026-07-25T16:01:25.893652",
+      "last_run": null,
       "notes": ""
     }
   ],

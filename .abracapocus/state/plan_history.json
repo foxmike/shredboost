@@ -511,5 +511,62 @@
       "version": "task-b.2",
       "created_at": "2026-07-25T15:57:18.420137"
     }
+  },
+  {
+    "created_at": "2026-07-25T16:01:25.976158",
+    "project_name": "shredboost",
+    "goal": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Create domain correct smoothed parameter snapshot engine",
+      "phases": [
+        {
+          "name": "B",
+          "objective": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "b.3",
+                "title": "Create domain correct smoothed parameter snapshot engine",
+                "description": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+                "phase": "B",
+                "dependencies": [
+                  "b.2"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp exist",
+                  "dB parameters (input_trim, mid_amount, drive, level, pick_attack) use linear juce::SmoothedValue and frequency parameters (tight_cut, mid_freq, tone) use multiplicative juce::SmoothedValue",
+                  "A prepare(sampleRate) method exists for allocation during prepareToPlay and the value-advance path performs no heap allocation, locking, or string construction",
+                  "voicing_mode, oversampling, and auto_gain are carried as discrete current values and are not smoothed as continuous SmoothedValue",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T15:58:45.416019",
+                "selected_backend": "codex_cli",
+                "model": null,
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/Parameters/ParameterSnapshot.h",
+                  "Source/Parameters/ParameterSnapshot.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T16:01:25.867855",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-b.3",
+      "created_at": "2026-07-25T15:58:45.495380"
+    }
   }
 ]
