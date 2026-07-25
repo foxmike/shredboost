@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-a.2",
+  "plan_version": "task-a.1",
   "active_phase": "A",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "a.2",
-      "title": "Create resizable editor shell connected to processor",
+      "task_id": "a.1",
+      "title": "Create processor shell with bus layout contract and deterministic channel clearing",
       "phase": "A",
-      "status": "completed",
+      "status": "planned",
       "backend": "antigravity_cli",
-      "last_run": "2026-07-25T15:30:10.835392",
+      "last_run": null,
       "notes": ""
     }
   ],

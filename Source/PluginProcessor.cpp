@@ -75,21 +75,16 @@ bool ShredBoostAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
     const auto input = layouts.getMainInputChannelSet();
     const auto output = layouts.getMainOutputChannelSet();
 
-    const bool inputIsMono = (input == juce::AudioChannelSet::mono());
-    const bool inputIsStereo = (input == juce::AudioChannelSet::stereo());
-    const bool outputIsMono = (output == juce::AudioChannelSet::mono());
-    const bool outputIsStereo = (output == juce::AudioChannelSet::stereo());
+    if (input == juce::AudioChannelSet::mono() && output == juce::AudioChannelSet::mono())
+        return true;
 
-    if (! (inputIsMono || inputIsStereo))
-        return false;
+    if (input == juce::AudioChannelSet::mono() && output == juce::AudioChannelSet::stereo())
+        return true;
 
-    if (! (outputIsMono || outputIsStereo))
-        return false;
+    if (input == juce::AudioChannelSet::stereo() && output == juce::AudioChannelSet::stereo())
+        return true;
 
-    if (inputIsStereo && outputIsMono)
-        return false;
-
-    return true;
+    return false;
 }
 
 void ShredBoostAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -97,12 +92,8 @@ void ShredBoostAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::ScopedNoDenormals noDenormals;
     juce::ignoreUnused (midiMessages);
 
-    const auto numInputChannels  = getTotalNumInputChannels();
-    const auto numOutputChannels = getTotalNumOutputChannels();
-    const auto numSamples        = buffer.getNumSamples();
-
-    for (auto channel = numInputChannels; channel < numOutputChannels; ++channel)
-        buffer.clear (channel, 0, numSamples);
+    for (auto channel = getTotalNumInputChannels(); channel < getTotalNumOutputChannels(); ++channel)
+        buffer.clear (channel, 0, buffer.getNumSamples());
 }
 
 void ShredBoostAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
@@ -110,12 +101,8 @@ void ShredBoostAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, 
     juce::ScopedNoDenormals noDenormals;
     juce::ignoreUnused (midiMessages);
 
-    const auto numInputChannels  = getTotalNumInputChannels();
-    const auto numOutputChannels = getTotalNumOutputChannels();
-    const auto numSamples        = buffer.getNumSamples();
-
-    for (auto channel = numInputChannels; channel < numOutputChannels; ++channel)
-        buffer.clear (channel, 0, numSamples);
+    for (auto channel = getTotalNumInputChannels(); channel < getTotalNumOutputChannels(); ++channel)
+        buffer.clear (channel, 0, buffer.getNumSamples());
 }
 
 bool ShredBoostAudioProcessor::hasEditor() const

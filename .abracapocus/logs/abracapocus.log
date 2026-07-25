@@ -1,3 +1,7 @@
 2026-07-25 11:04:42 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
 2026-07-25 11:29:29 | INFO | abracapocus | run=00f20ef7-dc12-492a-9dd9-f7b13da1286f phases=1 verification=passed
 2026-07-25 11:30:10 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0
+2026-07-25 11:30:10 | INFO | abracapocus | run=091f56bc-4f45-480b-8654-3e92ff4e877b phases=1 verification=passed
+2026-07-25 11:30:29 | INFO | abracapocus | run=784e6d1a-c336-4aa5-aa1a-3ec669302e09 phase=A adaptive_gate=blocked reason=task outcome at index 0 is not accepted (blocked)
+2026-07-25 11:30:29 | INFO | abracapocus | run=784e6d1a-c336-4aa5-aa1a-3ec669302e09 phases=1 verification=blocked
+2026-07-25 11:53:46 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0

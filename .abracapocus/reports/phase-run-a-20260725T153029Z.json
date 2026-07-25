@@ -1,0 +1,82 @@
+{
+  "run_at": "2026-07-25T15:30:29.511906",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a",
+  "status": "blocked",
+  "counts": {
+    "passed": 2,
+    "blocked": 1,
+    "skipped": 2
+  },
+  "tasks": [
+    {
+      "task_id": "a.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "00f20ef7-dc12-492a-9dd9-f7b13da1286f",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.1:Review complete"
+    },
+    {
+      "task_id": "a.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "091f56bc-4f45-480b-8654-3e92ff4e877b",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.2:Review complete"
+    },
+    {
+      "task_id": "a.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json",
+      "status": "blocked",
+      "acceptance_status": "blocked",
+      "task_verification": {
+        "status": "blocked",
+        "checks": [],
+        "owner": null
+      },
+      "run_id": "784e6d1a-c336-4aa5-aa1a-3ec669302e09",
+      "write_policy_violations": [],
+      "failure_classification": {
+        "failure_type": "operator_termination",
+        "affected_files": [],
+        "failure_detail": "task-run interrupted before verification completed",
+        "retry_likely": false,
+        "suggested_focus": "Review partial changes, then rerun the task when ready."
+      },
+      "reviewer_summary": "a.3:Task-run interrupted before review completed.",
+      "block_reason": "task-run interrupted before verification completed"
+    },
+    {
+      "task_id": "a.4",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json",
+      "status": "skipped",
+      "run_id": null
+    },
+    {
+      "task_id": "a.5",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json",
+      "status": "skipped",
+      "run_id": null
+    }
+  ],
+  "phase_verification": {
+    "status": "skipped",
+    "checks": [],
+    "notes": "phase verification deferred until all tasks pass",
+    "run_when": "all_tasks_pass"
+  }
+}
