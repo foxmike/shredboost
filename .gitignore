@@ -1,0 +1,14 @@
+build/
+cmake-build-*/
+.idea/
+.vs/
+.cache/
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.vst3
+*.lv2
+*.a
+.DS_Store

@@ -1,0 +1,315 @@
+{
+  "plan_name": "SHREDBOOST_1_0",
+  "purpose": "Build ShredBoost 1.0: an aggressive pre-amp attack shaper, overdrive, and low-end tightener engineered for high-gain thrash rhythm and fast lead guitar, as a complete professional C++20 JUCE plugin. Product identity (binding, used consistently in CMake, plugin metadata, and state): project/plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, manufacturer code NSPC, plugin code ShBs, bundle identifier com.nspacesystems.shredboost, LV2 URI urn:nspacesystems:plugin:shredboost. Target formats: Linux VST3, Linux LV2, Linux Standalone; a windows-msvc CMake preset is generated as configuration for later Windows tooling. JUCE is a git submodule at ./JUCE pinned to commit 7c9d3783b127263d72bb65fe0a7e2dc8a02a7ac2; no task modifies anything under JUCE/. Binding engineering rules restated into materialized tasks: (1) Real-time constraints: inside processBlock zero heap allocation, locks, file IO, string construction, GUI calls, or buffer resizing; all buffers allocated during prepareToPlay; juce::ScopedNoDenormals instantiated at top of processBlock. (2) Domain smoothing: linear SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone); 15 ms equal-power crossfade for discrete topology switches (voicing_mode). (3) DSP processing chain order: [0] Input Trim -> [1] Pre-Drive Tight HPF (RBJ 2nd-order, Q=0.707 or Q=1.2 Precision Tight) -> [2] Pre-Clip Mid Voicing Bell (RBJ 2nd-order) -> [3] Level-Independent Transient Pick-Attack Shaper -> [4] Oversampling Upsample (1x/2x/4x polyphase FIR) -> [5] Nonlinear Clip (Yng-Grey, Precision Tight, SD-1, Clean) -> [6] Downsample + Anti-Aliasing LPF -> [7] DC Blocker (1st-order HPF, R=0.9975) -> [8] Post-Drive Tone LPF -> [9] Output Level + Gain-Matched Bypass RMS Tracker. (4) Oversampling changes happen on the message thread with re-prepare and a 10 ms mute-fade, reporting PDC latency via setLatencySamples. (5) Testing uses the juce::UnitTest console runner target executed via CTest; no third-party testing frameworks allowed. (6) Explicit cmake/ctest verification commands are required per task as no C++ language adapter exists in the registry.",
+  "async_strategy": "Phases run sequentially a through h. Within each phase, Wave 1 tasks create disjoint new module files and run in parallel; later waves handle integration and shared fan-in files (CMakeLists.txt, PluginProcessor.*, PluginEditor.*, ParameterLayout.*), each owned by exactly one task per wave with same-phase writes serialized via dependencies. The final wave of each phase executes phase verification or CTest runner tasks.",
+  "cost_estimate": "34 tasks balanced evenly across 3 execution backends: 11 hardest tasks on codex_cli (account default), 11 middle tasks on antigravity_cli (account default), and 12 easiest tasks on pi_cli via OpenRouter GLM 5.21.",
+  "operator_questions": [
+    "Verify cmake and ctest are on the system PATH before executing phase a.",
+    "Ensure ABRACAPOCUS_WORKING_ROOT is set to /home/mike/dev/mike/music/plugins/shredboost and PROJECT_NAME is set to shredboost.",
+    "Confirm the JUCE submodule is checked out at ./JUCE to commit 7c9d3783b127263d72bb65fe0a7e2dc8a02a7ac2 prior to running plan-materialize.",
+    "Validate openrouter/z-ai/glm-5.21 identifier with a test prompt before executing phase a."
+  ],
+  "phases": [
+    {
+      "phase_id": "a",
+      "goal": "Establish the buildable ShredBoost plugin scaffold with exact product identity and Linux target formats. PluginProcessor.h/.cpp shell enforces bus layout (mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out) with deterministic unused output channel clearing and juce::ScopedNoDenormals. PluginEditor.h/.cpp minimal editor shell. CMakeLists.txt configures juce_add_plugin with PRODUCT_NAME ShredBoost, COMPANY_NAME 'nSpace Systems', VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredspace, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone, CXX_STANDARD 20. CMakePresets.json provides linux-release and windows-msvc presets. scripts/build_all.sh paste-and-run build script. Phase verification document docs/verification/phase_a_scaffold.md.",
+      "expected_changed_files": [
+        "Source/PluginProcessor.h",
+        "Source/PluginProcessor.cpp",
+        "Source/PluginEditor.h",
+        "Source/PluginEditor.cpp",
+        "CMakeLists.txt",
+        "CMakePresets.json",
+        "scripts/build_all.sh",
+        ".gitignore",
+        "docs/verification/phase_a_scaffold.md"
+      ],
+      "async_notes": "Wave 1: a.1 creates PluginProcessor shell. Wave 2: a.2 creates PluginEditor shell (depends on a.1). Wave 3: a.3 creates CMakeLists.txt and CMakePresets.json (depends on a.2). Wave 4: a.4 creates scripts/build_all.sh and .gitignore (depends on a.3). Final wave: a.5 writes docs/verification/phase_a_scaffold.md (depends on a.4).",
+      "risk_notes": "Bus layout acceptance contract and frozen identity codes (NSPC/ShBs) must be exact in this phase.",
+      "estimated_task_count": 5,
+      "task_hints": [
+        {
+          "title": "Create processor shell with bus layout contract and deterministic channel clearing",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Create resizable editor shell connected to processor",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Create CMake build configuration with product identity and three Linux target formats",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Create paste and run build script and gitignore",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        },
+        {
+          "title": "Write phase a scaffold verification document",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "b",
+      "goal": "Implement frozen parameter taxonomy in Source/Parameters/ParameterIDs.h (schema version 1) containing all automatable parameters: input_trim (-18..+18 dB default 0), tight_cut (80..400 Hz default 180), mid_freq (500..1200 Hz default 720), mid_amount (0..+9 dB default +4), drive (0..+36 dB default +12), tone (1..16 kHz default 6.5), level (-24..+12 dB default 0), pick_attack (0..+9 dB default +2), voicing_mode (0..3 choice, default Yng-Grey), oversampling (0..2 choice, default 2x), auto_gain (bool, default Off). ParameterLayout.h/.cpp builds full APVTS. ParameterSnapshot.h/.cpp provides real-time domain-smoothed value snapshot. PluginProcessor wires APVTS ownership and getStateInformation/setStateInformation XML serialization. Unit test harness tests/TestMain.cpp and tests/ParameterTests.cpp.",
+      "expected_changed_files": [
+        "Source/Parameters/ParameterIDs.h",
+        "Source/Parameters/ParameterLayout.h",
+        "Source/Parameters/ParameterLayout.cpp",
+        "Source/Parameters/ParameterSnapshot.h",
+        "Source/Parameters/ParameterSnapshot.cpp",
+        "Source/PluginProcessor.h",
+        "Source/PluginProcessor.cpp",
+        "tests/TestMain.cpp",
+        "tests/ParameterTests.cpp",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: b.1 creates ParameterIDs.h. Wave 2: b.2 creates ParameterLayout.h/.cpp (depends on b.1). Wave 3: b.3 creates ParameterSnapshot.h/.cpp (depends on b.2). Wave 4: b.4 integrates APVTS into PluginProcessor (depends on b.3). Final wave: b.5 creates TestMain.cpp and ParameterTests.cpp and registers CTest target in CMakeLists.txt (depends on b.4).",
+      "risk_notes": "Parameter IDs freeze permanently in b.1. Internal states must never be exposed to APVTS.",
+      "estimated_task_count": 5,
+      "task_hints": [
+        {
+          "title": "Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        },
+        {
+          "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Create domain correct smoothed parameter snapshot engine",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Wire APVTS state schema and snapshot allocation into processor",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Create unit test runner and parameter state tests",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "c",
+      "goal": "Implement pre-drive filtering and calibration stages. Source/DSP/InputTrimStage.h/.cpp: smoothed gain Gin = 10^(trim/20) with peak/RMS signal level metering. Source/DSP/TightFilter.h/.cpp: 2nd-order RBJ HPF with tight_cut frequency (80-400 Hz); Q=0.707 standard Butterworth, Q=1.2 resonant bump (+1.8 dB overshoot at cutoff) in Precision Tight mode. Source/DSP/MidVoicingFilter.h/.cpp: 2nd-order RBJ peaking bell filter centered at mid_freq (500-1200 Hz), boosting up to +9 dB before non-linear stage with Q_m=0.9. tests/FilterTests.cpp verifies frequency response, Q-factor resonance bump, mid-bell peaking curve, and input trim attenuation.",
+      "expected_changed_files": [
+        "Source/DSP/InputTrimStage.h",
+        "Source/DSP/InputTrimStage.cpp",
+        "Source/DSP/TightFilter.h",
+        "Source/DSP/TightFilter.cpp",
+        "Source/DSP/MidVoicingFilter.h",
+        "Source/DSP/MidVoicingFilter.cpp",
+        "tests/FilterTests.cpp",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: c.1 (TightFilter), c.2 (MidVoicingFilter), and c.3 (InputTrimStage) run in parallel on disjoint files. Final wave: c.4 creates tests/FilterTests.cpp and updates CMakeLists.txt (depends on c.1, c.2, c.3).",
+      "risk_notes": "Filter coefficient calculation must handle sample rate changes cleanly and flush denormals.",
+      "estimated_task_count": 4,
+      "task_hints": [
+        {
+          "title": "Implement pre drive tight HPF with Q 1 2 resonant bump option",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement pre clip midrange peaking bell voicing filter",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement Input Trim calibration stage with telemetry metering",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Create filter unit tests for HPF mid bell and input trim",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "d",
+      "goal": "Implement transient shaping, clipping, DC blocking, and tone filtering. Source/DSP/TransientShaper.h/.cpp: level-independent envelope follower ratio delta_rel = clamp((e_fast - e_slow)/(e_slow + epsilon), 0, 2.0) with tau_fast=1ms, tau_slow=15ms. Source/DSP/NonlinearClipper.h/.cpp: 4 voicing modes: (0) Yng-Grey (arctan + gamma*v^2*exp(-|v|), gamma=0.15), (1) Precision Tight (symmetric tanh), (2) Asymmetric SD-1 (piecewise tanh, k_pos=1.0, k_neg=1.8), (3) Clean Attack Boost (clipping bypassed); 15 ms equal-power crossfade during voicing_mode switching. Source/DSP/DcBlocker.h/.cpp: 1st-order high-pass y_dc(n) = x(n) - x(n-1) + R*y_dc(n-1) with R=0.9975. Source/DSP/ToneFilter.h/.cpp: 2nd-order RBJ LPF (1-16 kHz). Source/DSP/ShredBoostEngine.h/.cpp composes all stages in binding sequence. tests/WaveshaperTests.cpp asserts output mean ≈ 0 under asymmetric drive and click-free crossfade bounds.",
+      "expected_changed_files": [
+        "Source/DSP/TransientShaper.h",
+        "Source/DSP/TransientShaper.cpp",
+        "Source/DSP/NonlinearClipper.h",
+        "Source/DSP/NonlinearClipper.cpp",
+        "Source/DSP/DcBlocker.h",
+        "Source/DSP/DcBlocker.cpp",
+        "Source/DSP/ToneFilter.h",
+        "Source/DSP/ToneFilter.cpp",
+        "Source/DSP/ShredBoostEngine.h",
+        "Source/DSP/ShredBoostEngine.cpp",
+        "tests/WaveshaperTests.cpp",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: d.1 (TransientShaper), d.2 (NonlinearClipper), and d.3 (DcBlocker & ToneFilter) run in parallel. Wave 2: d.4 (ShredBoostEngine) composes all stages (depends on d.1, d.2, d.3). Final wave: d.5 creates tests/WaveshaperTests.cpp and updates CMakeLists.txt (depends on d.4).",
+      "risk_notes": "DC blocker is mandatory following asymmetric waveshapers. Topology crossfade must avoid step discontinuities.",
+      "estimated_task_count": 5,
+      "task_hints": [
+        {
+          "title": "Implement level independent transient pick attack shaper",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement multi topology non linear clipping engine with equal power topology crossfade",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement 1st order DC blocker and 2nd order post drive tone LPF",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Compose pre filter shaper clipper DC blocker and tone filter in processing chain",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Create waveshaper unit tests with DC offset and topology switch bounds",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "e",
+      "goal": "Implement oversampling and auto gain-matched bypass. Source/DSP/OversamplingEngine.h/.cpp: polyphase FIR half-band engine wrapping juce::dsp::Oversampling<float> for 1x, 2x, 4x rates; reports PDC latency via setLatencySamples; oversampling factor changes handled on message thread with re-prepare and 10 ms mute-fade. Source/DSP/AutoGainBypass.h/.cpp: RMS tracking circuit comparing dry input vs wet output to calculate dynamic level difference, applying dry compensation gain during bypass preview. tests/OversamplingTests.cpp asserts inharmonic aliasing floor rejection and exact PDC latency reporting.",
+      "expected_changed_files": [
+        "Source/DSP/OversamplingEngine.h",
+        "Source/DSP/OversamplingEngine.cpp",
+        "Source/DSP/AutoGainBypass.h",
+        "Source/DSP/AutoGainBypass.cpp",
+        "tests/OversamplingTests.cpp",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: e.1 (OversamplingEngine) and e.3 (AutoGainBypass) run in parallel. Wave 2: e.2 adds message-thread factor switching with mute-fade to OversamplingEngine (depends on e.1). Final wave: e.4 creates tests/OversamplingTests.cpp and registers sources in CMakeLists.txt (depends on e.2, e.3).",
+      "risk_notes": "Oversampling re-allocation must never occur inside processBlock.",
+      "estimated_task_count": 4,
+      "task_hints": [
+        {
+          "title": "Implement polyphase FIR oversampling engine with PDC latency reporting",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement message thread oversampling factor change with mute fade",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Implement auto loudness matched bypass RMS tracking and dry compensation",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "f",
+      "goal": "Full processor integration and real-time execution audits. PluginProcessor processBlock incorporates ShredBoostEngine, OversamplingEngine, and AutoGainBypass into audio processing loop. Allocates max block size buffers in prepareToPlay. Lock-free snapshot double buffering for parameter changes. tests/ProcessBlockRealtimeTests.cpp verifies zero heap allocation during processBlock and denormal flushing.",
+      "expected_changed_files": [
+        "Source/PluginProcessor.h",
+        "Source/PluginProcessor.cpp",
+        "tests/ProcessBlockRealtimeTests.cpp",
+        "docs/verification/phase_f_integration.md",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: f.1 integrates full DSP engine into PluginProcessor. Wave 2: f.2 creates tests/ProcessBlockRealtimeTests.cpp (depends on f.1). Final wave: f.3 writes docs/verification/phase_f_integration.md (depends on f.2).",
+      "risk_notes": "ProcessBlock MUST pass heap allocation tracking assertions in tests.",
+      "estimated_task_count": 3,
+      "task_hints": [
+        {
+          "title": "Integrate complete DSP signal chain into PluginProcessor processBlock",
+          "selected_backend": "codex_cli"
+        },
+        {
+          "title": "Create real time memory allocation and denormal audit tests",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        },
+        {
+          "title": "Write phase f integration verification document",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    },
+    {
+      "phase_id": "g",
+      "goal": "Native JUCE vector GUI implementation in Source/UI/. Custom LookAndFeel and dark industrial rotaries (ShredKnob). Source/UI/TransferCurveScope.h/.cpp: live X-Y transfer curve plot y=f(v) with moving dot indicating instantaneous input amplitude and morphing crossfade during voicing changes. Source/UI/SpectrumOverlay.h/.cpp: 512-bin Welch-averaged pre/post FFT spectrum display. Source/UI/LevelMeters.h/.cpp: Peak + RMS I/O meters and Drive Saturation readout (peak reduction). PluginEditor connects all components with APVTS attachments, gain-matched bypass button, and resizable window.",
+      "expected_changed_files": [
+        "Source/UI/ShredLookAndFeel.h",
+        "Source/UI/ShredLookAndFeel.cpp",
+        "Source/UI/TransferCurveScope.h",
+        "Source/UI/TransferCurveScope.cpp",
+        "Source/UI/SpectrumOverlay.h",
+        "Source/UI/SpectrumOverlay.cpp",
+        "Source/UI/LevelMeters.h",
+        "Source/UI/LevelMeters.cpp",
+        "Source/PluginEditor.h",
+        "Source/PluginEditor.cpp",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: g.1 (ShredLookAndFeel), g.2 (TransferCurveScope), g.3 (SpectrumOverlay), and g.4 (LevelMeters) run in parallel. Final wave: g.5 connects UI components into PluginEditor and updates CMakeLists.txt (depends on g.1, g.2, g.3, g.4).",
+      "risk_notes": "GUI thread must only read atomic telemetry / FIFO queues, never lock or block the audio thread.",
+      "estimated_task_count": 5,
+      "task_hints": [
+        {
+          "title": "Implement custom LookAndFeel and industrial dark metal rotary knobs",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Implement pre post FFT spectrum overlay visualizer",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Implement peak and RMS input output level meters and drive saturation readout",
+          "selected_backend": "antigravity_cli"
+        },
+        {
+          "title": "Integrate full editor UI components layout and resizable window",
+          "selected_backend": "antigravity_cli"
+        }
+      ]
+    },
+    {
+      "phase_id": "h",
+      "goal": "Release validation, factory presets, and documentation. scripts/validate_plugin.sh runs full build, CTest execution, and binary artifact existence checks. Factory presets covering Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack. Phase h verification document docs/verification/phase_h_release.md.",
+      "expected_changed_files": [
+        "scripts/validate_plugin.sh",
+        "Resources/Presets/FactoryPresets.xml",
+        "docs/verification/phase_h_release.md",
+        "CMakeLists.txt"
+      ],
+      "async_notes": "Wave 1: h.1 creates validate_plugin.sh. Wave 2: h.2 creates FactoryPresets.xml and registers resource in CMakeLists.txt (depends on h.1). Final wave: h.3 executes validation script and writes docs/verification/phase_h_release.md (depends on h.2).",
+      "risk_notes": "Release verification document must record real executed test results.",
+      "estimated_task_count": 3,
+      "task_hints": [
+        {
+          "title": "Create full validation script with build test and artifact checks",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        },
+        {
+          "title": "Create factory presets spanning thrash rhythm and singing lead voicings",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        },
+        {
+          "title": "Write phase h release verification document",
+          "selected_backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.21"
+        }
+      ]
+    }
+  ]
+}
