@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-a.5",
-  "active_phase": "A",
+  "plan_version": "task-b.1",
+  "active_phase": "B",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "a.5",
-      "title": "Write phase a scaffold verification document",
-      "phase": "A",
-      "status": "completed",
+      "task_id": "b.1",
+      "title": "Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
+      "phase": "B",
+      "status": "planned",
       "backend": "pi_cli",
-      "last_run": "2026-07-25T15:56:54.680984",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -83,6 +83,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "A"
+    "B"
   ]
 }

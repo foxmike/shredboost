@@ -1,0 +1,129 @@
+{
+  "run_at": "2026-07-25T15:56:54.846303",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a",
+  "status": "passed",
+  "counts": {
+    "passed": 5,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "a.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "6d5c40d9-b0ee-4890-8b46-417137c34d10",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.1:Review complete"
+    },
+    {
+      "task_id": "a.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "d43b7ade-16d2-4f46-afdb-4d45708f45fc",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.2:Review complete"
+    },
+    {
+      "task_id": "a.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "de3e55f6-b826-45fc-aaad-ea3af25d6f41",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.3:Review complete"
+    },
+    {
+      "task_id": "a.4",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "4d84ecf7-cdaf-4758-8f2c-555eb5287a45",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.4:Review complete"
+    },
+    {
+      "task_id": "a.5",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "1e564ed4-31f0-4a2a-95b3-8f9eedf4edf3",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "a.5:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "cmake-configure",
+        "status": "failed",
+        "detail": "CMake Error: Could not read presets from /home/mike/dev/mike/abracapocus/python/abracapocus_2:\nFile not found: /home/mike/dev/mike/abracapocus/python/abracapocus_2/CMakePresets.json",
+        "command": [
+          "cmake",
+          "--preset",
+          "linux-release"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "cmake-build",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--config",
+          "Release"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build-script-syntax",
+        "status": "failed",
+        "detail": "bash: scripts/build_all.sh: No such file or directory",
+        "command": [
+          "bash",
+          "-n",
+          "scripts/build_all.sh"
+        ],
+        "exit_code": 127
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}

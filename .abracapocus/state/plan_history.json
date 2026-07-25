@@ -344,5 +344,61 @@
       "version": "task-a.4",
       "created_at": "2026-07-25T15:55:45.531871"
     }
+  },
+  {
+    "created_at": "2026-07-25T15:56:54.728893",
+    "project_name": "shredboost",
+    "goal": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Write phase a scaffold verification document",
+      "phases": [
+        {
+          "name": "A",
+          "objective": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "a.5",
+                "title": "Write phase a scaffold verification document",
+                "description": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
+                "phase": "A",
+                "dependencies": [
+                  "a.4"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "docs/verification/phase_a_scaffold.md exists",
+                  "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
+                  "The document lists the three supported bus layouts and states others are rejected",
+                  "The document includes the paste-and-run cmake configure and build commands",
+                  "No file outside allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T15:56:21.044102",
+                "selected_backend": "pi_cli",
+                "model": "openrouter/z-ai/glm-5.2",
+                "task_timeout_seconds": 900.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "docs/verification/phase_a_scaffold.md"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T15:56:54.660344",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-a.5",
+      "created_at": "2026-07-25T15:56:21.111873"
+    }
   }
 ]
