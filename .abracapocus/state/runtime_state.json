@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-d.5",
-  "active_phase": "D",
+  "plan_version": "task-e.1",
+  "active_phase": "E",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "d.5",
-      "title": "Create waveshaper unit tests with DC offset and topology switch bounds",
-      "phase": "D",
-      "status": "completed",
-      "backend": "pi_cli",
-      "last_run": "2026-07-25T16:52:19.090073",
+      "task_id": "e.1",
+      "title": "Implement polyphase FIR oversampling engine with PDC latency reporting",
+      "phase": "E",
+      "status": "planned",
+      "backend": "codex_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -209,6 +209,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "D"
+    "E"
   ]
 }
