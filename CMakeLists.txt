@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(ShredBoost VERSION 1.0.0 LANGUAGES CXX)
+project(ShredBoost VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -52,3 +52,40 @@ target_link_libraries(ShredBoost
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags
 )
+
+# -----------------------------------------------------------------------------
+# Unit tests (juce::UnitTest only, no third-party frameworks)
+# -----------------------------------------------------------------------------
+enable_testing()
+
+add_executable(ShredBoostUnitTests
+    tests/TestMain.cpp
+    tests/ParameterTests.cpp
+    Source/PluginProcessor.cpp
+    Source/PluginEditor.cpp
+    Source/Parameters/ParameterLayout.cpp
+    Source/Parameters/ParameterSnapshot.cpp
+)
+
+target_compile_definitions(ShredBoostUnitTests PRIVATE
+    JUCE_WEB_BROWSER=0
+    JUCE_USE_CURL=0
+)
+
+target_include_directories(ShredBoostUnitTests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(ShredBoostUnitTests PRIVATE
+    juce::juce_audio_utils
+    juce::juce_audio_processors
+    juce::juce_audio_basics
+    juce::juce_gui_basics
+    juce::juce_data_structures
+    juce::juce_events
+    juce::juce_core
+    juce::juce_recommended_config_flags
+    juce::juce_recommended_warning_flags
+)
+
+add_test(NAME ShredBoostParameterTests COMMAND ShredBoostUnitTests)

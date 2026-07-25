@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-b.4",
+  "plan_version": "task-b.5",
   "active_phase": "B",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "b.4",
-      "title": "Wire APVTS state schema and snapshot allocation into processor",
+      "task_id": "b.5",
+      "title": "Create unit test runner and parameter state tests",
       "phase": "B",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T16:03:32.699620",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],

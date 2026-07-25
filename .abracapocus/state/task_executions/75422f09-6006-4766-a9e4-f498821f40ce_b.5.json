@@ -1,0 +1,146 @@
+{
+  "path": null,
+  "run_id": "75422f09-6006-4766-a9e4-f498821f40ce",
+  "task_id": "b.5",
+  "phase_name": "B",
+  "task_title": "Create unit test runner and parameter state tests",
+  "task_file": null,
+  "acceptance_criteria": [
+    "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
+    "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
+    "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
+    "cmake --preset linux configure succeeds and ctest runs the parameter test target",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "Done. Summary of work:\n\n## Files created/modified (within allowed scope)\n\n- **`tests/TestMain.cpp`** — Console entry point using `juce::UnitTestRunner::runAllTests()`, aggregates per-result failures, returns non-zero exit code if any test fails. Uses `juce::ScopedJuceInitialiser_GUI` for MessageManager lifetime. No third-party frameworks.\n\n- **`tests/ParameterTests.cpp`** — A `juce::UnitTest` (`ParameterTests`) registered statically, with three sub-tests:\n  1. **Layout taxonomy** — asserts exactly 11 parameters with correct IDs/order, ranges (`getNormalisableRange().start/end`), and defaults (via `convertFrom0to1(getDefaultValue())` for floats, `getIndex()` for choices, `get()` for bool).\n  2. **Discrete defaults** — `voicing_mode` = \"Yng-Grey\", `oversampling` = \"2x\", `auto_gain` = Off.\n  3. **State round-trip** — drives all parameters to non-default values on a `ShredBoostAudioProcessor`, `getStateInformation` → asserts embedded `schemaVersion == 1` and root tag `ShredBoostState` → `setStateInformation` into a fresh processor → asserts every restored `getValue()` equals the pre-save value.\n\n- **`CMakeLists.txt`** — Added `enable_testing()`, a `ShredBoostUnitTests` executable (linking JUCE modules + Source parameter/processor files), and `add_test(NAME ShredBoostParameterTests ...)`. Also fixed `project(... LANGUAGES C CXX)` (was `CXX` only) which was preventing configure/generation under CMake 4.4 (`CMAKE_C_COMPILE_OBJECT` missing) — matching the sibling project's setup.\n\n## Verification\n- `cmake --preset linux-release` configures successfully.\n- `cmake --build build/linux-release --target ShredBoostUnitTests` builds cleanly.\n- `ctest --test-dir build/linux-release -C Release --output-on-failure` → `100% tests passed out of 1`.\n\nNote: To run the build, the pinned JUCE dependency had to be populated at `JUCE/` (it was missing from the working tree); I cloned JUCE 8.0.13 from the sibling `aural-maximizer-pro` checkout. The full plugin target (`ShredBoost`) fails to link in this environment due to missing system GTK/webkit2gtk dev headers required by `juce_gui_extra`'s WebBrowser — that is a pre-existing environment limitation, not introduced by this task, and does not affect the unit-test target or ctest.\n\nOne API subtlety encountered and handled: `getDefaultValue()` is declared `private` on the concrete `AudioParameterFloat`/`AudioParameterChoice`/`AudioParameterBool` classes, so the test calls it through the base `RangedAudioParameter`/`AudioProcessorParameter` interface where it remains public, and converts the normalized 0..1 result back to the real value for comparison.\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 706.6029922962189,
+  "changed_files": [
+    {
+      "path": "CMakeLists.txt",
+      "status": "modified",
+      "code": null
+    },
+    {
+      "path": "tests/ParameterTests.cpp",
+      "status": "untracked",
+      "code": null
+    },
+    {
+      "path": "tests/TestMain.cpp",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "CMakeLists.txt | 39 ++++++++++++++++++++++++++++++++++++++-\n 1 file changed, 38 insertions(+), 1 deletion(-)",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 706.6029922962189,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "b.5",
+    "acceptance_criteria": [
+      "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
+      "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
+      "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
+      "cmake --preset linux configure succeeds and ctest runs the parameter test target",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
+      "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
+      "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
+      "cmake --preset linux configure succeeds and ctest runs the parameter test target",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 5 of 5 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "Done. Summary of work:\n\n## Files created/modified (within allowed scope)\n\n- **`tests/TestMain.cpp`** — Console entry point using `juce::UnitTestRunner::runAllTests()`, aggregates per-result failures, returns non-zero exit code if any test fails. Uses `juce::ScopedJuceInitialiser_GUI` for MessageManager lifetime. No third-party frameworks.\n\n- **`tests/ParameterTests.cpp`** — A `juce::UnitTest` (`ParameterTests`) registered statically, with three sub-tests:\n  1. **Layout taxonomy** — asserts exactly 11 parameters with correct IDs/order, ranges (`getNormalisableRange().start/end`), and defaults (via `convertFrom0to1(getDefaultValue())` for floats, `getIndex()` for choices, `get()` for bool).\n  2. **Discrete defaults** — `voicing_mode` = \"Yng-Grey\", `oversampling` = \"2x\", `auto_gain` = Off.\n  3. **State round-trip** — drives all parameters to non-default values on a `ShredBoostAudioProcessor`, `getStateInformation` → asserts embedded `schemaVersion == 1` and root tag `ShredBoostState` → `setStateInformation` into a fresh processor → asserts every restored `getValue()` equals the pre-save value.\n\n- **`CMakeLists.txt`** — Added `enable_testing()`, a `ShredBoostUnitTests` executable (linking JUCE modules + Source parameter/processor files), and `add_test(NAME ShredBoostParameterTests ...)`. Also fixed `project(... LANGUAGES C CXX)` (was `CXX` only) which was preventing configure/generation under CMake 4.4 (`CMAKE_C_COMPILE_OBJECT` missing) — matching the sibling project's setup.\n\n## Verification\n- `cmake --preset linux-release` configures successfully.\n- `cmake --build build/linux-release --target ShredBoostUnitTests` builds cleanly.\n- `ctest --test-dir build/linux-release -C Release --output-on-failure` → `100% tests passed out of 1`.\n\nNote: To run the build, the pinned JUCE dependency had to be populated at `JUCE/` (it was missing from the working tree); I cloned JUCE 8.0.13 from the sibling `aural-maximizer-pro` checkout. The full plugin target (`ShredBoost`) fails to link in this environment due to missing system GTK/webkit2gtk dev headers required by `juce_gui_extra`'s WebBrowser — that is a pre-existing environment limitation, not introduced by this task, and does not affect the unit-test target or ctest.\n\nOne API subtlety encountered and handled: `getDefaultValue()` is declared `private` on the concrete `AudioParameterFloat`/`AudioParameterChoice`/`AudioParameterBool` classes, so the test calls it through the base `RangedAudioParameter`/`AudioProcessorParameter` interface where it remains public, and converts the normalized 0..1 result back to the real value for comparison.\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 706.6029922962189,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "CMakeLists.txt",
+      "tests/ParameterTests.cpp",
+      "tests/TestMain.cpp"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
+        "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
+        "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
+        "cmake --preset linux configure succeeds and ctest runs the parameter test target",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "tests/TestMain.cpp exists and runs all registered juce::UnitTest instances via a console runner, returning non-zero on failure",
+        "tests/ParameterTests.cpp implements a juce::UnitTest asserting the 11 parameters, their defaults (voicing_mode=Yng-Grey, oversampling=2x, auto_gain=Off), and that a getStateInformation/setStateInformation round-trip restores identical parameter values with embedded schema version equal to 1",
+        "CMakeLists.txt registers a unit-test executable via add_test so it is discoverable by ctest, using only juce::UnitTest (no third-party test framework)",
+        "cmake --preset linux configure succeeds and ctest runs the parameter test target",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 706.6029922962189,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-75422f09-6006-4766-a9e4-f498821f40ce.json"
+  ],
+  "created_at": "2026-07-25T16:15:19.636169",
+  "lifecycle_state": "accepted"
+}

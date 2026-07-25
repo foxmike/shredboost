@@ -568,5 +568,62 @@
       "version": "task-b.3",
       "created_at": "2026-07-25T15:58:45.495380"
     }
+  },
+  {
+    "created_at": "2026-07-25T16:03:32.763095",
+    "project_name": "shredboost",
+    "goal": "Modify Source/PluginProcessor.h and Source/PluginProcessor.cpp to own the APVTS and snapshot infrastructure. Add a juce::AudioProcessorValueTreeState member constructed with createParameterLayout() from Source/Parameters/ParameterLayout.h. Add a ParameterSnapshot member and call its prepare(sampleRate) inside prepareToPlay so all smoothing buffers are allocated off the real-time path. Implement getStateInformation/setStateInformation using the APVTS ValueTree XML serialization, embedding the schema version constant (kParameterSchemaVersion) so future migrations can detect the version. Do NOT expose internal DSP states through the APVTS. Keep processBlock changes minimal (do not add DSP here); ScopedNoDenormals/allocation-free rules still apply to any code touched. If PluginProcessor.h/.cpp do not yet exist as full JUCE processors, create the minimal AudioProcessor skeleton needed to own the APVTS and state serialization.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterLayout.h (createParameterLayout signature)\n- Source/Parameters/ParameterSnapshot.h (prepare and snapshot API)\n- Source/Parameters/ParameterIDs.h (schema version constant)\n- CMakeLists.txt (JUCE modules and target sources)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Wire APVTS state schema and snapshot allocation into processor",
+      "phases": [
+        {
+          "name": "B",
+          "objective": "Modify Source/PluginProcessor.h and Source/PluginProcessor.cpp to own the APVTS and snapshot infrastructure. Add a juce::AudioProcessorValueTreeState member constructed with createParameterLayout() from Source/Parameters/ParameterLayout.h. Add a ParameterSnapshot member and call its prepare(sampleRate) inside prepareToPlay so all smoothing buffers are allocated off the real-time path. Implement getStateInformation/setStateInformation using the APVTS ValueTree XML serialization, embedding the schema version constant (kParameterSchemaVersion) so future migrations can detect the version. Do NOT expose internal DSP states through the APVTS. Keep processBlock changes minimal (do not add DSP here); ScopedNoDenormals/allocation-free rules still apply to any code touched. If PluginProcessor.h/.cpp do not yet exist as full JUCE processors, create the minimal AudioProcessor skeleton needed to own the APVTS and state serialization.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterLayout.h (createParameterLayout signature)\n- Source/Parameters/ParameterSnapshot.h (prepare and snapshot API)\n- Source/Parameters/ParameterIDs.h (schema version constant)\n- CMakeLists.txt (JUCE modules and target sources)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "b.4",
+                "title": "Wire APVTS state schema and snapshot allocation into processor",
+                "description": "Modify Source/PluginProcessor.h and Source/PluginProcessor.cpp to own the APVTS and snapshot infrastructure. Add a juce::AudioProcessorValueTreeState member constructed with createParameterLayout() from Source/Parameters/ParameterLayout.h. Add a ParameterSnapshot member and call its prepare(sampleRate) inside prepareToPlay so all smoothing buffers are allocated off the real-time path. Implement getStateInformation/setStateInformation using the APVTS ValueTree XML serialization, embedding the schema version constant (kParameterSchemaVersion) so future migrations can detect the version. Do NOT expose internal DSP states through the APVTS. Keep processBlock changes minimal (do not add DSP here); ScopedNoDenormals/allocation-free rules still apply to any code touched. If PluginProcessor.h/.cpp do not yet exist as full JUCE processors, create the minimal AudioProcessor skeleton needed to own the APVTS and state serialization.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterLayout.h (createParameterLayout signature)\n- Source/Parameters/ParameterSnapshot.h (prepare and snapshot API)\n- Source/Parameters/ParameterIDs.h (schema version constant)\n- CMakeLists.txt (JUCE modules and target sources)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+                "phase": "B",
+                "dependencies": [
+                  "b.3"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "Source/PluginProcessor.h and Source/PluginProcessor.cpp own a juce::AudioProcessorValueTreeState constructed from createParameterLayout()",
+                  "prepareToPlay calls ParameterSnapshot::prepare so smoothing state is allocated off the real-time path",
+                  "getStateInformation and setStateInformation serialize/restore the APVTS as XML and embed the schema version constant",
+                  "No internal DSP state is registered with the APVTS and processBlock adds no heap allocation, lock, or string construction",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T16:01:26.013866",
+                "selected_backend": "codex_cli",
+                "model": null,
+                "task_timeout_seconds": 1500.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "Source/PluginProcessor.h",
+                  "Source/PluginProcessor.cpp"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T16:03:32.679349",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-b.4",
+      "created_at": "2026-07-25T16:01:26.083376"
+    }
   }
 ]
