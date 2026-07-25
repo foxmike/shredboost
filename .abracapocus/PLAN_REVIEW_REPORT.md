@@ -1,0 +1,379 @@
+# Plan Review Report
+
+Plan directory: /home/mike/dev/mike/music/plugins/shredboost/.abracapocus
+
+## Warnings
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] allowed_write_paths entry 'Source/PluginProcessor.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] allowed_write_paths entry 'Source/PluginProcessor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json] description contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json] allowed_write_paths entry 'Source/PluginEditor.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json] allowed_write_paths entry 'Source/PluginEditor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json] allowed_write_paths entry 'Source/PluginProcessor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json] allowed_write_paths entry 'CMakePresets.json' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json] allowed_write_paths entry 'scripts/build_all.sh' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json] allowed_write_paths entry 'docs/verification/phase_a_scaffold.md' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json] description field length > 300 characters
+- Task 'a.1' has overlapping allowed_write_paths with 'a.2' but no dependency declared
+- Task 'a.3' depends on 'a.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'a.4' depends on 'a.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'a.5' depends on 'a.4' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'a.1' acceptance_criteria[1] may produce unsatisfied reconciliation: 'isBusesLayoutSupported accepts mono->mono, mono->stereo, and...' lacks file reference or test command
+- Task 'a.1' acceptance_criteria[2] may produce unsatisfied reconciliation: 'processBlock instantiates juce::ScopedNoDenormals at the top...' lacks file reference or test command
+- Task 'a.1' acceptance_criteria[3] may produce unsatisfied reconciliation: 'processBlock contains no heap allocation, locking, file IO, ...' lacks file reference or test command
+- Task 'a.1' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'a.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'ShredBoostAudioProcessorEditor derives from juce::AudioProce...' lacks file reference or test command
+- Task 'a.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'Constructor calls setResizable(true, true) and setSize()...' lacks file reference or test command
+- Task 'a.2' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'a.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake --preset linux-release -DSHREDBOOST_CONFIGURE_ONLY=ON ...' lacks file reference or test command
+- Task 'a.3' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'a.4' acceptance_criteria[4] may produce unsatisfied reconciliation: '.gitignore ignores build/ and does not ignore the JUCE/ subm...' lacks file reference or test command
+- Task 'a.4' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'a.5' acceptance_criteria[2] may produce unsatisfied reconciliation: 'The document lists the three supported bus layouts and state...' lacks file reference or test command
+- Task 'a.5' acceptance_criteria[3] may produce unsatisfied reconciliation: 'The document includes the paste-and-run cmake configure and ...' lacks file reference or test command
+- Task 'a.5' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json] allowed_write_paths entry 'Source/Parameters/ParameterIDs.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json] description contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json] allowed_write_paths entry 'Source/Parameters/ParameterLayout.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json] allowed_write_paths entry 'Source/Parameters/ParameterLayout.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json] description contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json] allowed_write_paths entry 'Source/Parameters/ParameterSnapshot.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json] allowed_write_paths entry 'Source/Parameters/ParameterSnapshot.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] allowed_write_paths entry 'Source/PluginProcessor.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] allowed_write_paths entry 'Source/PluginProcessor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] description contains broad word: full
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] allowed_write_paths entry 'tests/TestMain.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] allowed_write_paths entry 'tests/ParameterTests.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json] acceptance_criteria[0] contains broad word: all
+- Task 'b.2' depends on 'b.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'b.3' depends on 'b.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'b.4' depends on 'b.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'b.5' depends on 'b.4' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'b.1' acceptance_criteria[3] may produce unsatisfied reconciliation: 'No internal DSP state (crossfade, mute-fade, RMS tracker) is...' lacks file reference or test command
+- Task 'b.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'b.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'voicing_mode and oversampling are AudioParameterChoice with ...' lacks file reference or test command
+- Task 'b.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'b.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'dB parameters (input_trim, mid_amount, drive, level, pick_at...' lacks file reference or test command
+- Task 'b.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'A prepare(sampleRate) method exists for allocation during pr...' lacks file reference or test command
+- Task 'b.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'voicing_mode, oversampling, and auto_gain are carried as dis...' lacks file reference or test command
+- Task 'b.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'b.4' acceptance_criteria[1] may produce unsatisfied reconciliation: 'prepareToPlay calls ParameterSnapshot::prepare so smoothing ...' lacks file reference or test command
+- Task 'b.4' acceptance_criteria[2] may produce unsatisfied reconciliation: 'getStateInformation and setStateInformation serialize/restor...' lacks file reference or test command
+- Task 'b.4' acceptance_criteria[3] may produce unsatisfied reconciliation: 'No internal DSP state is registered with the APVTS and proce...' lacks file reference or test command
+- Task 'b.4' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'b.5' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --preset linux configure succeeds and ctest runs the p...' lacks file reference or test command
+- Task 'b.5' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json] allowed_write_paths entry 'Source/DSP/TightFilter.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json] allowed_write_paths entry 'Source/DSP/TightFilter.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json] allowed_write_paths entry 'Source/DSP/MidVoicingFilter.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json] allowed_write_paths entry 'Source/DSP/MidVoicingFilter.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] allowed_write_paths entry 'Source/DSP/InputTrimStage.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] allowed_write_paths entry 'Source/DSP/InputTrimStage.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] allowed_write_paths entry 'tests/FilterTests.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json] description field length > 300 characters
+- Task 'c.4' depends on 'c.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'c.4' depends on 'c.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'c.4' depends on 'c.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'c.1' acceptance_criteria[1] may produce unsatisfied reconciliation: 'TightFilter uses a multiplicative juce::SmoothedValue for th...' lacks file reference or test command
+- Task 'c.1' acceptance_criteria[2] may produce unsatisfied reconciliation: 'TightFilter supports Q=0.707 Butterworth and Q=1.2 Precision...' lacks file reference or test command
+- Task 'c.1' acceptance_criteria[3] may produce unsatisfied reconciliation: 'RBJ biquad coefficients are recomputed on sample-rate change...' lacks file reference or test command
+- Task 'c.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures wi...' lacks file reference or test command
+- Task 'c.1' acceptance_criteria[6] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'c.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'MidVoicingFilter uses a multiplicative SmoothedValue for mid...' lacks file reference or test command
+- Task 'c.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'The filter is a 2nd-order RBJ peaking bell with fixed Q_m = ...' lacks file reference or test command
+- Task 'c.2' acceptance_criteria[3] may produce unsatisfied reconciliation: 'RBJ coefficients are recomputed on sample-rate change and de...' lacks file reference or test command
+- Task 'c.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures wi...' lacks file reference or test command
+- Task 'c.2' acceptance_criteria[6] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'c.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'InputTrimStage applies smoothed gain Gin = 10^(trim/20) usin...' lacks file reference or test command
+- Task 'c.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'Per-block peak and RMS metering is exposed via lock-free ato...' lacks file reference or test command
+- Task 'c.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures wi...' lacks file reference or test command
+- Task 'c.3' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'c.4' acceptance_criteria[1] may produce unsatisfied reconciliation: 'The tests measure actual filter/stage output and assert Tigh...' lacks file reference or test command
+- Task 'c.4' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures wi...' lacks file reference or test command
+- Task 'c.4' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoostTests builds the test...' lacks file reference or test command
+- Task 'c.4' acceptance_criteria[5] may produce unsatisfied reconciliation: 'ctest --test-dir build -R FilterTests --output-on-failure pa...' lacks file reference or test command
+- Task 'c.4' acceptance_criteria[6] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json] allowed_write_paths entry 'Source/DSP/TransientShaper.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json] allowed_write_paths entry 'Source/DSP/TransientShaper.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] allowed_write_paths entry 'Source/DSP/NonlinearClipper.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] allowed_write_paths entry 'Source/DSP/NonlinearClipper.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json] acceptance_criteria[1] contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] allowed_write_paths entry 'Source/DSP/DcBlocker.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] allowed_write_paths entry 'Source/DSP/DcBlocker.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] allowed_write_paths entry 'Source/DSP/ToneFilter.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] allowed_write_paths entry 'Source/DSP/ToneFilter.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] allowed_write_paths entry 'Source/DSP/ShredBoostEngine.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] allowed_write_paths entry 'Source/DSP/ShredBoostEngine.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] description contains broad word: full
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] description contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] acceptance_criteria[2] contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json] acceptance_criteria[3] contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] allowed_write_paths entry 'tests/WaveshaperTests.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json] description field length > 300 characters
+- Task 'd.4' depends on 'd.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'd.4' depends on 'd.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'd.4' depends on 'd.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'd.5' depends on 'd.4' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'd.4' has 3 broad words (limit 2)
+- Task 'd.1' acceptance_criteria[1] may produce unsatisfied reconciliation: 'delta_rel is computed as clamp((e_fast - e_slow)/(e_slow + e...' lacks file reference or test command
+- Task 'd.1' acceptance_criteria[2] may produce unsatisfied reconciliation: 'juce::ScopedNoDenormals is instantiated at the top of the bl...' lacks file reference or test command
+- Task 'd.1' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost succeeds after these...' lacks file reference or test command
+- Task 'd.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'd.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'All four voicing modes are implemented: Yng-Grey (gamma=0.15...' lacks file reference or test command
+- Task 'd.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'Voicing mode changes trigger a 15 ms equal-power crossfade c...' lacks file reference or test command
+- Task 'd.2' acceptance_criteria[3] may produce unsatisfied reconciliation: 'juce::ScopedNoDenormals is instantiated at the top of the bl...' lacks file reference or test command
+- Task 'd.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'd.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'Both classes expose prepare, reset, and a process method fol...' lacks file reference or test command
+- Task 'd.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'juce::ScopedNoDenormals is instantiated at the top of the bl...' lacks file reference or test command
+- Task 'd.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'd.4' acceptance_criteria[1] may produce unsatisfied reconciliation: 'The process method invokes the owned stages in binding chain...' lacks file reference or test command
+- Task 'd.4' acceptance_criteria[2] may produce unsatisfied reconciliation: 'prepare and reset are forwarded to every owned stage and juc...' lacks file reference or test command
+- Task 'd.4' acceptance_criteria[3] may produce unsatisfied reconciliation: 'No heap allocation occurs in the process path; all state is ...' lacks file reference or test command
+- Task 'd.4' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- Task 'd.5' acceptance_criteria[1] may produce unsatisfied reconciliation: 'A test drives Asymmetric SD-1 clipping through the DcBlocker...' lacks file reference or test command
+- Task 'd.5' acceptance_criteria[2] may produce unsatisfied reconciliation: 'A test switches voicing_mode and asserts sample-to-sample di...' lacks file reference or test command
+- Task 'd.5' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost_Tests succeeds and c...' lacks file reference or test command
+- Task 'd.5' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside allowed_write_paths is created or modified...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] allowed_write_paths entry 'Source/DSP/OversamplingEngine.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] allowed_write_paths entry 'Source/DSP/OversamplingEngine.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json] acceptance_criteria[2] contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.2_implement_message_thread_oversampling_factor_change_with_mute_fade.json] allowed_write_paths entry 'Source/DSP/OversamplingEngine.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.2_implement_message_thread_oversampling_factor_change_with_mute_fade.json] allowed_write_paths entry 'Source/DSP/OversamplingEngine.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.2_implement_message_thread_oversampling_factor_change_with_mute_fade.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.2_implement_message_thread_oversampling_factor_change_with_mute_fade.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json] allowed_write_paths entry 'Source/DSP/AutoGainBypass.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json] allowed_write_paths entry 'Source/DSP/AutoGainBypass.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json] acceptance_criteria[2] contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] allowed_write_paths entry 'tests/OversamplingTests.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json] description field length > 300 characters
+- Task 'e.1' has overlapping allowed_write_paths with 'e.2' but no dependency declared
+- Task 'e.4' depends on 'e.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'e.4' depends on 'e.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'e.1' acceptance_criteria[1] may produce unsatisfied reconciliation: 'OversamplingEngine supports 1x, 2x, and 4x factors and expos...' lacks file reference or test command
+- Task 'e.1' acceptance_criteria[2] may produce unsatisfied reconciliation: 'All oversampling stages are allocated in a prepare method; n...' lacks file reference or test command
+- Task 'e.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'e.2' acceptance_criteria[0] may produce unsatisfied reconciliation: 'OversamplingEngine exposes a message-thread factor-change pa...' lacks file reference or test command
+- Task 'e.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'A 10 ms mute-fade is applied on the audio path across a fact...' lacks file reference or test command
+- Task 'e.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'getLatencySamples() reflects the newly applied factor after ...' lacks file reference or test command
+- Task 'e.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'e.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'AutoGainBypass tracks dry-input and wet-output RMS and deriv...' lacks file reference or test command
+- Task 'e.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'All state is allocated in a prepare method; no allocation, l...' lacks file reference or test command
+- Task 'e.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'e.4' acceptance_criteria[2] may produce unsatisfied reconciliation: 'A test asserts the inharmonic aliasing floor is rejected bel...' lacks file reference or test command
+- Task 'e.4' acceptance_criteria[3] may produce unsatisfied reconciliation: 'A test asserts exact getLatencySamples() PDC values for 1x, ...' lacks file reference or test command
+- Task 'e.4' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoostTests compiles the ru...' lacks file reference or test command
+- Task 'e.4' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] allowed_write_paths entry 'Source/PluginProcessor.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] allowed_write_paths entry 'Source/PluginProcessor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] description contains broad word: complete
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] description contains broad word: full
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json] acceptance_criteria[2] contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json] allowed_write_paths entry 'tests/ProcessBlockRealtimeTests.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json] allowed_write_paths entry 'docs/verification/phase_f_integration.md' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json] description contains broad word: full
+- Task 'f.2' depends on 'f.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'f.3' depends on 'f.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'f.1' has 3 broad words (limit 2)
+- Task 'f.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures succ...' lacks file reference or test command
+- Task 'f.1' acceptance_criteria[5] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost succeeds...' lacks file reference or test command
+- Task 'f.1' acceptance_criteria[6] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'The test asserts zero heap allocations occur during processB...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'The test asserts denormal inputs are flushed to zero in proc...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures succ...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[5] may produce unsatisfied reconciliation: 'cmake --build build succeeds...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[6] may produce unsatisfied reconciliation: 'ctest --test-dir build --output-on-failure runs the ProcessB...' lacks file reference or test command
+- Task 'f.2' acceptance_criteria[7] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'f.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'The document describes how ShredBoostEngine, OversamplingEng...' lacks file reference or test command
+- Task 'f.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'The document includes a Verification Commands section with t...' lacks file reference or test command
+- Task 'f.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json] allowed_write_paths entry 'Source/UI/ShredLookAndFeel.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json] allowed_write_paths entry 'Source/UI/ShredLookAndFeel.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json] allowed_write_paths entry 'Source/UI/TransferCurveScope.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json] allowed_write_paths entry 'Source/UI/TransferCurveScope.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json] allowed_write_paths entry 'Source/UI/SpectrumOverlay.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json] allowed_write_paths entry 'Source/UI/SpectrumOverlay.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json] allowed_write_paths entry 'Source/UI/LevelMeters.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json] allowed_write_paths entry 'Source/UI/LevelMeters.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] allowed_write_paths entry 'Source/PluginEditor.h' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] allowed_write_paths entry 'Source/PluginEditor.cpp' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] description contains broad word: all
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] description contains broad word: every
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json] acceptance_criteria[1] contains broad word: every
+- Task 'g.5' depends on 'g.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'g.5' depends on 'g.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'g.5' depends on 'g.3' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'g.5' depends on 'g.4' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'g.1' acceptance_criteria[1] may produce unsatisfied reconciliation: 'ShredLookAndFeel overrides drawRotarySlider to render the cu...' lacks file reference or test command
+- Task 'g.1' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost_VST3 succeeds after ...' lacks file reference or test command
+- Task 'g.1' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside this task's allowed_write_paths is created o...' lacks file reference or test command
+- Task 'g.2' acceptance_criteria[1] may produce unsatisfied reconciliation: 'TransferCurveScope renders a transfer curve, a moving input-...' lacks file reference or test command
+- Task 'g.2' acceptance_criteria[2] may produce unsatisfied reconciliation: 'TransferCurveScope reads telemetry only through atomics or a...' lacks file reference or test command
+- Task 'g.2' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost_VST3 succeeds after ...' lacks file reference or test command
+- Task 'g.2' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside this task's allowed_write_paths is created o...' lacks file reference or test command
+- Task 'g.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'SpectrumOverlay computes a 512-bin (FFT order 9) Welch-windo...' lacks file reference or test command
+- Task 'g.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'SpectrumOverlay drains sample data only through a lock-free ...' lacks file reference or test command
+- Task 'g.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost_VST3 succeeds after ...' lacks file reference or test command
+- Task 'g.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside this task's allowed_write_paths is created o...' lacks file reference or test command
+- Task 'g.4' acceptance_criteria[1] may produce unsatisfied reconciliation: 'LevelMeters renders peak and RMS input/output meters with de...' lacks file reference or test command
+- Task 'g.4' acceptance_criteria[2] may produce unsatisfied reconciliation: 'LevelMeters reads telemetry only through std::atomic values ...' lacks file reference or test command
+- Task 'g.4' acceptance_criteria[3] may produce unsatisfied reconciliation: 'cmake --build build --target ShredBoost_VST3 succeeds after ...' lacks file reference or test command
+- Task 'g.4' acceptance_criteria[4] may produce unsatisfied reconciliation: 'No file outside this task's allowed_write_paths is created o...' lacks file reference or test command
+- Task 'g.5' acceptance_criteria[1] may produce unsatisfied reconciliation: 'Every parameter control is connected to the APVTS via an att...' lacks file reference or test command
+- Task 'g.5' acceptance_criteria[2] may produce unsatisfied reconciliation: 'The editor window is resizable via setResizable with a bound...' lacks file reference or test command
+- Task 'g.5' acceptance_criteria[4] may produce unsatisfied reconciliation: 'cmake -S . -B build succeeds and cmake --build build --targe...' lacks file reference or test command
+- Task 'g.5' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside this task's allowed_write_paths is created o...' lacks file reference or test command
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] allowed_write_paths entry 'scripts/validate_plugin.sh' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] acceptance_criteria item length > 120 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json] description contains broad word: full
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json] allowed_write_paths entry 'Resources/Presets/FactoryPresets.xml' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json] allowed_write_paths entry 'CMakeLists.txt' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json] allowed_write_paths entry 'docs/verification/phase_h_release.md' does not exist in working root
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json] acceptance_criteria list length > 5
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json] acceptance_criteria references pytest or test without a test allowed_write_path
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json] description field length > 300 characters
+- [/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json] description contains broad word: full
+- Task 'h.2' depends on 'h.1' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'h.3' depends on 'h.2' but their allowed_write_paths are disjoint; dependency may be unnecessary
+- Task 'h.1' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'h.2' acceptance_criteria[3] may produce unsatisfied reconciliation: 'Each preset sets the plugin's named parameters using IDs con...' lacks file reference or test command
+- Task 'h.2' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+- Task 'h.3' acceptance_criteria[1] may produce unsatisfied reconciliation: 'The document records the exact validation command(s) execute...' lacks file reference or test command
+- Task 'h.3' acceptance_criteria[2] may produce unsatisfied reconciliation: 'The document reports real CTest results including tests run/...' lacks file reference or test command
+- Task 'h.3' acceptance_criteria[3] may produce unsatisfied reconciliation: 'The document reports the VST3, LV2, and Standalone artifact ...' lacks file reference or test command
+- Task 'h.3' acceptance_criteria[4] may produce unsatisfied reconciliation: 'The document states an overall PASS/FAIL conclusion with the...' lacks file reference or test command
+- Task 'h.3' acceptance_criteria[5] may produce unsatisfied reconciliation: 'No file outside the task's allowed_write_paths is created or...' lacks file reference or test command
+
+## Lint Results
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.1_create_processor_shell_with_bus_layout_contract_and_deterministic_channel_clearing.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.2_create_resizable_editor_shell_connected_to_processor.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.3_create_cmake_build_configuration_with_product_identity_and_three_linux_target_formats.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.4_create_paste_and_run_build_script_and_gitignore.json: 0 errors, 3 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/a/task_a.5_write_phase_a_scaffold_verification_document.json: 0 errors, 3 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json: 0 errors, 8 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.1_implement_pre_drive_tight_hpf_with_q_1_2_resonant_bump_option.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.2_implement_pre_clip_midrange_peaking_bell_voicing_filter.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.3_implement_input_trim_calibration_stage_with_telemetry_metering.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/c/task_c.4_create_filter_unit_tests_for_hpf_mid_bell_and_input_trim.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.1_implement_level_independent_transient_pick_attack_shaper.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.2_implement_multi_topology_non_linear_clipping_engine_with_equal_power_topology_crossfade.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.3_implement_1st_order_dc_blocker_and_2nd_order_post_drive_tone_lpf.json: 0 errors, 7 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.4_compose_pre_filter_shaper_clipper_dc_blocker_and_tone_filter_in_processing_chain.json: 0 errors, 9 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/d/task_d.5_create_waveshaper_unit_tests_with_dc_offset_and_topology_switch_bounds.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.1_implement_polyphase_fir_oversampling_engine_with_pdc_latency_reporting.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.2_implement_message_thread_oversampling_factor_change_with_mute_fade.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.3_implement_auto_loudness_matched_bypass_rms_tracking_and_dry_compensation.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/e/task_e.4_create_oversampling_and_bypass_unit_tests_verifying_alias_floor_and_pdc.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json: 0 errors, 9 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.1_implement_custom_lookandfeel_and_industrial_dark_metal_rotary_knobs.json: 0 errors, 5 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.2_implement_live_x_y_transfer_curve_scope_with_moving_dot_and_morphing_crossfade.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.3_implement_pre_post_fft_spectrum_overlay_visualizer.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.4_implement_peak_and_rms_input_output_level_meters_and_drive_saturation_readout.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/g/task_g.5_integrate_full_editor_ui_components_layout_and_resizable_window.json: 0 errors, 9 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json: 0 errors, 6 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json: 0 errors, 4 warnings
+- /home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json: 0 errors, 5 warnings
+
+## Summary
+- Total errors: 0
+- Total warnings: 333
+- Linted files: 34

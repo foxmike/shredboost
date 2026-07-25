@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "task_id": "b.2",
+  "phase": "B",
+  "phase_id": "b",
+  "title": "Create parameter layout with APVTS definitions for all ShredBoost parameters",
+  "description": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp exist",
+    "createParameterLayout returns a juce::AudioProcessorValueTreeState::ParameterLayout with exactly the 11 parameters from ParameterIDs.h",
+    "voicing_mode and oversampling are AudioParameterChoice with defaults Yng-Grey and 2x respectively; auto_gain is AudioParameterBool defaulting to false",
+    "Each parameter's range and default match the values documented in ParameterIDs.h",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/Parameters/ParameterLayout.h",
+    "Source/Parameters/ParameterLayout.cpp"
+  ],
+  "forbidden_changes": [
+    "modify Source/Parameters/ParameterIDs.h",
+    "modify CMakeLists.txt",
+    "modify anything under JUCE/",
+    "add parameters not defined in ParameterIDs.h",
+    "add new third-party dependencies"
+  ],
+  "dependencies": [
+    "b.1"
+  ],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

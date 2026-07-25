@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "task_id": "f.3",
+  "phase": "F",
+  "phase_id": "f",
+  "title": "Write phase f integration verification document",
+  "description": "Write the phase F verification document summarizing full processor integration and the real-time execution audit results.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp (integrated processBlock and prepareToPlay from f.1)\n- tests/ProcessBlockRealtimeTests.cpp (the allocation and denormal audits from f.2)\n- CMakeLists.txt (the configure/build/ctest commands used)\n- Any existing docs/verification/*.md for the established document format\n\nImplementation requirements:\n1. Create docs/verification/phase_f_integration.md.\n2. Document the integration: how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are wired into processBlock, buffer allocation in prepareToPlay, the lock-free double-buffered parameter snapshot, ScopedNoDenormals placement, and PDC/oversampling handling on the message thread.\n3. Document the real-time audit: what ProcessBlockRealtimeTests.cpp verifies (zero heap allocation during processBlock, denormal flushing) and the exact commands to reproduce.\n4. Include a 'Verification Commands' section listing the literal cmake configure, cmake build, and ctest commands.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "docs/verification/phase_f_integration.md exists",
+    "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+    "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+    "The document includes a Verification Commands section with the literal cmake and ctest commands",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "docs/verification/phase_f_integration.md"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify source code, tests, or CMakeLists.txt",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [],
+  "decision_budget": {
+    "allowed": [
+      "choose document section ordering and headings"
+    ],
+    "forbidden": [
+      "make code changes",
+      "assert results not produced by the phase F tests"
+    ]
+  },
+  "dependencies": [
+    "f.2"
+  ],
+  "task_timeout_seconds": 900,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

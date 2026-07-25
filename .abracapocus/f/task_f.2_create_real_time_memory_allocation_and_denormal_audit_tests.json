@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task_id": "f.2",
+  "phase": "F",
+  "phase_id": "f",
+  "title": "Create real time memory allocation and denormal audit tests",
+  "description": "Create a juce::UnitTest that audits processBlock for real-time safety: zero heap allocation during processing and correct denormal flushing.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp (integrated processBlock from task f.1; prepareToPlay buffer allocation and the ScopedNoDenormals guard)\n- CMakeLists.txt (how existing UnitTest sources and the CTest console-runner target are registered; the ShredBoost target definition)\n- Any existing tests/*.cpp using juce::UnitTest for the established pattern (registration, runner wiring)\n\nImplementation requirements:\n1. Add tests/ProcessBlockRealtimeTests.cpp defining a juce::UnitTest subclass registered with the existing console runner (no third-party testing frameworks).\n2. Allocation audit: call prepareToPlay with a fixed max block size, then install a global new/delete allocation counter (e.g. override operator new/delete or a scoped allocation guard) around repeated processBlock calls; assert the allocation count is zero during processBlock.\n3. Denormal audit: feed a buffer whose samples decay into the denormal range and assert that outputs are flushed to zero (denormals not present), confirming ScopedNoDenormals behavior.\n4. Register tests/ProcessBlockRealtimeTests.cpp in CMakeLists.txt so it builds into the UnitTest runner and is discoverable by CTest.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+    "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+    "The test asserts denormal inputs are flushed to zero in processBlock output",
+    "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+    "cmake --build build succeeds",
+    "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "tests/ProcessBlockRealtimeTests.cpp",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify Source/PluginProcessor.h or Source/PluginProcessor.cpp",
+    "introduce a third-party testing framework",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "ProcessBlockRealtimeTests"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "choose the allocation-counting mechanism (scoped operator new/delete override or guard)",
+      "choose the denormal-decay test signal"
+    ],
+    "forbidden": [
+      "change the processor's public interface",
+      "add a non-JUCE test dependency"
+    ]
+  },
+  "dependencies": [
+    "f.1"
+  ],
+  "task_timeout_seconds": 1200,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "a.2",
+  "phase": "A",
+  "phase_id": "a",
+  "title": "Create resizable editor shell connected to processor",
+  "description": "Create the minimal ShredBoost editor shell in Source/PluginEditor.h and Source/PluginEditor.cpp, connected to the processor created in a.1.\n\nRequirements:\n- Declare class ShredBoostAudioProcessorEditor : public juce::AudioProcessorEditor, holding a reference to ShredBoostAudioProcessor.\n- Constructor takes ShredBoostAudioProcessor& and calls setSize() with a reasonable default (e.g. 600x400) and setResizable(true, true).\n- Implement paint() to fill the background and draw the \"ShredBoost\" name/placeholder text; implement resized() (may be empty for now).\n- Ensure Source/PluginProcessor.cpp's createEditor() returns a new ShredBoostAudioProcessorEditor(*this). If a.1 left createEditor as a placeholder, update it minimally to construct the real editor.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp from a.1 for the processor class name and createEditor() signature.\n- ./JUCE/modules/juce_audio_processors/juce_audio_processors.h for AudioProcessorEditor (do NOT modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/PluginEditor.h and Source/PluginEditor.cpp exist",
+    "ShredBoostAudioProcessorEditor derives from juce::AudioProcessorEditor and holds a ShredBoostAudioProcessor reference",
+    "Constructor calls setResizable(true, true) and setSize()",
+    "Source/PluginProcessor.cpp createEditor() returns a new ShredBoostAudioProcessorEditor",
+    "grep -n 'setResizable' Source/PluginEditor.cpp returns a match",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/PluginEditor.h",
+    "Source/PluginEditor.cpp",
+    "Source/PluginProcessor.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "change isBusesLayoutSupported or processBlock logic in PluginProcessor.cpp",
+    "modify Source/PluginProcessor.h",
+    "add GUI controls or parameter bindings (deferred to later phases)"
+  ],
+  "allowed_symbols": [
+    "ShredBoostAudioProcessorEditor",
+    "paint",
+    "resized",
+    "createEditor"
+  ],
+  "dependencies": [
+    "a.1"
+  ],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

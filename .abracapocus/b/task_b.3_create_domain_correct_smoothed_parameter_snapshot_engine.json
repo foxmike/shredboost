@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "task_id": "b.3",
+  "phase": "B",
+  "phase_id": "b",
+  "title": "Create domain correct smoothed parameter snapshot engine",
+  "description": "Create Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp providing a real-time-safe snapshot of the smoothed current values of all continuous parameters, plus the current discrete choices. Apply domain-correct smoothing per the binding rules: linear juce::SmoothedValue for dB values (input_trim, mid_amount, drive, level, pick_attack); multiplicative juce::SmoothedValue for strictly positive frequencies (tight_cut, mid_freq, tone). Provide prepare(sampleRate) that sizes ramp times and allocates any smoothing state (called from prepareToPlay), a per-block/per-sample advance to retrieve smoothed values, and setter/target methods driven from raw parameter pointers. Discrete parameters (voicing_mode, oversampling, auto_gain) are carried as plain current values (crossfade/topology switching handled elsewhere), NOT smoothed here. The advance/get path must be allocation-free, lock-free, and must not construct strings or call the GUI (real-time safe). Header declares the ParameterSnapshot type; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h and Source/Parameters/ParameterLayout.h (for parameter set)\n- The binding smoothing rules above (linear dB vs multiplicative frequency).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/Parameters/ParameterSnapshot.h and Source/Parameters/ParameterSnapshot.cpp exist",
+    "dB parameters (input_trim, mid_amount, drive, level, pick_attack) use linear juce::SmoothedValue and frequency parameters (tight_cut, mid_freq, tone) use multiplicative juce::SmoothedValue",
+    "A prepare(sampleRate) method exists for allocation during prepareToPlay and the value-advance path performs no heap allocation, locking, or string construction",
+    "voicing_mode, oversampling, and auto_gain are carried as discrete current values and are not smoothed as continuous SmoothedValue",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/Parameters/ParameterSnapshot.h",
+    "Source/Parameters/ParameterSnapshot.cpp"
+  ],
+  "forbidden_changes": [
+    "modify Source/Parameters/ParameterIDs.h",
+    "modify Source/Parameters/ParameterLayout.h or ParameterLayout.cpp",
+    "modify CMakeLists.txt",
+    "modify anything under JUCE/",
+    "allocate heap memory, lock, or construct strings on the real-time value-advance path",
+    "smooth discrete parameters (voicing_mode, oversampling, auto_gain)"
+  ],
+  "allowed_symbols": [
+    "ParameterSnapshot"
+  ],
+  "dependencies": [
+    "b.2"
+  ],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

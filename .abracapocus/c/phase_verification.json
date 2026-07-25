@@ -1,0 +1,48 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "configure",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build",
+          "-DCMAKE_BUILD_TYPE=Release"
+        ]
+      },
+      {
+        "name": "build-plugin",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost"
+        ]
+      },
+      {
+        "name": "build-tests",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoostTests"
+        ]
+      },
+      {
+        "name": "ctest-filters",
+        "command": [
+          "ctest",
+          "--test-dir",
+          "build",
+          "-R",
+          "FilterTests",
+          "--output-on-failure"
+        ]
+      }
+    ]
+  }
+}

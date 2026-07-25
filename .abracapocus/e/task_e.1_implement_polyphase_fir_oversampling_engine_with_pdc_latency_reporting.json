@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "e.1",
+  "phase": "E",
+  "phase_id": "e",
+  "title": "Implement polyphase FIR oversampling engine with PDC latency reporting",
+  "description": "Create Source/DSP/OversamplingEngine.h and Source/DSP/OversamplingEngine.cpp implementing a polyphase FIR half-band oversampling engine wrapping juce::dsp::Oversampling<float> for 1x, 2x, and 4x rates. The engine allocates all oversampling stages during prepare (never inside processBlock), exposes upsample/downsample entry points returning the oversampled AudioBlock, and reports processing latency through getLatencySamples() so the processor can call setLatencySamples. Follow binding rule (1): no heap allocation, locks, or buffer resizing on the audio path; all buffers allocated during prepare. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- Source/DSP/ for existing DSP module header/cpp conventions and namespace usage\n- CMakeLists.txt for JUCE module linkage (juce_dsp) already available to the target\n- JUCE/modules/juce_dsp/processors/juce_Oversampling.h for the Oversampling<float> API (read only; do not modify anything under JUCE/)\n- PluginProcessor.h/.cpp (if present) for prepareToPlay and setLatencySamples usage patterns",
+  "acceptance_criteria": [
+    "Source/DSP/OversamplingEngine.h and Source/DSP/OversamplingEngine.cpp exist",
+    "OversamplingEngine supports 1x, 2x, and 4x factors and exposes a getLatencySamples() accessor for PDC reporting",
+    "All oversampling stages are allocated in a prepare method; no allocation, locking, or buffer resizing occurs on the audio processing path",
+    "cmake --build build --target ShredBoost compiles OversamplingEngine.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/OversamplingEngine.h",
+    "Source/DSP/OversamplingEngine.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "modify PluginProcessor.h or PluginProcessor.cpp",
+    "allocate memory, lock, or resize buffers inside the audio processing path",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "OversamplingEngine",
+    "prepare",
+    "reset",
+    "processSamplesUp",
+    "processSamplesDown",
+    "getLatencySamples",
+    "setFactor"
+  ],
+  "dependencies": [],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

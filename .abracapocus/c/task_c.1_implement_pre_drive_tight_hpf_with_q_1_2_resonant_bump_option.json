@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "c.1",
+  "phase": "C",
+  "phase_id": "c",
+  "title": "Implement pre drive tight HPF with Q 1 2 resonant bump option",
+  "description": "Create Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp implementing a 2nd-order RBJ high-pass filter used as the pre-drive tight low-end control.\n\nRequirements:\n- Class TightFilter with prepare(double sampleRate), reset(), and process/processBlock methods operating on a single mono channel of samples (buffers pre-allocated in prepare()).\n- Cutoff (tight_cut) parameter constrained to 80-400 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain) \u2014 do NOT construct the SmoothedValue inside the process loop.\n- Two Q modes: standard Butterworth Q=0.707, and Precision Tight resonant mode Q=1.2 producing a +1.8 dB overshoot at cutoff.\n- RBJ biquad coefficient computation recomputed on sample-rate change and on smoothed-frequency movement; coefficients derived only in prepare()/coefficient-update paths, never allocating in process.\n- Flush denormals: apply juce::ScopedNoDenormals discipline at the call site and add a tiny-value flush (or use JUCE denormal-safe state) in the recursive state to prevent denormal stalls.\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are added to the target; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and juce::ScopedNoDenormals (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/TightFilter.h and Source/DSP/TightFilter.cpp exist and declare/define class TightFilter",
+    "TightFilter uses a multiplicative juce::SmoothedValue for the tight_cut frequency and does not construct it inside the process loop",
+    "TightFilter supports Q=0.707 Butterworth and Q=1.2 Precision Tight modes with a +1.8 dB overshoot at cutoff in the resonant mode",
+    "RBJ biquad coefficients are recomputed on sample-rate change and denormals are flushed in the recursive state",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+    "cmake --build build --target ShredBoost compiles Source/DSP/TightFilter.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/TightFilter.h",
+    "Source/DSP/TightFilter.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "modify Source/DSP/MidVoicingFilter.h, Source/DSP/MidVoicingFilter.cpp, Source/DSP/InputTrimStage.h, or Source/DSP/InputTrimStage.cpp",
+    "allocate heap memory, take locks, or construct strings inside the audio process loop",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "TightFilter",
+    "prepare",
+    "reset",
+    "process",
+    "processBlock",
+    "setCutoff",
+    "setResonantMode",
+    "updateCoefficients"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "add private biquad state members and coefficient fields",
+      "choose internal helper for RBJ coefficient math"
+    ],
+    "forbidden": [
+      "introduce a new filter framework",
+      "change the DSP processing chain order",
+      "add parameters outside tight_cut and Q mode"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

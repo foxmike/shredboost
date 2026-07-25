@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "g.4",
+  "phase": "G",
+  "phase_id": "g",
+  "title": "Implement peak and RMS input output level meters and drive saturation readout",
+  "description": "Create Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp. Implement a juce::Component subclass named LevelMeters that renders Peak + RMS input and output level meters (with ballistic decay) and a Drive Saturation readout showing peak reduction in dB. The GUI reads instantaneous peak/RMS/reduction telemetry exclusively through std::atomic<float> values that the processor updates on the audio thread; the component runs a Timer to sample those atomics and repaint. It must NEVER lock, block, or call the audio thread. Provide a public API so PluginEditor can bind the atomic telemetry handles, but do not include PluginProcessor here.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h (existing atomic peak/RMS I/O and gain-reduction/saturation telemetry members; read only)\n- Source/PluginEditor.h (naming conventions and how editor passes telemetry handles)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h (do not modify anything under JUCE/)",
+  "acceptance_criteria": [
+    "Source/UI/LevelMeters.h and Source/UI/LevelMeters.cpp exist and declare/define class LevelMeters deriving from juce::Component",
+    "LevelMeters renders peak and RMS input/output meters with decay ballistics and a drive saturation (peak reduction) readout",
+    "LevelMeters reads telemetry only through std::atomic values and never locks or calls the audio thread",
+    "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+    "No file outside this task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/UI/LevelMeters.h",
+    "Source/UI/LevelMeters.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt (g.5 owns the CMake integration)",
+    "modify PluginEditor.h or PluginEditor.cpp",
+    "modify PluginProcessor.h or PluginProcessor.cpp",
+    "lock, block, or call the audio thread from GUI code",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "LevelMeters"
+  ],
+  "dependencies": [],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

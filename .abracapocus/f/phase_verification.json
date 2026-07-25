@@ -1,0 +1,34 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "configure",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build",
+          "-DCMAKE_BUILD_TYPE=Debug"
+        ]
+      },
+      {
+        "name": "build",
+        "command": [
+          "cmake",
+          "--build",
+          "build"
+        ]
+      },
+      {
+        "name": "ctest",
+        "command": [
+          "ctest",
+          "--test-dir",
+          "build",
+          "--output-on-failure"
+        ]
+      }
+    ]
+  }
+}

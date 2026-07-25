@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "e.3",
+  "phase": "E",
+  "phase_id": "e",
+  "title": "Implement auto loudness matched bypass RMS tracking and dry compensation",
+  "description": "Create Source/DSP/AutoGainBypass.h and Source/DSP/AutoGainBypass.cpp implementing an RMS tracking circuit that compares dry input against wet output to compute a dynamic level difference, then applies a compensating dry gain during bypass preview so bypassed audio is loudness-matched to the processed signal. Use time-smoothed RMS estimators (allocated during prepare) and follow binding rule (1): no allocation, locking, or buffer resizing on the audio path. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- Source/DSP/ for existing DSP module header/cpp conventions and namespace usage\n- JUCE/modules/juce_dsp for SmoothedValue/ballistics helpers (read only)\n- CMakeLists.txt for the juce_dsp linkage already available to the target (do not modify it in this task)",
+  "acceptance_criteria": [
+    "Source/DSP/AutoGainBypass.h and Source/DSP/AutoGainBypass.cpp exist",
+    "AutoGainBypass tracks dry-input and wet-output RMS and derives a dynamic dry compensation gain applied during bypass preview",
+    "All state is allocated in a prepare method; no allocation, locking, or buffer resizing occurs on the audio processing path",
+    "cmake --build build --target ShredBoost compiles AutoGainBypass.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/AutoGainBypass.h",
+    "Source/DSP/AutoGainBypass.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "modify OversamplingEngine.h or OversamplingEngine.cpp",
+    "allocate memory, lock, or resize buffers inside the audio processing path",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "AutoGainBypass",
+    "prepare",
+    "reset",
+    "pushDryWet",
+    "getCompensationGain",
+    "process"
+  ],
+  "dependencies": [],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

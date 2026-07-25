@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "e.2",
+  "phase": "E",
+  "phase_id": "e",
+  "title": "Implement message thread oversampling factor change with mute fade",
+  "description": "Extend Source/DSP/OversamplingEngine.h and Source/DSP/OversamplingEngine.cpp so that oversampling factor changes are performed on the message thread with a re-prepare and a 10 ms mute-fade, never re-allocating inside processBlock (risk_notes: oversampling re-allocation must never occur inside processBlock). Add a message-thread-side requestFactorChange/applyPendingFactor path that re-prepares the underlying Oversampling stages, and an audio-path mute-fade ramp so the transition is click-free while latency is re-reported via getLatencySamples(). Depends on the engine created in e.1. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- Source/DSP/OversamplingEngine.h/.cpp as created in task e.1 for the prepare and getLatencySamples surface\n- JUCE/modules/juce_dsp for SmoothedValue and Oversampling re-prepare semantics (read only)\n- PluginProcessor.h/.cpp (if present) for how message-thread parameter changes are dispatched",
+  "acceptance_criteria": [
+    "OversamplingEngine exposes a message-thread factor-change path that re-prepares stages off the audio thread",
+    "A 10 ms mute-fade is applied on the audio path across a factor change; no re-allocation occurs inside the audio processing path",
+    "getLatencySamples() reflects the newly applied factor after a change so setLatencySamples can be re-issued",
+    "cmake --build build --target ShredBoost compiles the modified OversamplingEngine.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/OversamplingEngine.h",
+    "Source/DSP/OversamplingEngine.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "re-allocate or re-prepare oversampling stages inside processBlock or the audio processing path",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "requestFactorChange",
+    "applyPendingFactor",
+    "muteFadeGain",
+    "isFactorChangePending",
+    "getLatencySamples"
+  ],
+  "dependencies": [
+    "e.1"
+  ],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

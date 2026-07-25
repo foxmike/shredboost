@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "e.4",
+  "phase": "E",
+  "phase_id": "e",
+  "title": "Create oversampling and bypass unit tests verifying alias floor and PDC",
+  "description": "Create tests/OversamplingTests.cpp using the juce::UnitTest framework (binding rule 5: no third-party testing frameworks) and register the new DSP sources plus the test in CMakeLists.txt so the existing juce::UnitTest console runner target builds and runs them under CTest. The tests must (a) drive the OversamplingEngine with a high-frequency sine and assert that the inharmonic aliasing floor is rejected below a threshold, and (b) assert exact PDC latency reporting from getLatencySamples() for each 1x/2x/4x factor. Add a smoke check for AutoGainBypass loudness matching. This test proves the behavioral claims (alias rejection, exact PDC), so it must run and pass, not merely compile. Depends on e.2 and e.3. STRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.\n\nBefore editing, inspect:\n- tests/ for existing juce::UnitTest test file structure and the console runner registration pattern\n- CMakeLists.txt for the existing UnitTest runner target and where Source/DSP/*.cpp sources and test sources are added, plus the add_test/CTest registration\n- Source/DSP/OversamplingEngine.h and Source/DSP/AutoGainBypass.h for the public surfaces under test",
+  "acceptance_criteria": [
+    "tests/OversamplingTests.cpp exists and uses only juce::UnitTest (no third-party test framework)",
+    "CMakeLists.txt registers Source/DSP/OversamplingEngine.cpp, Source/DSP/AutoGainBypass.cpp, and tests/OversamplingTests.cpp with the juce::UnitTest console runner target",
+    "A test asserts the inharmonic aliasing floor is rejected below a defined threshold for the OversamplingEngine",
+    "A test asserts exact getLatencySamples() PDC values for 1x, 2x, and 4x factors",
+    "cmake --build build --target ShredBoostTests compiles the runner, and ctest --test-dir build --output-on-failure runs OversamplingTests and passes",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "tests/OversamplingTests.cpp",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "add third-party testing frameworks",
+    "modify Source/DSP/OversamplingEngine.h or Source/DSP/OversamplingEngine.cpp",
+    "modify Source/DSP/AutoGainBypass.h or Source/DSP/AutoGainBypass.cpp"
+  ],
+  "dependencies": [
+    "e.2",
+    "e.3"
+  ],
+  "task_timeout_seconds": 1800,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "a.3",
+  "phase": "A",
+  "phase_id": "a",
+  "title": "Create CMake build configuration with product identity and three Linux target formats",
+  "description": "Create CMakeLists.txt and CMakePresets.json configuring the ShredBoost plugin with the exact frozen product identity and Linux target formats.\n\nCMakeLists.txt requirements:\n- cmake_minimum_required(VERSION 3.22) and project(ShredBoost VERSION 1.0.0 LANGUAGES CXX).\n- set CMAKE_CXX_STANDARD 20 and CMAKE_CXX_STANDARD_REQUIRED ON.\n- add_subdirectory(JUCE) referencing the pinned JUCE submodule (do NOT modify JUCE/).\n- juce_add_plugin(ShredBoost ...) with EXACT values: PRODUCT_NAME ShredBoost, COMPANY_NAME \"nSpace Systems\", VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone, IS_SYNTH FALSE, NEEDS_MIDI_INPUT FALSE.\n- target_sources adding Source/PluginProcessor.cpp and Source/PluginEditor.cpp.\n- target_link_libraries linking juce recommended flags and juce_audio_utils.\n\nCMakePresets.json requirements:\n- version 3 (or appropriate) with two configure presets: \"linux-release\" (Unix Makefiles or Ninja, CMAKE_BUILD_TYPE Release) and \"windows-msvc\" (Visual Studio / MSVC generator) as configuration for later Windows tooling.\n\nNote: the frozen BUNDLE_ID is com.nspacesystems.shredboost per the binding product identity.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp and Source/PluginEditor.cpp for source file names to add to target_sources.\n- ./JUCE/CMakeLists.txt for the juce_add_plugin signature (do NOT modify anything under JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "CMakeLists.txt and CMakePresets.json exist",
+    "CMakeLists.txt sets PRODUCT_NAME ShredBoost, COMPANY_NAME nSpace Systems, VERSION 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost",
+    "CMakeLists.txt sets FORMATS to VST3 LV2 Standalone and CMAKE_CXX_STANDARD 20",
+    "CMakePresets.json defines linux-release and windows-msvc configure presets",
+    "cmake --preset linux-release -DSHREDBOOST_CONFIGURE_ONLY=ON generates a build tree without configuration errors",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "CMakeLists.txt",
+    "CMakePresets.json"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "change the pinned JUCE submodule commit",
+    "alter the frozen identity codes NSPC or ShBs",
+    "add plugin formats beyond VST3 LV2 Standalone",
+    "modify Source/ files"
+  ],
+  "dependencies": [
+    "a.2"
+  ],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

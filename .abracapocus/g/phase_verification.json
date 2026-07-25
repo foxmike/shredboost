@@ -1,0 +1,36 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "configure",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build"
+        ]
+      },
+      {
+        "name": "build-vst3",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost_VST3"
+        ]
+      },
+      {
+        "name": "build-standalone",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost_Standalone"
+        ]
+      }
+    ]
+  }
+}

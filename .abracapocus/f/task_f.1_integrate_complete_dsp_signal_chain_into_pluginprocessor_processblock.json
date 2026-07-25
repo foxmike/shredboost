@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "f.1",
+  "phase": "F",
+  "phase_id": "f",
+  "title": "Integrate complete DSP signal chain into PluginProcessor processBlock",
+  "description": "Integrate the full ShredBoost DSP engine into PluginProcessor so that processBlock runs the complete signal chain in real-time-safe fashion.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp (current processor scaffold, prepareToPlay, processBlock, member layout)\n- Source/ShredBoostEngine.* (core DSP chain: input trim, tight HPF, mid voicing bell, pick-attack shaper, clip, DC blocker, tone LPF, output level)\n- Source/OversamplingEngine.* (1x/2x/4x polyphase FIR upsample/downsample and PDC latency reporting via setLatencySamples)\n- Source/AutoGainBypass.* (gain-matched bypass RMS tracker)\n- Source/ParameterLayout.* (parameter IDs and SmoothedValue conventions)\n- CMakeLists.txt (existing target sources, so no new files need registering here)\n\nImplementation requirements:\n1. Add ShredBoostEngine, OversamplingEngine, and AutoGainBypass as members of PluginProcessor (owned by value or unique_ptr, constructed at processor construction).\n2. In prepareToPlay, allocate ALL buffers sized to the maximum block size and the current sample rate; prepare each sub-engine. No allocation may occur later in processBlock.\n3. In processBlock: instantiate juce::ScopedNoDenormals at the very top; take a lock-free snapshot of parameter values via double buffering (no locks, no heap allocation); run the chain in the binding order [0]->[9]; perform NO heap allocation, locking, file IO, string construction, GUI calls, or buffer resizing.\n4. Oversampling factor changes must be deferred to the message thread with re-prepare and a 10 ms mute-fade; processBlock only reads the currently-prepared oversampling state.\n5. Report PDC latency through setLatencySamples whenever oversampling state changes.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/PluginProcessor.h declares ShredBoostEngine, OversamplingEngine, and AutoGainBypass members",
+    "Source/PluginProcessor.cpp instantiates juce::ScopedNoDenormals at the top of processBlock",
+    "Source/PluginProcessor.cpp allocates all processing buffers in prepareToPlay, not in processBlock",
+    "Source/PluginProcessor.cpp uses a lock-free double-buffered parameter snapshot inside processBlock (no locks, no heap allocation)",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+    "cmake --build build --target ShredBoost succeeds",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/PluginProcessor.h",
+    "Source/PluginProcessor.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "allocate heap memory, resize buffers, lock, construct strings, perform file IO, or call GUI code inside processBlock",
+    "change parameter IDs or the ParameterLayout files",
+    "modify tests/ or docs/ files",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "ShredBoostAudioProcessor",
+    "prepareToPlay",
+    "processBlock",
+    "ShredBoostEngine",
+    "OversamplingEngine",
+    "AutoGainBypass"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "choose value vs unique_ptr ownership for sub-engine members",
+      "size internal snapshot/scratch buffers in prepareToPlay"
+    ],
+    "forbidden": [
+      "introduce a new DSP module or framework",
+      "change the [0]->[9] signal chain order",
+      "perform oversampling re-prepare on the audio thread"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

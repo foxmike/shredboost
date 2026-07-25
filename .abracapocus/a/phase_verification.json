@@ -1,0 +1,32 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "cmake-configure",
+        "command": [
+          "cmake",
+          "--preset",
+          "linux-release"
+        ]
+      },
+      {
+        "name": "cmake-build",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--config",
+          "Release"
+        ]
+      },
+      {
+        "name": "build-script-syntax",
+        "command": [
+          "bash",
+          "-n",
+          "scripts/build_all.sh"
+        ]
+      }
+    ]
+  }
+}

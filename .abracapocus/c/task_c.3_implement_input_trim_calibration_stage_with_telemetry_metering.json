@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "c.3",
+  "phase": "C",
+  "phase_id": "c",
+  "title": "Implement Input Trim calibration stage with telemetry metering",
+  "description": "Create Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp implementing the input trim / calibration stage at chain position [0].\n\nRequirements:\n- Class InputTrimStage with prepare(double sampleRate), reset(), and process/processBlock on a single mono channel; all state allocated in prepare().\n- Applies smoothed gain Gin = 10^(trim/20) where the input_trim value (in dB) is driven by a linear SmoothedValue (dB domain). Do not construct the SmoothedValue in the process loop.\n- Telemetry metering: track per-block peak and RMS signal levels, exposed via lock-free atomic getters (e.g. std::atomic<float>) readable by the message/GUI thread. Metering must not allocate, lock, or construct strings in process().\n- No heap allocation, locks, file IO, or GUI calls inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue and RMS helpers (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/InputTrimStage.h and Source/DSP/InputTrimStage.cpp exist and declare/define class InputTrimStage",
+    "InputTrimStage applies smoothed gain Gin = 10^(trim/20) using a linear SmoothedValue for input_trim in dB",
+    "Per-block peak and RMS metering is exposed via lock-free atomic getters and computed without allocation or locks in process()",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+    "cmake --build build --target ShredBoost compiles Source/DSP/InputTrimStage.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/InputTrimStage.h",
+    "Source/DSP/InputTrimStage.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "modify Source/DSP/TightFilter.h, Source/DSP/TightFilter.cpp, Source/DSP/MidVoicingFilter.h, or Source/DSP/MidVoicingFilter.cpp",
+    "allocate heap memory, take locks, or construct strings inside the audio process loop",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "InputTrimStage",
+    "prepare",
+    "reset",
+    "process",
+    "processBlock",
+    "setTrimDb",
+    "getPeakLevel",
+    "getRmsLevel"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "add std::atomic telemetry members for peak and RMS",
+      "choose internal RMS accumulation strategy"
+    ],
+    "forbidden": [
+      "expose metering through locks or non-atomic shared state",
+      "change the DSP processing chain order"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1500,
+  "verification_commands": []
+}

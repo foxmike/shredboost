@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "task_id": "a.4",
+  "phase": "A",
+  "phase_id": "a",
+  "title": "Create paste and run build script and gitignore",
+  "description": "Create scripts/build_all.sh (a paste-and-run build script) and .gitignore for the ShredBoost project.\n\nscripts/build_all.sh requirements:\n- Bash script with '#!/usr/bin/env bash' and 'set -euo pipefail'.\n- Configure and build using the linux-release preset: 'cmake --preset linux-release' then 'cmake --build build --config Release' (match the binary/build dir used by CMakePresets.json from a.3).\n- Echo clear progress messages and be safe to paste-and-run from the repository root.\n\n.gitignore requirements:\n- Ignore CMake build output directories (build/, cmake-build-*/), IDE files (.vscode/, .idea/), and OS cruft (.DS_Store). Do NOT ignore the JUCE/ submodule.\n\nBefore editing, inspect:\n- CMakePresets.json from a.3 for the exact preset name (linux-release) and build directory.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "scripts/build_all.sh and .gitignore exist",
+    "scripts/build_all.sh starts with a bash shebang and uses 'set -euo pipefail'",
+    "scripts/build_all.sh invokes 'cmake --preset linux-release' and 'cmake --build'",
+    "bash -n scripts/build_all.sh passes (syntax check)",
+    ".gitignore ignores build/ and does not ignore the JUCE/ submodule",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "scripts/build_all.sh",
+    ".gitignore"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "add gitignore rules that exclude the JUCE/ submodule",
+    "modify CMakeLists.txt or CMakePresets.json"
+  ],
+  "dependencies": [
+    "a.3"
+  ],
+  "task_timeout_seconds": 900,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

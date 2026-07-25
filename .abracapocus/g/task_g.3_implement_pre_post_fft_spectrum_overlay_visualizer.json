@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "g.3",
+  "phase": "G",
+  "phase_id": "g",
+  "title": "Implement pre post FFT spectrum overlay visualizer",
+  "description": "Create Source/UI/SpectrumOverlay.h and Source/UI/SpectrumOverlay.cpp. Implement a juce::Component subclass named SpectrumOverlay that draws an overlaid pre-drive and post-drive frequency spectrum using a 512-bin (juce::dsp::FFT order 9) Welch-windowed, time-averaged FFT display on a log-frequency / dB axis. The GUI thread pulls raw sample blocks from lock-free FIFOs that the processor fills on the audio thread, then computes the windowed FFT and running average on the message thread inside a Timer callback. It must NEVER lock, block, or call the audio thread; only the lock-free FIFO drain is allowed. Provide a public API so PluginEditor can wire the pre/post FIFOs, but do not include PluginProcessor here.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h (existing pre/post lock-free FIFO or AbstractFifo telemetry for spectrum capture; read only)\n- Source/PluginEditor.h (naming conventions and how editor passes telemetry handles)\n- JUCE/modules/juce_dsp/frequency/juce_FFT.h and JUCE/modules/juce_dsp/frequency/juce_Windowing.h (FFT and Welch/Hann window API; do not modify anything under JUCE/)",
+  "acceptance_criteria": [
+    "Source/UI/SpectrumOverlay.h and Source/UI/SpectrumOverlay.cpp exist and declare/define class SpectrumOverlay deriving from juce::Component",
+    "SpectrumOverlay computes a 512-bin (FFT order 9) Welch-windowed, time-averaged spectrum and draws overlaid pre and post curves",
+    "SpectrumOverlay drains sample data only through a lock-free FIFO and never locks or calls the audio thread",
+    "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+    "No file outside this task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/UI/SpectrumOverlay.h",
+    "Source/UI/SpectrumOverlay.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt (g.5 owns the CMake integration)",
+    "modify PluginEditor.h or PluginEditor.cpp",
+    "modify PluginProcessor.h or PluginProcessor.cpp",
+    "lock, block, or call the audio thread from GUI code",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "SpectrumOverlay"
+  ],
+  "dependencies": [],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

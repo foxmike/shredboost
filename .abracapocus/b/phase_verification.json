@@ -1,0 +1,34 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "cmake_configure",
+        "command": [
+          "cmake",
+          "--preset",
+          "linux"
+        ]
+      },
+      {
+        "name": "cmake_build_tests",
+        "command": [
+          "cmake",
+          "--build",
+          "--preset",
+          "linux",
+          "--target",
+          "ShredBoostTests"
+        ]
+      },
+      {
+        "name": "ctest",
+        "command": [
+          "ctest",
+          "--preset",
+          "linux",
+          "--output-on-failure"
+        ]
+      }
+    ]
+  }
+}

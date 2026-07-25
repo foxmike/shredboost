@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "task_id": "d.3",
+  "phase": "D",
+  "phase_id": "d",
+  "title": "Implement 1st order DC blocker and 2nd order post drive tone LPF",
+  "description": "Create Source/DSP/DcBlocker.h, Source/DSP/DcBlocker.cpp, Source/DSP/ToneFilter.h, and Source/DSP/ToneFilter.cpp.\n\nDcBlocker: 1st-order high-pass implementing y_dc(n) = x(n) - x(n-1) + R*y_dc(n-1) with R=0.9975. Keep per-channel x(n-1) and y_dc(n-1) state allocated in prepare. This stage is mandatory after the asymmetric waveshaper to remove the DC offset it introduces.\n\nToneFilter: 2nd-order RBJ low-pass filter with a cutoff adjustable in the 1-16 kHz range. Compute RBJ biquad coefficients from the smoothed cutoff frequency. Use a multiplicative juce::SmoothedValue for the tone cutoff frequency (strictly positive frequency parameter). Provide prepare, reset, setCutoff(float hz), and a process method.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction in the per-sample/processBlock path; instantiate juce::ScopedNoDenormals at the top of any block-processing method; allocate all state during prepare.\n\nBefore editing, inspect:\n- Source/DSP/TransientShaper.h (d.1) or another existing Source/DSP header for prepare/reset/process conventions and include-guard/namespace style.\n- CMakeLists.txt to understand Source/DSP compilation (do not modify it here).\n- JUCE/modules/juce_dsp for biquad/IIR coefficient helpers and juce::SmoothedValue (read only; do not modify JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/DcBlocker.h/.cpp implement y_dc(n) = x(n) - x(n-1) + R*y_dc(n-1) with R=0.9975 and per-channel state",
+    "Source/DSP/ToneFilter.h/.cpp implement a 2nd-order RBJ low-pass with a 1-16 kHz cutoff smoothed multiplicatively",
+    "Both classes expose prepare, reset, and a process method following the established Source/DSP conventions",
+    "juce::ScopedNoDenormals is instantiated at the top of the block-processing methods and no heap allocation occurs in the per-sample path",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/DcBlocker.h",
+    "Source/DSP/DcBlocker.cpp",
+    "Source/DSP/ToneFilter.h",
+    "Source/DSP/ToneFilter.cpp"
+  ],
+  "forbidden_changes": [
+    "modify CMakeLists.txt",
+    "modify any file under JUCE/",
+    "modify other Source/DSP module files",
+    "change the DC blocker coefficient R=0.9975",
+    "perform heap allocation, locking, or string construction inside the per-sample processing path",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "DcBlocker",
+    "ToneFilter"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "add private RBJ coefficient computation helper for ToneFilter",
+      "use juce::SmoothedValue with multiplicative smoothing for the tone cutoff"
+    ],
+    "forbidden": [
+      "introduce a new DSP framework",
+      "combine the two filters into a single class"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

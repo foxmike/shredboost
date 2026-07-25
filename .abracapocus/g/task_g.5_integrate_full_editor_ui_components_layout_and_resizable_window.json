@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "g.5",
+  "phase": "G",
+  "phase_id": "g",
+  "title": "Integrate full editor UI components layout and resizable window",
+  "description": "Wire all UI components into the plugin editor and register the new UI sources in the build. Update Source/PluginEditor.h and Source/PluginEditor.cpp so the editor: instantiates and applies ShredLookAndFeel; creates and lays out TransferCurveScope, SpectrumOverlay, and LevelMeters plus the parameter rotaries; connects every parameter control to the APVTS via SliderAttachment/ButtonAttachment/ComboBoxAttachment; adds a gain-matched bypass button bound to the bypass parameter; and makes the window resizable (setResizable with a constrainer / sensible min/max, laying out in resized()). Pass the processor's atomic/FIFO telemetry handles into the scope, spectrum, and meter components. Update CMakeLists.txt to add all Source/UI/*.cpp files (ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, LevelMeters) to the target sources. GUI code must only read atomic telemetry / lock-free FIFOs; it must never lock or block the audio thread.\n\nBefore editing, inspect:\n- Source/UI/ShredLookAndFeel.h, Source/UI/TransferCurveScope.h, Source/UI/SpectrumOverlay.h, Source/UI/LevelMeters.h (public APIs produced by g.1-g.4)\n- Source/PluginProcessor.h (APVTS accessor, parameter IDs, and telemetry handles to bind)\n- Source/PluginEditor.h and Source/PluginEditor.cpp (current editor structure)\n- CMakeLists.txt (existing target sources block and Source/UI file list)",
+  "acceptance_criteria": [
+    "Source/PluginEditor.cpp instantiates ShredLookAndFeel, TransferCurveScope, SpectrumOverlay, and LevelMeters and lays them out in resized()",
+    "Every parameter control is connected to the APVTS via an attachment and a gain-matched bypass button is bound to the bypass parameter",
+    "The editor window is resizable via setResizable with a bounded constrainer",
+    "CMakeLists.txt lists Source/UI/ShredLookAndFeel.cpp, Source/UI/TransferCurveScope.cpp, Source/UI/SpectrumOverlay.cpp, and Source/UI/LevelMeters.cpp in the target sources",
+    "cmake -S . -B build succeeds and cmake --build build --target ShredBoost_VST3 succeeds",
+    "No file outside this task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/PluginEditor.h",
+    "Source/PluginEditor.cpp",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify Source/PluginProcessor.h or Source/PluginProcessor.cpp",
+    "modify the Source/UI component files created in g.1-g.4",
+    "lock, block, or call the audio thread from GUI code",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "ShredBoostAudioProcessorEditor",
+    "resized",
+    "ShredLookAndFeel",
+    "TransferCurveScope",
+    "SpectrumOverlay",
+    "LevelMeters"
+  ],
+  "dependencies": [
+    "g.1",
+    "g.2",
+    "g.3",
+    "g.4"
+  ],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

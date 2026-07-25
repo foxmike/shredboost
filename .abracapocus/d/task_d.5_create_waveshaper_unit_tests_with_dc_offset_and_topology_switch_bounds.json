@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "d.5",
+  "phase": "D",
+  "phase_id": "d",
+  "title": "Create waveshaper unit tests with DC offset and topology switch bounds",
+  "description": "Create tests/WaveshaperTests.cpp using the juce::UnitTest console runner (no third-party testing frameworks) and register the test target in CMakeLists.txt so it runs via CTest.\n\nTests to implement against the phase-d DSP:\n- DC offset: drive a signal through the Asymmetric SD-1 clipper (NonlinearClipper mode 2) followed by the DcBlocker and assert the output mean is approximately 0 (|mean| below a small epsilon), proving the DC blocker removes the offset the asymmetric waveshaper introduces.\n- Click-free crossfade: switch NonlinearClipper voicing_mode during processing and assert the sample-to-sample difference during the 15 ms crossfade window stays within a bounded threshold (no step discontinuity), i.e. the crossfade is click-free.\n\nWire the test into CMakeLists.txt: add a juce::UnitTest-based console runner executable (or extend the existing UnitTest runner target) that includes tests/WaveshaperTests.cpp and register it with add_test / CTest. Follow the existing test target pattern already in CMakeLists.txt from earlier phases.\n\nBinding rule: testing uses the juce::UnitTest console runner executed via CTest; do not add GoogleTest, Catch2, or any other third-party test framework. Explicit cmake/ctest verification commands are required.\n\nBefore editing, inspect:\n- CMakeLists.txt for the existing juce::UnitTest runner target, how test sources are added, and the add_test/enable_testing/CTest registration pattern.\n- tests/ for existing UnitTest .cpp files to match the JUCE_UNIT_TEST registration style.\n- Source/DSP/NonlinearClipper.h, Source/DSP/DcBlocker.h, and Source/DSP/ShredBoostEngine.h for the interfaces under test.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "tests/WaveshaperTests.cpp exists and defines juce::UnitTest cases (no third-party test framework used)",
+    "A test drives Asymmetric SD-1 clipping through the DcBlocker and asserts output mean is approximately 0 under asymmetric drive",
+    "A test switches voicing_mode and asserts sample-to-sample differences during the 15 ms crossfade stay within a click-free bound",
+    "CMakeLists.txt registers the WaveshaperTests source into the juce::UnitTest console runner target and via CTest add_test",
+    "cmake --build build --target ShredBoost_Tests succeeds and ctest --test-dir build -R Waveshaper passes",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "tests/WaveshaperTests.cpp",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify any file under JUCE/",
+    "modify Source/DSP module implementation files",
+    "add GoogleTest, Catch2, or any third-party testing framework",
+    "change the DSP processing chain order or stage constants"
+  ],
+  "dependencies": [
+    "d.4"
+  ],
+  "task_timeout_seconds": 1500,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

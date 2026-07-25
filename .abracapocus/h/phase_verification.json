@@ -1,0 +1,30 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "validate_script_syntax",
+        "command": [
+          "bash",
+          "-n",
+          "scripts/validate_plugin.sh"
+        ]
+      },
+      {
+        "name": "presets_wellformed",
+        "command": [
+          "xmllint",
+          "--noout",
+          "Resources/Presets/FactoryPresets.xml"
+        ]
+      },
+      {
+        "name": "release_doc_exists",
+        "command": [
+          "test",
+          "-f",
+          "docs/verification/phase_h_release.md"
+        ]
+      }
+    ]
+  }
+}

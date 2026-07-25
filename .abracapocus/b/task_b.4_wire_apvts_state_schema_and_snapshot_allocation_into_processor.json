@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "b.4",
+  "phase": "B",
+  "phase_id": "b",
+  "title": "Wire APVTS state schema and snapshot allocation into processor",
+  "description": "Modify Source/PluginProcessor.h and Source/PluginProcessor.cpp to own the APVTS and snapshot infrastructure. Add a juce::AudioProcessorValueTreeState member constructed with createParameterLayout() from Source/Parameters/ParameterLayout.h. Add a ParameterSnapshot member and call its prepare(sampleRate) inside prepareToPlay so all smoothing buffers are allocated off the real-time path. Implement getStateInformation/setStateInformation using the APVTS ValueTree XML serialization, embedding the schema version constant (kParameterSchemaVersion) so future migrations can detect the version. Do NOT expose internal DSP states through the APVTS. Keep processBlock changes minimal (do not add DSP here); ScopedNoDenormals/allocation-free rules still apply to any code touched. If PluginProcessor.h/.cpp do not yet exist as full JUCE processors, create the minimal AudioProcessor skeleton needed to own the APVTS and state serialization.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterLayout.h (createParameterLayout signature)\n- Source/Parameters/ParameterSnapshot.h (prepare and snapshot API)\n- Source/Parameters/ParameterIDs.h (schema version constant)\n- CMakeLists.txt (JUCE modules and target sources)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/PluginProcessor.h and Source/PluginProcessor.cpp own a juce::AudioProcessorValueTreeState constructed from createParameterLayout()",
+    "prepareToPlay calls ParameterSnapshot::prepare so smoothing state is allocated off the real-time path",
+    "getStateInformation and setStateInformation serialize/restore the APVTS as XML and embed the schema version constant",
+    "No internal DSP state is registered with the APVTS and processBlock adds no heap allocation, lock, or string construction",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/PluginProcessor.h",
+    "Source/PluginProcessor.cpp"
+  ],
+  "forbidden_changes": [
+    "modify Source/Parameters/ParameterIDs.h",
+    "modify Source/Parameters/ParameterLayout.h or ParameterLayout.cpp",
+    "modify Source/Parameters/ParameterSnapshot.h or ParameterSnapshot.cpp",
+    "modify CMakeLists.txt",
+    "modify anything under JUCE/",
+    "expose internal DSP states through the APVTS",
+    "add heap allocation, locks, or string construction inside processBlock"
+  ],
+  "dependencies": [
+    "b.3"
+  ],
+  "task_timeout_seconds": 1500,
+  "verification_commands": []
+}

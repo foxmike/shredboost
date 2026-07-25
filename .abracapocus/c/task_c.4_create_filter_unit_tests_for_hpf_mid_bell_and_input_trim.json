@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "c.4",
+  "phase": "C",
+  "phase_id": "c",
+  "title": "Create filter unit tests for HPF mid bell and input trim",
+  "description": "Create tests/FilterTests.cpp using the juce::UnitTest console runner (no third-party test frameworks) and register the new DSP sources plus the test file in CMakeLists.txt so the test target builds and runs under CTest.\n\nRequirements:\n- tests/FilterTests.cpp defines juce::UnitTest-derived cases that verify:\n  * TightFilter frequency response: high-pass attenuation below tight_cut and unity above; the Q=1.2 Precision Tight mode shows the ~+1.8 dB resonant overshoot at cutoff while Q=0.707 does not.\n  * MidVoicingFilter mid-bell peaking curve: gain boost peaks near mid_freq with fixed Q_m=0.9, up to +9 dB.\n  * InputTrimStage attenuation: measured output gain matches Gin = 10^(trim/20) within tolerance for representative trim values.\n- Because acceptance asserts numeric response/gain matching, the tests must measure actual filter output (e.g. via sine probes / impulse response magnitude) and assert against the analytic expected values, not merely compile.\n- Update CMakeLists.txt to: add Source/DSP/TightFilter.cpp, Source/DSP/MidVoicingFilter.cpp, and Source/DSP/InputTrimStage.cpp to the appropriate targets, and add/extend the ShredBoostTests console-runner target that compiles tests/FilterTests.cpp and is registered with add_test/CTest.\n- Do not modify the DSP source files themselves in this task.\n\nBefore editing, inspect:\n- Source/DSP/TightFilter.h, Source/DSP/MidVoicingFilter.h, Source/DSP/InputTrimStage.h (public APIs produced by c.1, c.2, c.3)\n- CMakeLists.txt (existing target definitions and any test target scaffolding from earlier phases)\n- JUCE/modules/juce_core for juce::UnitTest and juce::UnitTestRunner (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "tests/FilterTests.cpp exists and defines juce::UnitTest cases for TightFilter, MidVoicingFilter, and InputTrimStage using only the juce::UnitTest console runner",
+    "The tests measure actual filter/stage output and assert TightFilter's ~+1.8 dB Q=1.2 overshoot, MidVoicingFilter's +9 dB mid-bell peak at mid_freq, and InputTrimStage output matching Gin = 10^(trim/20) within tolerance",
+    "CMakeLists.txt registers Source/DSP/TightFilter.cpp, Source/DSP/MidVoicingFilter.cpp, and Source/DSP/InputTrimStage.cpp and defines/extends the ShredBoostTests target with add_test/CTest",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+    "cmake --build build --target ShredBoostTests builds the test runner without errors",
+    "ctest --test-dir build -R FilterTests --output-on-failure passes",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "tests/FilterTests.cpp",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify Source/DSP/TightFilter.h, Source/DSP/TightFilter.cpp, Source/DSP/MidVoicingFilter.h, Source/DSP/MidVoicingFilter.cpp, Source/DSP/InputTrimStage.h, or Source/DSP/InputTrimStage.cpp",
+    "add third-party testing frameworks",
+    "change product identity metadata (name, vendor, codes, bundle id, LV2 URI)"
+  ],
+  "allowed_symbols": [
+    "FilterTests",
+    "TightFilterTest",
+    "MidVoicingFilterTest",
+    "InputTrimStageTest",
+    "ShredBoostTests"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "choose sine-probe or impulse-response measurement approach for assertions",
+      "extend an existing test target or add a dedicated ShredBoostTests target"
+    ],
+    "forbidden": [
+      "introduce Catch2, GoogleTest, or any non-JUCE test framework",
+      "modify the DSP implementation files to make tests pass"
+    ]
+  },
+  "dependencies": [
+    "c.1",
+    "c.2",
+    "c.3"
+  ],
+  "task_timeout_seconds": 1500,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

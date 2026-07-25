@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "d.2",
+  "phase": "D",
+  "phase_id": "d",
+  "title": "Implement multi topology non linear clipping engine with equal power topology crossfade",
+  "description": "Create Source/DSP/NonlinearClipper.h and Source/DSP/NonlinearClipper.cpp implementing a 4-mode nonlinear clipper with click-free topology switching.\n\nVoicing modes:\n- (0) Yng-Grey: arctan(v) + gamma*v^2*exp(-|v|) with gamma=0.15\n- (1) Precision Tight: symmetric tanh(v)\n- (2) Asymmetric SD-1: piecewise tanh with k_pos=1.0 for v>=0 and k_neg=1.8 for v<0\n- (3) Clean Attack Boost: clipping bypassed (unity passthrough)\n\nOn voicing_mode change, perform a 15 ms equal-power crossfade between the old and new topology outputs to avoid step discontinuities: run both waveshapers during the fade window and mix with equal-power (cos/sin) gains. Do not switch topology instantaneously.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction in the per-sample/processBlock path; instantiate juce::ScopedNoDenormals at the top of any block-processing method; allocate all state during prepare. Provide a class NonlinearClipper with prepare(double sampleRate, int maxBlockSize), reset(), setVoicingMode(int), and a process method.\n\nBefore editing, inspect:\n- Source/DSP/TransientShaper.h (from d.1) for the established prepare/reset/process signature conventions.\n- CMakeLists.txt to understand how Source/DSP files are compiled (do not modify it here).\n- JUCE/modules/juce_dsp for any helper types you use (read only; do not modify JUCE/).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/NonlinearClipper.h and Source/DSP/NonlinearClipper.cpp exist and declare/define a NonlinearClipper class with setVoicingMode, prepare, reset, and a process method",
+    "All four voicing modes are implemented: Yng-Grey (gamma=0.15), Precision Tight (tanh), Asymmetric SD-1 (k_pos=1.0, k_neg=1.8), Clean Attack Boost (bypass)",
+    "Voicing mode changes trigger a 15 ms equal-power crossfade computed with complementary cos/sin gains, running both topologies during the fade",
+    "juce::ScopedNoDenormals is instantiated at the top of the block-processing method and no heap allocation occurs in the per-sample path",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/NonlinearClipper.h",
+    "Source/DSP/NonlinearClipper.cpp"
+  ],
+  "forbidden_changes": [
+    "modify CMakeLists.txt",
+    "modify any file under JUCE/",
+    "modify other Source/DSP module files",
+    "switch voicing topology without the 15 ms equal-power crossfade",
+    "perform heap allocation, locking, or string construction inside the per-sample processing path",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "NonlinearClipper"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "add private per-mode waveshaping helper functions",
+      "store crossfade state (remaining samples, source/target mode) allocated in prepare"
+    ],
+    "forbidden": [
+      "introduce a new DSP framework",
+      "change the documented gamma/k_pos/k_neg constants or fade length"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

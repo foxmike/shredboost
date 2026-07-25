@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "h.2",
+  "phase": "H",
+  "phase_id": "h",
+  "title": "Create factory presets spanning thrash rhythm and singing lead voicings",
+  "description": "Create Resources/Presets/FactoryPresets.xml containing four factory presets for ShredBoost 1.0 and register the presets resource in CMakeLists.txt so it is bundled with the plugin.\n\nThe four presets, each a distinct plugin state, must cover:\n1. \"Thrash Chug\" \u2014 aggressive high-gain rhythm: tight low end (higher tight_cut / Precision Tight HPF), strong drive, pronounced pick_attack, mid voicing set for chug articulation.\n2. \"Yngwie Lead\" \u2014 singing fast lead: Yng-Grey clip voicing, smoother mids, moderate tight_cut, level-appropriate for lead.\n3. \"SD-1 Rhythm\" \u2014 SD-1 clip voicing mid-hump rhythm tone.\n4. \"Clean Tight Attack\" \u2014 Clean voicing, low drive, emphasizing the transient pick-attack shaper and low-end tightening.\n\nEach preset must set the plugin's named parameters (input_trim, tight_cut, mid_freq, mid_amount, drive, pick_attack, tone, level, voicing_mode, and oversampling if state-serialized) to values consistent with the parameter ranges and IDs defined in the existing parameter layout. Use valid, well-formed XML matching the plugin's state serialization format (juce::ValueTree/AudioProcessorValueTreeState style).\n\nThen edit CMakeLists.txt to register Resources/Presets/FactoryPresets.xml as a bundled binary/data resource for the ShredBoost target, following the existing resource-embedding pattern in that file.\n\nBefore editing, inspect:\n- The parameter layout source (ParameterLayout.* / ParameterIDs) for exact parameter IDs, ranges, and voicing_mode enum values\n- PluginProcessor state get/setStateInformation to match the serialized XML tag/attribute structure\n- CMakeLists.txt to follow the existing resource/binary-data embedding pattern",
+  "acceptance_criteria": [
+    "Resources/Presets/FactoryPresets.xml exists and is well-formed XML",
+    "xmllint --noout Resources/Presets/FactoryPresets.xml passes (or equivalent well-formedness check)",
+    "FactoryPresets.xml contains four presets named Thrash Chug, Yngwie Lead, SD-1 Rhythm, and Clean Tight Attack",
+    "Each preset sets the plugin's named parameters using IDs consistent with the existing parameter layout",
+    "CMakeLists.txt registers Resources/Presets/FactoryPresets.xml as a bundled resource for the ShredBoost target",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Resources/Presets/FactoryPresets.xml",
+    "CMakeLists.txt"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "change parameter IDs or ranges in the parameter layout source",
+    "modify PluginProcessor or PluginEditor source files",
+    "add new third-party dependencies",
+    "alter unrelated CMake targets or the DSP processing chain"
+  ],
+  "dependencies": [
+    "h.1"
+  ],
+  "task_timeout_seconds": 900,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}

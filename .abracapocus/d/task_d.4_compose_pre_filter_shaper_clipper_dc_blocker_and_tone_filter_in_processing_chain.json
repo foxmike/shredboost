@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "task_id": "d.4",
+  "phase": "D",
+  "phase_id": "d",
+  "title": "Compose pre filter shaper clipper DC blocker and tone filter in processing chain",
+  "description": "Create Source/DSP/ShredBoostEngine.h and Source/DSP/ShredBoostEngine.cpp composing the phase-d DSP stages into the binding processing chain order. This engine owns and sequences: the Transient Pick-Attack Shaper (d.1, TransientShaper), the Nonlinear Clipper (d.2, NonlinearClipper), the DC Blocker (d.3, DcBlocker), and the post-drive Tone LPF (d.3, ToneFilter), invoked in binding chain order [3] TransientShaper -> [5] NonlinearClipper -> [7] DcBlocker -> [8] ToneFilter. Preserve slots for the earlier pre-filter/oversampling stages and later output stages so this composition drops into the full chain without reordering.\n\nProvide prepare(double sampleRate, int maxBlockSize), reset(), setters that forward smoothed parameters (pick_attack, voicing_mode, tone) to the owned stages, and a process method that runs the owned stages in order on a juce::dsp::AudioBlock or float buffers.\n\nBinding real-time rules: no heap allocation, locks, file IO, or string construction in processBlock; instantiate juce::ScopedNoDenormals at the top of the process method; allocate all buffers/state during prepare and forward prepare to every owned stage.\n\nBefore editing, inspect:\n- Source/DSP/TransientShaper.h (d.1), Source/DSP/NonlinearClipper.h (d.2), Source/DSP/DcBlocker.h and Source/DSP/ToneFilter.h (d.3) for the exact prepare/reset/process and setter signatures to call.\n- CMakeLists.txt for how Source/DSP files are compiled (do not modify it here).\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/ShredBoostEngine.h/.cpp exist and define a ShredBoostEngine class owning TransientShaper, NonlinearClipper, DcBlocker, and ToneFilter members",
+    "The process method invokes the owned stages in binding chain order: TransientShaper -> NonlinearClipper -> DcBlocker -> ToneFilter",
+    "prepare and reset are forwarded to every owned stage and juce::ScopedNoDenormals is instantiated at the top of the process method",
+    "No heap allocation occurs in the process path; all state is allocated in prepare",
+    "No file outside allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/ShredBoostEngine.h",
+    "Source/DSP/ShredBoostEngine.cpp"
+  ],
+  "forbidden_changes": [
+    "modify CMakeLists.txt",
+    "modify any file under JUCE/",
+    "modify the TransientShaper, NonlinearClipper, DcBlocker, or ToneFilter source files",
+    "reorder the binding DSP processing chain",
+    "perform heap allocation, locking, or string construction inside the process path"
+  ],
+  "allowed_symbols": [
+    "ShredBoostEngine"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "compose the existing stage classes as members",
+      "add private parameter-forwarding helpers"
+    ],
+    "forbidden": [
+      "reimplement DSP already provided by the owned stage classes",
+      "change any owned stage's public interface"
+    ]
+  },
+  "dependencies": [
+    "d.1",
+    "d.2",
+    "d.3"
+  ],
+  "task_timeout_seconds": 1500,
+  "verification_commands": []
+}

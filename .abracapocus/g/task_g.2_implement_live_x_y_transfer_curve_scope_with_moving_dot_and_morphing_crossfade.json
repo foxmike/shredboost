@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "g.2",
+  "phase": "G",
+  "phase_id": "g",
+  "title": "Implement live X Y transfer curve scope with moving dot and morphing crossfade",
+  "description": "Create Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp. Implement a juce::Component subclass named TransferCurveScope that renders a live X-Y transfer curve plot y = f(v) across the input amplitude domain, plus a moving dot indicating the instantaneous input amplitude, and a smooth morphing crossfade of the curve during voicing-mode changes. The component is a Timer-driven repaint consumer only: it reads instantaneous input amplitude and the current/target transfer-curve state through atomic values or a lock-free FIFO snapshot that the processor exposes. It must NEVER lock, block, or call the audio thread; the GUI only reads atomic telemetry. Provide a public API (e.g. setCurvePoints/pushInputSample or a snapshot-pull method) so PluginEditor can feed it telemetry, but do not include PluginProcessor here \u2014 depend only on plain atomics/parameters passed in.\n\nBefore editing, inspect:\n- Source/PluginEditor.h (namespace/class naming, how editor holds references)\n- Source/PluginProcessor.h (what atomic telemetry / lock-free FIFO the DSP chain already exposes for the transfer curve and instantaneous amplitude; read only)\n- JUCE/modules/juce_gui_basics/components/juce_Component.h and juce_events Timer API (do not modify anything under JUCE/)",
+  "acceptance_criteria": [
+    "Source/UI/TransferCurveScope.h and Source/UI/TransferCurveScope.cpp exist and declare/define class TransferCurveScope deriving from juce::Component",
+    "TransferCurveScope renders a transfer curve, a moving input-amplitude dot, and crossfades between voicing curves in paint()",
+    "TransferCurveScope reads telemetry only through atomics or a lock-free snapshot and never locks or calls the audio thread",
+    "cmake --build build --target ShredBoost_VST3 succeeds after adding these files to the target sources",
+    "No file outside this task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "antigravity_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/UI/TransferCurveScope.h",
+    "Source/UI/TransferCurveScope.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt (g.5 owns the CMake integration)",
+    "modify PluginEditor.h or PluginEditor.cpp",
+    "modify PluginProcessor.h or PluginProcessor.cpp",
+    "lock, block, or call the audio thread from GUI code",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "TransferCurveScope"
+  ],
+  "dependencies": [],
+  "task_timeout_seconds": 1200,
+  "verification_commands": []
+}

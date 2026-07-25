@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "c.2",
+  "phase": "C",
+  "phase_id": "c",
+  "title": "Implement pre clip midrange peaking bell voicing filter",
+  "description": "Create Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp implementing a 2nd-order RBJ peaking (bell) filter applied before the non-linear clip stage.\n\nRequirements:\n- Class MidVoicingFilter with prepare(double sampleRate), reset(), and process/processBlock methods on a single mono channel; buffers/state allocated only in prepare().\n- Center frequency mid_freq constrained to 500-1200 Hz, driven by a multiplicative SmoothedValue (strictly-positive frequency domain).\n- Gain mid_amount up to +9 dB boost, driven by a linear SmoothedValue (dB domain). Fixed Q_m = 0.9.\n- RBJ peaking-bell biquad coefficients recomputed on sample-rate change and on smoothed parameter movement; no allocation in process.\n- Denormal-safe recursive state (flush tiny values / denormal-safe accumulation).\n- No heap allocation, locks, file IO, or string construction inside process().\n\nBefore editing, inspect:\n- Source/DSP/ (existing DSP module conventions and namespace from phases a/b)\n- CMakeLists.txt (how DSP sources are registered; do NOT modify it in this task)\n- JUCE/modules/juce_audio_basics for juce::SmoothedValue (read only; never modify anything under JUCE/)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in allowed_write_paths.",
+  "acceptance_criteria": [
+    "Source/DSP/MidVoicingFilter.h and Source/DSP/MidVoicingFilter.cpp exist and declare/define class MidVoicingFilter",
+    "MidVoicingFilter uses a multiplicative SmoothedValue for mid_freq (500-1200 Hz) and a linear SmoothedValue for mid_amount (dB, up to +9 dB)",
+    "The filter is a 2nd-order RBJ peaking bell with fixed Q_m = 0.9",
+    "RBJ coefficients are recomputed on sample-rate change and denormals are flushed in the recursive state",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release configures without error",
+    "cmake --build build --target ShredBoost compiles Source/DSP/MidVoicingFilter.cpp without errors",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "codex_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "Source/DSP/MidVoicingFilter.h",
+    "Source/DSP/MidVoicingFilter.cpp"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify CMakeLists.txt",
+    "modify Source/DSP/TightFilter.h, Source/DSP/TightFilter.cpp, Source/DSP/InputTrimStage.h, or Source/DSP/InputTrimStage.cpp",
+    "allocate heap memory, take locks, or construct strings inside the audio process loop",
+    "add new third-party dependencies"
+  ],
+  "allowed_symbols": [
+    "MidVoicingFilter",
+    "prepare",
+    "reset",
+    "process",
+    "processBlock",
+    "setCenterFrequency",
+    "setGainDb",
+    "updateCoefficients"
+  ],
+  "decision_budget": {
+    "allowed": [
+      "add private biquad state and coefficient fields",
+      "choose internal helper for RBJ peaking coefficient math"
+    ],
+    "forbidden": [
+      "make Q_m user-adjustable",
+      "change the DSP processing chain order",
+      "introduce a new filter framework"
+    ]
+  },
+  "dependencies": [],
+  "task_timeout_seconds": 1800,
+  "verification_commands": []
+}

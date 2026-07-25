@@ -1,0 +1,48 @@
+{
+  "verification": {
+    "checks": [
+      {
+        "name": "cmake_configure",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build",
+          "-DCMAKE_BUILD_TYPE=Release"
+        ]
+      },
+      {
+        "name": "cmake_build_plugin",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost"
+        ]
+      },
+      {
+        "name": "cmake_build_tests",
+        "command": [
+          "cmake",
+          "--build",
+          "build",
+          "--target",
+          "ShredBoost_Tests"
+        ]
+      },
+      {
+        "name": "ctest_waveshaper",
+        "command": [
+          "ctest",
+          "--test-dir",
+          "build",
+          "-R",
+          "Waveshaper",
+          "--output-on-failure"
+        ]
+      }
+    ]
+  }
+}

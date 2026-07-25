@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "h.3",
+  "phase": "H",
+  "phase_id": "h",
+  "title": "Write phase h release verification document",
+  "description": "Execute scripts/validate_plugin.sh (full clean build, CTest run, and artifact existence checks) and record the real, actually-executed results in docs/verification/phase_h_release.md.\n\nThe document MUST record real executed test results \u2014 do not fabricate or template values. Run the validation script, capture the true output, and write a verification report containing:\n1. The exact command(s) run (scripts/validate_plugin.sh and any cmake/ctest invocations).\n2. The build result (success/failure) with relevant output excerpts.\n3. The CTest results: number of tests run, passed, and failed, with the CTest summary line.\n4. The binary artifact existence check results listing the VST3, LV2, and Standalone artifacts and whether each was found.\n5. Confirmation that the four factory presets file (Resources/Presets/FactoryPresets.xml) is present and bundled.\n6. An overall PASS/FAIL conclusion for ShredBoost 1.0 phase h release validation, with the date of execution.\n\nBefore editing, inspect:\n- scripts/validate_plugin.sh (the script to execute; created in h.1)\n- Resources/Presets/FactoryPresets.xml and CMakeLists.txt registration (from h.2)\n- docs/verification/ prior phase documents to match the report format and heading style",
+  "acceptance_criteria": [
+    "docs/verification/phase_h_release.md exists",
+    "The document records the exact validation command(s) executed",
+    "The document reports real CTest results including tests run/passed/failed counts",
+    "The document reports the VST3, LV2, and Standalone artifact existence check outcomes",
+    "The document states an overall PASS/FAIL conclusion with the execution date",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "verification_profile": "focused",
+  "allowed_write_paths": [
+    "docs/verification/phase_h_release.md"
+  ],
+  "forbidden_changes": [
+    "modify anything under JUCE/",
+    "modify scripts/validate_plugin.sh, CMakeLists.txt, or source files",
+    "fabricate or template test results instead of recording real executed output"
+  ],
+  "dependencies": [
+    "h.2"
+  ],
+  "task_timeout_seconds": 900,
+  "model": "openrouter/z-ai/glm-5.2",
+  "verification_commands": []
+}
