@@ -9,9 +9,9 @@
       "task_id": "d.5",
       "title": "Create waveshaper unit tests with DC offset and topology switch bounds",
       "phase": "D",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:52:19.090073",
       "notes": ""
     }
   ],
@@ -195,6 +195,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:48:48.847607"
+    },
+    {
+      "run_id": "4370e5c1-6fe0-4319-a649-0064577f66ec",
+      "task_id": "d.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:52:19.090234"
     }
   ],
   "operator_overrides": {},
