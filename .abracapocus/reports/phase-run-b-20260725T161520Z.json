@@ -1,0 +1,131 @@
+{
+  "run_at": "2026-07-25T16:15:20.449597",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b",
+  "status": "passed",
+  "counts": {
+    "passed": 5,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "b.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.1_create_frozen_parameter_id_taxonomy_in_parameterids_header_with_schema_version.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "1dc81047-34df-4a32-a87b-2b4a6f182c57",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "b.1:Review complete"
+    },
+    {
+      "task_id": "b.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.2_create_parameter_layout_with_apvts_definitions_for_all_shredboost_parameters.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "191db605-540d-466c-990b-7d9b3a6b414d",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "b.2:Review complete"
+    },
+    {
+      "task_id": "b.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.3_create_domain_correct_smoothed_parameter_snapshot_engine.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "c84c97df-1f61-48a8-aee7-09d4273ee56a",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "b.3:Review complete"
+    },
+    {
+      "task_id": "b.4",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.4_wire_apvts_state_schema_and_snapshot_allocation_into_processor.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "bca7772e-7cfc-4b1d-b71b-bc6e2c6062c2",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "b.4:Review complete"
+    },
+    {
+      "task_id": "b.5",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/b/task_b.5_create_unit_test_runner_and_parameter_state_tests.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "75422f09-6006-4766-a9e4-f498821f40ce",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "b.5:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "cmake_configure",
+        "status": "failed",
+        "detail": "CMake Error: Could not read presets from /home/mike/dev/mike/abracapocus/python/abracapocus_2:\nFile not found: /home/mike/dev/mike/abracapocus/python/abracapocus_2/CMakePresets.json",
+        "command": [
+          "cmake",
+          "--preset",
+          "linux"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "cmake_build_tests",
+        "status": "failed",
+        "detail": "CMake Error: Could not read presets from /home/mike/dev/mike/abracapocus/python/abracapocus_2:\nFile not found: /home/mike/dev/mike/abracapocus/python/abracapocus_2/CMakePresets.json",
+        "command": [
+          "cmake",
+          "--build",
+          "--preset",
+          "linux",
+          "--target",
+          "ShredBoostTests"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "ctest",
+        "status": "failed",
+        "detail": "CMake Error: Could not read presets from /home/mike/dev/mike/abracapocus/python/abracapocus_2:\nFile not found: /home/mike/dev/mike/abracapocus/python/abracapocus_2/CMakePresets.json",
+        "command": [
+          "ctest",
+          "--preset",
+          "linux",
+          "--output-on-failure"
+        ],
+        "exit_code": 1
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}
