@@ -42,14 +42,29 @@ target_sources(ShredBoost
     PRIVATE
         Source/PluginProcessor.cpp
         Source/PluginEditor.cpp
+        Source/Parameters/ParameterLayout.cpp
+        Source/Parameters/ParameterSnapshot.cpp
         Source/DSP/TightFilter.cpp
         Source/DSP/MidVoicingFilter.cpp
         Source/DSP/InputTrimStage.cpp
+        Source/DSP/ShredBoostEngine.cpp
+        Source/DSP/OversamplingEngine.cpp
+        Source/DSP/AutoGainBypass.cpp
+        Source/DSP/DcBlocker.cpp
+        Source/DSP/NonlinearClipper.cpp
+        Source/DSP/ToneFilter.cpp
+        Source/DSP/TransientShaper.cpp
+)
+
+target_compile_definitions(ShredBoost PRIVATE
+    JUCE_WEB_BROWSER=0
+    JUCE_USE_CURL=0
 )
 
 target_link_libraries(ShredBoost
     PRIVATE
         juce::juce_audio_utils
+        juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
@@ -64,10 +79,21 @@ enable_testing()
 add_executable(ShredBoostUnitTests
     tests/TestMain.cpp
     tests/ParameterTests.cpp
+    tests/ProcessBlockRealtimeTests.cpp
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
     Source/Parameters/ParameterLayout.cpp
     Source/Parameters/ParameterSnapshot.cpp
+    Source/DSP/TightFilter.cpp
+    Source/DSP/MidVoicingFilter.cpp
+    Source/DSP/InputTrimStage.cpp
+    Source/DSP/ShredBoostEngine.cpp
+    Source/DSP/OversamplingEngine.cpp
+    Source/DSP/AutoGainBypass.cpp
+    Source/DSP/DcBlocker.cpp
+    Source/DSP/NonlinearClipper.cpp
+    Source/DSP/ToneFilter.cpp
+    Source/DSP/TransientShaper.cpp
 )
 
 target_compile_definitions(ShredBoostUnitTests PRIVATE
@@ -83,6 +109,7 @@ target_link_libraries(ShredBoostUnitTests PRIVATE
     juce::juce_audio_utils
     juce::juce_audio_processors
     juce::juce_audio_basics
+    juce::juce_dsp
     juce::juce_gui_basics
     juce::juce_data_structures
     juce::juce_events
@@ -92,6 +119,7 @@ target_link_libraries(ShredBoostUnitTests PRIVATE
 )
 
 add_test(NAME ShredBoostParameterTests COMMAND ShredBoostUnitTests)
+add_test(NAME ProcessBlockRealtimeTests COMMAND ShredBoostUnitTests)
 
 # -----------------------------------------------------------------------------
 # DSP filter/stage unit tests (juce::UnitTest console runner, no third-party

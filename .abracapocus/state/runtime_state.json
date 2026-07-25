@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-f.1",
+  "plan_version": "task-f.2",
   "active_phase": "F",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "f.1",
-      "title": "Integrate complete DSP signal chain into PluginProcessor processBlock",
+      "task_id": "f.2",
+      "title": "Create real time memory allocation and denormal audit tests",
       "phase": "F",
-      "status": "completed",
-      "backend": "codex_cli",
-      "last_run": "2026-07-25T19:45:37.638084",
+      "status": "planned",
+      "backend": "pi_cli",
+      "last_run": null,
       "notes": ""
     }
   ],

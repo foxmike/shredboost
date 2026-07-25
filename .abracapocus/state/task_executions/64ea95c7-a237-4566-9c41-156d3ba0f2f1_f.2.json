@@ -1,0 +1,177 @@
+{
+  "path": null,
+  "run_id": "64ea95c7-a237-4566-9c41-156d3ba0f2f1",
+  "task_id": "f.2",
+  "phase_name": "F",
+  "task_title": "Create real time memory allocation and denormal audit tests",
+  "task_file": null,
+  "acceptance_criteria": [
+    "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+    "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+    "The test asserts denormal inputs are flushed to zero in processBlock output",
+    "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+    "cmake --build build succeeds",
+    "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 124,
+  "stdout": "",
+  "stderr": "task timeout exceeded 1200s",
+  "duration_seconds": 1200.024633677,
+  "changed_files": [
+    {
+      "path": "CMakeLists.txt",
+      "status": "modified",
+      "code": null
+    },
+    {
+      "path": "tests/ProcessBlockRealtimeTests.cpp",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "CMakeLists.txt | 28 ++++++++++++++++++++++++++++\n 1 file changed, 28 insertions(+)",
+  "backend_outcome_classification": "backend_timeout_with_changes",
+  "backend_timeout": true,
+  "backend_elapsed_seconds": 1200.024633677,
+  "backend_timeout_seconds": 1200.0,
+  "changed_files_at_timeout_exit": [
+    {
+      "path": "CMakeLists.txt",
+      "status": "modified",
+      "code": null
+    },
+    {
+      "path": "tests/ProcessBlockRealtimeTests.cpp",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "abracapocus_verification_ran_after_backend_timeout": true,
+  "verification_owner": "abracapocus",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "f.2",
+    "acceptance_criteria": [
+      "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+      "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+      "The test asserts denormal inputs are flushed to zero in processBlock output",
+      "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+      "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+      "cmake --build build succeeds",
+      "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+      "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+      "The test asserts denormal inputs are flushed to zero in processBlock output",
+      "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+      "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+      "cmake --build build succeeds",
+      "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 8 of 8 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 124,
+    "stdout": "",
+    "stderr": "task timeout exceeded 1200s",
+    "duration_seconds": 1200.024633677,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "CMakeLists.txt",
+      "tests/ProcessBlockRealtimeTests.cpp"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+        "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+        "The test asserts denormal inputs are flushed to zero in processBlock output",
+        "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+        "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+        "cmake --build build succeeds",
+        "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+        "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+        "The test asserts denormal inputs are flushed to zero in processBlock output",
+        "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+        "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+        "cmake --build build succeeds",
+        "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_timeout_with_changes",
+    "backend_timeout": true,
+    "backend_elapsed_seconds": 1200.024633677,
+    "backend_timeout_seconds": 1200.0,
+    "changed_files_at_timeout_exit": [
+      {
+        "path": "CMakeLists.txt",
+        "status": "modified",
+        "code": null
+      },
+      {
+        "path": "tests/ProcessBlockRealtimeTests.cpp",
+        "status": "untracked",
+        "code": null
+      }
+    ],
+    "abracapocus_verification_ran_after_backend_timeout": true,
+    "verification_owner": "abracapocus",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "timed_out"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-64ea95c7-a237-4566-9c41-156d3ba0f2f1.json"
+  ],
+  "created_at": "2026-07-25T20:05:38.711760",
+  "lifecycle_state": "timed_out"
+}
