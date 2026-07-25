@@ -9,9 +9,9 @@
       "task_id": "b.5",
       "title": "Create unit test runner and parameter state tests",
       "phase": "B",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T16:15:19.807694",
       "notes": ""
     }
   ],
@@ -114,6 +114,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T16:03:32.699717"
+    },
+    {
+      "run_id": "75422f09-6006-4766-a9e4-f498821f40ce",
+      "task_id": "b.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:15:19.807806"
     }
   ],
   "operator_overrides": {},
