@@ -1,0 +1,134 @@
+{
+  "path": null,
+  "run_id": "d88b313c-3307-4aad-b624-d271d894960d",
+  "task_id": "f.3",
+  "phase_name": "F",
+  "task_title": "Write phase f integration verification document",
+  "task_file": null,
+  "acceptance_criteria": [
+    "docs/verification/phase_f_integration.md exists",
+    "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+    "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+    "The document includes a Verification Commands section with the literal cmake and ctest commands",
+    "No file outside the task's allowed_write_paths is created or modified"
+  ],
+  "selected_backend": "pi_cli",
+  "selected_model": "openrouter/z-ai/glm-5.2",
+  "routing_reason": "phase_based",
+  "task_type": "coding",
+  "task_complexity": null,
+  "risk_level": null,
+  "commit_before": null,
+  "commit_after": null,
+  "exit_code": 0,
+  "stdout": "Created `docs/verification/phase_f_integration.md`. The document covers:\n\n1. **Engine integration** (§2) — how `ShredBoostEngine`, `OversamplingEngine`, and `AutoGainBypass` are wired into `processBlock`/`processFloatBlock` in order: parameter snapshot acquisition → dry copy + per-channel filters → upsample → drive ramp + `ShredBoostEngine` (per-factor) → downsample → output ramp → `AutoGainBypass`.\n2. **Buffer allocation in `prepareToPlay`** (§3) — `dryBuffer`, `doublePrecisionScratch`, oversampler, `AutoGainBypass`, and per-oversampling-factor `ShredBoostEngine` instances are all pre-allocated, with `preparedMaximumBlockSize` as the bound that prevents audio-thread reallocation.\n3. **Lock-free double-buffered parameter snapshot** (§4) — the `parameterBuffers`/`publishedParameterBuffer`/`parameterBufferReaders` RCU handover, lock-free `static_assert`s, the publish path on the timer thread, and the acquire path on the audio thread.\n4. **`ScopedNoDenormals` placement** (§6) — constructed first in both `processBlock` overloads, enabling DAZ/FTZ for the entire DSP chain.\n5. **PDC / oversampling on the message thread** (§5) — `timerCallback` stages factor changes via `requestFactorChange`, applies them with `applyPendingFactor`, and reports latency via `setLatencySamples`.\n6. **Real-time audit** (§7) — the allocation audit (replaced global `operator new`, thread-local counter, 200-block steady-state window asserting zero allocations) and the denormal audit (subnormal input → exactly zero output; decaying signal → no subnormal residuals).\n7. **Verification Commands** (§8) — literal `cmake --preset linux-release`, `cmake --build`, and `ctest -R ProcessBlockRealtimeTests` commands, plus a full-suite ctest invocation.\n\nOnly `docs/verification/phase_f_integration.md` was created, within the task's file scope.\n",
+  "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+  "duration_seconds": 44.00609803199768,
+  "changed_files": [
+    {
+      "path": "docs/verification/phase_f_integration.md",
+      "status": "untracked",
+      "code": null
+    }
+  ],
+  "write_policy_violations": [],
+  "diff_summary": "git diff reported no changes",
+  "backend_outcome_classification": "backend_completed_with_changes",
+  "backend_timeout": false,
+  "backend_elapsed_seconds": 44.00609803199768,
+  "backend_timeout_seconds": null,
+  "changed_files_at_timeout_exit": [],
+  "abracapocus_verification_ran_after_backend_timeout": false,
+  "verification_owner": "task",
+  "verification_result": "passed",
+  "verification_status": "passed",
+  "verification_checks": [],
+  "acceptance_status": "accepted",
+  "failure_classification": null,
+  "failure_summary": "",
+  "change_assessment": null,
+  "task_reconciliation": {
+    "task_id": "f.3",
+    "acceptance_criteria": [
+      "docs/verification/phase_f_integration.md exists",
+      "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+      "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+      "The document includes a Verification Commands section with the literal cmake and ctest commands",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "matched_criteria": [
+      "docs/verification/phase_f_integration.md exists",
+      "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+      "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+      "The document includes a Verification Commands section with the literal cmake and ctest commands",
+      "No file outside the task's allowed_write_paths is created or modified"
+    ],
+    "unmatched_criteria": [],
+    "verification_checks_considered": [],
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": "diff",
+    "notes": "Matched 5 of 5 acceptance criteria"
+  },
+  "evidence": {
+    "exit_code": 0,
+    "stdout": "Created `docs/verification/phase_f_integration.md`. The document covers:\n\n1. **Engine integration** (§2) — how `ShredBoostEngine`, `OversamplingEngine`, and `AutoGainBypass` are wired into `processBlock`/`processFloatBlock` in order: parameter snapshot acquisition → dry copy + per-channel filters → upsample → drive ramp + `ShredBoostEngine` (per-factor) → downsample → output ramp → `AutoGainBypass`.\n2. **Buffer allocation in `prepareToPlay`** (§3) — `dryBuffer`, `doublePrecisionScratch`, oversampler, `AutoGainBypass`, and per-oversampling-factor `ShredBoostEngine` instances are all pre-allocated, with `preparedMaximumBlockSize` as the bound that prevents audio-thread reallocation.\n3. **Lock-free double-buffered parameter snapshot** (§4) — the `parameterBuffers`/`publishedParameterBuffer`/`parameterBufferReaders` RCU handover, lock-free `static_assert`s, the publish path on the timer thread, and the acquire path on the audio thread.\n4. **`ScopedNoDenormals` placement** (§6) — constructed first in both `processBlock` overloads, enabling DAZ/FTZ for the entire DSP chain.\n5. **PDC / oversampling on the message thread** (§5) — `timerCallback` stages factor changes via `requestFactorChange`, applies them with `applyPendingFactor`, and reports latency via `setLatencySamples`.\n6. **Real-time audit** (§7) — the allocation audit (replaced global `operator new`, thread-local counter, 200-block steady-state window asserting zero allocations) and the denormal audit (subnormal input → exactly zero output; decaying signal → no subnormal residuals).\n7. **Verification Commands** (§8) — literal `cmake --preset linux-release`, `cmake --build`, and `ctest -R ProcessBlockRealtimeTests` commands, plus a full-suite ctest invocation.\n\nOnly `docs/verification/phase_f_integration.md` was created, within the task's file scope.\n",
+    "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+    "duration_seconds": 44.00609803199768,
+    "verification_output": null,
+    "verification_status": "passed",
+    "verification_checks": [],
+    "changed_files": [
+      "docs/verification/phase_f_integration.md"
+    ],
+    "affected_modules": [],
+    "scope_status": null,
+    "acceptance_status": "accepted",
+    "rejection_reason": null,
+    "rejected_reason": null,
+    "failure_classification": null,
+    "failure_summary": null,
+    "reconciliation_status": "satisfied",
+    "reconciliation_source": null,
+    "reconciliation_detail": {
+      "acceptance_criteria": [
+        "docs/verification/phase_f_integration.md exists",
+        "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+        "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+        "The document includes a Verification Commands section with the literal cmake and ctest commands",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "matched_criteria": [
+        "docs/verification/phase_f_integration.md exists",
+        "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+        "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+        "The document includes a Verification Commands section with the literal cmake and ctest commands",
+        "No file outside the task's allowed_write_paths is created or modified"
+      ],
+      "unmatched_criteria": [],
+      "verification_checks_considered": [],
+      "reconciliation_source": "diff",
+      "changed_files_within_allowed_write_paths": true,
+      "verification_status": "passed"
+    },
+    "risk_level": null,
+    "backend_outcome_classification": "backend_completed_with_changes",
+    "backend_timeout": false,
+    "backend_elapsed_seconds": 44.00609803199768,
+    "backend_timeout_seconds": null,
+    "changed_files_at_timeout_exit": [],
+    "abracapocus_verification_ran_after_backend_timeout": false,
+    "verification_owner": "task",
+    "verification_result": "passed",
+    "runtime_startup_attempted": null,
+    "runtime_startup_failed": null,
+    "runtime_startup_error": null,
+    "dependency_advisory": null,
+    "lifecycle_state": "accepted"
+  },
+  "shadow_execution": null,
+  "artifact_references": [
+    "reports/run-d88b313c-3307-4aad-b624-d271d894960d.json"
+  ],
+  "created_at": "2026-07-25T20:06:23.868984",
+  "lifecycle_state": "accepted"
+}

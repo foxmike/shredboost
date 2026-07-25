@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-f.2",
+  "plan_version": "task-f.3",
   "active_phase": "F",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "f.2",
-      "title": "Create real time memory allocation and denormal audit tests",
+      "task_id": "f.3",
+      "title": "Write phase f integration verification document",
       "phase": "F",
-      "status": "blocked",
+      "status": "planned",
       "backend": "pi_cli",
-      "last_run": "2026-07-25T20:05:39.509615",
+      "last_run": null,
       "notes": ""
     }
   ],

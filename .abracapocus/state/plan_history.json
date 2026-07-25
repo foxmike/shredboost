@@ -1,61 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T15:56:54.728893",
-    "project_name": "shredboost",
-    "goal": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Write phase a scaffold verification document",
-      "phases": [
-        {
-          "name": "A",
-          "objective": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "a.5",
-                "title": "Write phase a scaffold verification document",
-                "description": "Create docs/verification/phase_a_scaffold.md documenting how to verify the Phase A scaffold.\n\nThe document must include:\n- A short overview of Phase A deliverables (processor shell, editor shell, CMake config, build script, gitignore).\n- The frozen product identity table: plugin name ShredBoost, vendor nSpace Systems, version 1.0.0, PLUGIN_MANUFACTURER_CODE NSPC, PLUGIN_CODE ShBs, BUNDLE_ID com.nspacesystems.shredboost, LV2URI urn:nspacesystems:plugin:shredboost, FORMATS VST3 LV2 Standalone.\n- The bus-layout acceptance contract: mono-in/mono-out, mono-in/stereo-out, stereo-in/stereo-out supported; others rejected.\n- Exact paste-and-run verification commands: 'cmake --preset linux-release' and 'cmake --build build --config Release' (or 'bash scripts/build_all.sh'), and where to find the built VST3/LV2/Standalone artifacts.\n\nBefore editing, inspect:\n- CMakeLists.txt and CMakePresets.json from a.3 for the identity values and preset name.\n- scripts/build_all.sh from a.4 for the build command.\n- Source/PluginProcessor.cpp from a.1 for the bus-layout contract.\n\nSTRICT FILE SCOPE: Create or modify ONLY the file listed in allowed_write_paths.",
-                "phase": "A",
-                "dependencies": [
-                  "a.4"
-                ],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "docs/verification/phase_a_scaffold.md exists",
-                  "The document lists the frozen identity values (ShredBoost, nSpace Systems, NSPC, ShBs, com.nspacesystems.shredboost, urn:nspacesystems:plugin:shredboost)",
-                  "The document lists the three supported bus layouts and states others are rejected",
-                  "The document includes the paste-and-run cmake configure and build commands",
-                  "No file outside allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T15:56:21.044102",
-                "selected_backend": "pi_cli",
-                "model": "openrouter/z-ai/glm-5.2",
-                "task_timeout_seconds": 900.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "docs/verification/phase_a_scaffold.md"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T15:56:54.660344",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-a.5",
-      "created_at": "2026-07-25T15:56:21.111873"
-    }
-  },
-  {
     "created_at": "2026-07-25T15:57:18.313520",
     "project_name": "shredboost",
     "goal": "Create Source/Parameters/ParameterIDs.h defining the frozen, permanent parameter ID taxonomy for ShredBoost (schema version 1). Declare a compile-time schema version constant (e.g. constexpr int kParameterSchemaVersion = 1) and stable string ID constants for every automatable parameter exactly as named: input_trim, tight_cut, mid_freq, mid_amount, drive, tone, level, pick_attack, voicing_mode, oversampling, auto_gain. Use a dedicated namespace (e.g. ShredBoost::ParamID). Document per-parameter range/default in comments: input_trim (-18..+18 dB, default 0), tight_cut (80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (0..3 choice, default Yng-Grey), oversampling (0..2 choice, default 2x), auto_gain (bool, default Off). This is a header-only, include-guarded (#pragma once) file with no APVTS logic. Do NOT expose any internal DSP states (crossfade, mute-fade, RMS tracker) as parameter IDs.\n\nBefore editing, inspect:\n- CMakeLists.txt (to confirm Source/ layout and product identity)\n- The plan DSP chain and parameter list above for exact IDs, ranges, and defaults.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
@@ -1134,6 +1078,66 @@
       ],
       "version": "task-f.1",
       "created_at": "2026-07-25T19:40:15.757367"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:05:39.576860",
+    "project_name": "shredboost",
+    "goal": "Create a juce::UnitTest that audits processBlock for real-time safety: zero heap allocation during processing and correct denormal flushing.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp (integrated processBlock from task f.1; prepareToPlay buffer allocation and the ScopedNoDenormals guard)\n- CMakeLists.txt (how existing UnitTest sources and the CTest console-runner target are registered; the ShredBoost target definition)\n- Any existing tests/*.cpp using juce::UnitTest for the established pattern (registration, runner wiring)\n\nImplementation requirements:\n1. Add tests/ProcessBlockRealtimeTests.cpp defining a juce::UnitTest subclass registered with the existing console runner (no third-party testing frameworks).\n2. Allocation audit: call prepareToPlay with a fixed max block size, then install a global new/delete allocation counter (e.g. override operator new/delete or a scoped allocation guard) around repeated processBlock calls; assert the allocation count is zero during processBlock.\n3. Denormal audit: feed a buffer whose samples decay into the denormal range and assert that outputs are flushed to zero (denormals not present), confirming ScopedNoDenormals behavior.\n4. Register tests/ProcessBlockRealtimeTests.cpp in CMakeLists.txt so it builds into the UnitTest runner and is discoverable by CTest.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Create real time memory allocation and denormal audit tests",
+      "phases": [
+        {
+          "name": "F",
+          "objective": "Create a juce::UnitTest that audits processBlock for real-time safety: zero heap allocation during processing and correct denormal flushing.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp (integrated processBlock from task f.1; prepareToPlay buffer allocation and the ScopedNoDenormals guard)\n- CMakeLists.txt (how existing UnitTest sources and the CTest console-runner target are registered; the ShredBoost target definition)\n- Any existing tests/*.cpp using juce::UnitTest for the established pattern (registration, runner wiring)\n\nImplementation requirements:\n1. Add tests/ProcessBlockRealtimeTests.cpp defining a juce::UnitTest subclass registered with the existing console runner (no third-party testing frameworks).\n2. Allocation audit: call prepareToPlay with a fixed max block size, then install a global new/delete allocation counter (e.g. override operator new/delete or a scoped allocation guard) around repeated processBlock calls; assert the allocation count is zero during processBlock.\n3. Denormal audit: feed a buffer whose samples decay into the denormal range and assert that outputs are flushed to zero (denormals not present), confirming ScopedNoDenormals behavior.\n4. Register tests/ProcessBlockRealtimeTests.cpp in CMakeLists.txt so it builds into the UnitTest runner and is discoverable by CTest.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "f.2",
+                "title": "Create real time memory allocation and denormal audit tests",
+                "description": "Create a juce::UnitTest that audits processBlock for real-time safety: zero heap allocation during processing and correct denormal flushing.\n\nBefore editing, inspect:\n- Source/PluginProcessor.h and Source/PluginProcessor.cpp (integrated processBlock from task f.1; prepareToPlay buffer allocation and the ScopedNoDenormals guard)\n- CMakeLists.txt (how existing UnitTest sources and the CTest console-runner target are registered; the ShredBoost target definition)\n- Any existing tests/*.cpp using juce::UnitTest for the established pattern (registration, runner wiring)\n\nImplementation requirements:\n1. Add tests/ProcessBlockRealtimeTests.cpp defining a juce::UnitTest subclass registered with the existing console runner (no third-party testing frameworks).\n2. Allocation audit: call prepareToPlay with a fixed max block size, then install a global new/delete allocation counter (e.g. override operator new/delete or a scoped allocation guard) around repeated processBlock calls; assert the allocation count is zero during processBlock.\n3. Denormal audit: feed a buffer whose samples decay into the denormal range and assert that outputs are flushed to zero (denormals not present), confirming ScopedNoDenormals behavior.\n4. Register tests/ProcessBlockRealtimeTests.cpp in CMakeLists.txt so it builds into the UnitTest runner and is discoverable by CTest.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+                "phase": "F",
+                "dependencies": [
+                  "f.1"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "tests/ProcessBlockRealtimeTests.cpp defines a juce::UnitTest subclass and uses no third-party testing framework",
+                  "The test asserts zero heap allocations occur during processBlock via an allocation counter around processBlock calls",
+                  "The test asserts denormal inputs are flushed to zero in processBlock output",
+                  "CMakeLists.txt registers tests/ProcessBlockRealtimeTests.cpp in the UnitTest console-runner target",
+                  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug configures successfully",
+                  "cmake --build build succeeds",
+                  "ctest --test-dir build --output-on-failure runs the ProcessBlockRealtime test and it passes",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T19:45:38.453055",
+                "selected_backend": "pi_cli",
+                "model": "openrouter/z-ai/glm-5.2",
+                "task_timeout_seconds": 1200.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "tests/ProcessBlockRealtimeTests.cpp",
+                  "CMakeLists.txt"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:05:39.481634",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-f.2",
+      "created_at": "2026-07-25T19:45:38.510985"
     }
   }
 ]
