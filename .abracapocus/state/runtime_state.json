@@ -1,17 +1,17 @@
 {
   "project_name": "shredboost",
-  "plan_version": "task-f.3",
-  "active_phase": "F",
+  "plan_version": "task-g.1",
+  "active_phase": "G",
   "default_backend": "codex_cli",
   "routing_mode": "manual",
   "tasks": [
     {
-      "task_id": "f.3",
-      "title": "Write phase f integration verification document",
-      "phase": "F",
-      "status": "completed",
-      "backend": "pi_cli",
-      "last_run": "2026-07-25T20:06:24.680796",
+      "task_id": "g.1",
+      "title": "Implement custom LookAndFeel and industrial dark metal rotary knobs",
+      "phase": "G",
+      "status": "planned",
+      "backend": "antigravity_cli",
+      "last_run": null,
       "notes": ""
     }
   ],
@@ -272,6 +272,6 @@
   "operator_overrides": {},
   "completed_phases": [],
   "remaining_phases": [
-    "F"
+    "G"
   ]
 }

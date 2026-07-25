@@ -1,0 +1,101 @@
+{
+  "run_at": "2026-07-25T20:06:24.914532",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f",
+  "status": "passed",
+  "counts": {
+    "passed": 3,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "f.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.1_integrate_complete_dsp_signal_chain_into_pluginprocessor_processblock.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "68731f2b-de4e-48a7-872e-206a3fd31e16",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "f.1:Review complete"
+    },
+    {
+      "task_id": "f.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.2_create_real_time_memory_allocation_and_denormal_audit_tests.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "abracapocus"
+      },
+      "run_id": "64ea95c7-a237-4566-9c41-156d3ba0f2f1",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "f.2:Review complete"
+    },
+    {
+      "task_id": "f.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/f/task_f.3_write_phase_f_integration_verification_document.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "d88b313c-3307-4aad-b624-d271d894960d",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "f.3:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "configure",
+        "status": "failed",
+        "detail": "CMake Error: The source directory \"/home/mike/dev/mike/abracapocus/python/abracapocus_2\" does not appear to contain CMakeLists.txt.\nSpecify --help for usage, or press the help button on the CMake GUI.",
+        "command": [
+          "cmake",
+          "-S",
+          ".",
+          "-B",
+          "build",
+          "-DCMAKE_BUILD_TYPE=Debug"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "build",
+        "status": "failed",
+        "detail": "Error: /home/mike/dev/mike/abracapocus/python/abracapocus_2/build is not a directory",
+        "command": [
+          "cmake",
+          "--build",
+          "build"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "ctest",
+        "status": "failed",
+        "detail": "Failed to change working directory to \"/home/mike/dev/mike/abracapocus/python/abracapocus_2/build\": No such file or directory",
+        "command": [
+          "ctest",
+          "--test-dir",
+          "build",
+          "--output-on-failure"
+        ],
+        "exit_code": 1
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}

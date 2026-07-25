@@ -54,3 +54,5 @@
 2026-07-25 15:45:38 | INFO | abracapocus | run=68731f2b-de4e-48a7-872e-206a3fd31e16 phases=1 verification=passed
 2026-07-25 16:05:39 | INFO | abracapocus | run=64ea95c7-a237-4566-9c41-156d3ba0f2f1 phases=1 verification=passed
 2026-07-25 16:06:23 | INFO | abracapocus.backends.pi_cli | backend=pi_cli retry_count=0
+2026-07-25 16:06:24 | INFO | abracapocus | run=d88b313c-3307-4aad-b624-d271d894960d phases=1 verification=passed
+2026-07-25 16:22:24 | INFO | abracapocus.backends.antigravity_cli | backend=antigravity_cli retry_count=0

@@ -1,59 +1,5 @@
 [
   {
-    "created_at": "2026-07-25T15:57:18.313520",
-    "project_name": "shredboost",
-    "goal": "Create Source/Parameters/ParameterIDs.h defining the frozen, permanent parameter ID taxonomy for ShredBoost (schema version 1). Declare a compile-time schema version constant (e.g. constexpr int kParameterSchemaVersion = 1) and stable string ID constants for every automatable parameter exactly as named: input_trim, tight_cut, mid_freq, mid_amount, drive, tone, level, pick_attack, voicing_mode, oversampling, auto_gain. Use a dedicated namespace (e.g. ShredBoost::ParamID). Document per-parameter range/default in comments: input_trim (-18..+18 dB, default 0), tight_cut (80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (0..3 choice, default Yng-Grey), oversampling (0..2 choice, default 2x), auto_gain (bool, default Off). This is a header-only, include-guarded (#pragma once) file with no APVTS logic. Do NOT expose any internal DSP states (crossfade, mute-fade, RMS tracker) as parameter IDs.\n\nBefore editing, inspect:\n- CMakeLists.txt (to confirm Source/ layout and product identity)\n- The plan DSP chain and parameter list above for exact IDs, ranges, and defaults.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-    "plan_template": {
-      "project_name": "shredboost",
-      "summary": "Task run: Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
-      "phases": [
-        {
-          "name": "B",
-          "objective": "Create Source/Parameters/ParameterIDs.h defining the frozen, permanent parameter ID taxonomy for ShredBoost (schema version 1). Declare a compile-time schema version constant (e.g. constexpr int kParameterSchemaVersion = 1) and stable string ID constants for every automatable parameter exactly as named: input_trim, tight_cut, mid_freq, mid_amount, drive, tone, level, pick_attack, voicing_mode, oversampling, auto_gain. Use a dedicated namespace (e.g. ShredBoost::ParamID). Document per-parameter range/default in comments: input_trim (-18..+18 dB, default 0), tight_cut (80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (0..3 choice, default Yng-Grey), oversampling (0..2 choice, default 2x), auto_gain (bool, default Off). This is a header-only, include-guarded (#pragma once) file with no APVTS logic. Do NOT expose any internal DSP states (crossfade, mute-fade, RMS tracker) as parameter IDs.\n\nBefore editing, inspect:\n- CMakeLists.txt (to confirm Source/ layout and product identity)\n- The plan DSP chain and parameter list above for exact IDs, ranges, and defaults.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-          "status": "completed",
-          "tasks": [
-            {
-              "task": {
-                "task_id": "b.1",
-                "title": "Create frozen parameter ID taxonomy in ParameterIDs header with schema version",
-                "description": "Create Source/Parameters/ParameterIDs.h defining the frozen, permanent parameter ID taxonomy for ShredBoost (schema version 1). Declare a compile-time schema version constant (e.g. constexpr int kParameterSchemaVersion = 1) and stable string ID constants for every automatable parameter exactly as named: input_trim, tight_cut, mid_freq, mid_amount, drive, tone, level, pick_attack, voicing_mode, oversampling, auto_gain. Use a dedicated namespace (e.g. ShredBoost::ParamID). Document per-parameter range/default in comments: input_trim (-18..+18 dB, default 0), tight_cut (80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (0..3 choice, default Yng-Grey), oversampling (0..2 choice, default 2x), auto_gain (bool, default Off). This is a header-only, include-guarded (#pragma once) file with no APVTS logic. Do NOT expose any internal DSP states (crossfade, mute-fade, RMS tracker) as parameter IDs.\n\nBefore editing, inspect:\n- CMakeLists.txt (to confirm Source/ layout and product identity)\n- The plan DSP chain and parameter list above for exact IDs, ranges, and defaults.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
-                "phase": "B",
-                "dependencies": [],
-                "exclusivity_category": null,
-                "max_in_category": null,
-                "status": "completed",
-                "acceptance_criteria": [
-                  "Source/Parameters/ParameterIDs.h exists and is #pragma once guarded",
-                  "ParameterIDs.h declares a schema version constant equal to 1",
-                  "ParameterIDs.h declares stable string ID constants for exactly these 11 parameters: input_trim, tight_cut, mid_freq, mid_amount, drive, tone, level, pick_attack, voicing_mode, oversampling, auto_gain",
-                  "No internal DSP state (crossfade, mute-fade, RMS tracker) is exposed as a parameter ID",
-                  "No file outside the task's allowed_write_paths is created or modified"
-                ],
-                "created_at": "2026-07-25T15:56:55.385282",
-                "selected_backend": "pi_cli",
-                "model": "openrouter/z-ai/glm-5.2",
-                "task_timeout_seconds": 900.0,
-                "verification_profile": "focused",
-                "verification_commands": [],
-                "allowed_write_paths": [
-                  "Source/Parameters/ParameterIDs.h"
-                ],
-                "forbidden_patterns_override": null
-              },
-              "dependencies": [],
-              "status": "completed"
-            }
-          ],
-          "completed": true,
-          "completed_at": "2026-07-25T15:57:18.233128",
-          "human_checkpoint": null
-        }
-      ],
-      "version": "task-b.1",
-      "created_at": "2026-07-25T15:56:55.480714"
-    }
-  },
-  {
     "created_at": "2026-07-25T15:58:45.386415",
     "project_name": "shredboost",
     "goal": "Create Source/Parameters/ParameterLayout.h and Source/Parameters/ParameterLayout.cpp providing a function (e.g. ShredBoost::createParameterLayout()) that returns a juce::AudioProcessorValueTreeState::ParameterLayout containing every automatable parameter. Use the frozen IDs from Source/Parameters/ParameterIDs.h. Build each parameter with correct type, range, and default: input_trim (AudioParameterFloat -18..+18 dB, default 0), tight_cut (500..400? no -> 80..400 Hz, default 180), mid_freq (500..1200 Hz, default 720), mid_amount (0..+9 dB, default +4), drive (0..+36 dB, default +12), tone (1..16 kHz, default 6.5), level (-24..+12 dB, default 0), pick_attack (0..+9 dB, default +2), voicing_mode (AudioParameterChoice, 4 choices Yng-Grey/Precision Tight/SD-1/Clean, default Yng-Grey index 0), oversampling (AudioParameterChoice, 3 choices 1x/2x/4x, default 2x index 1), auto_gain (AudioParameterBool, default false/Off). Frequency parameters should use a skewed/logarithmic NormalisableRange appropriate for their positive-frequency domain. Header declares the function; cpp implements it.\n\nBefore editing, inspect:\n- Source/Parameters/ParameterIDs.h (for exact IDs and documented ranges/defaults)\n- CMakeLists.txt (for JUCE target/module availability)\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
@@ -1138,6 +1084,62 @@
       ],
       "version": "task-f.2",
       "created_at": "2026-07-25T19:45:38.510985"
+    }
+  },
+  {
+    "created_at": "2026-07-25T20:06:24.748102",
+    "project_name": "shredboost",
+    "goal": "Write the phase F verification document summarizing full processor integration and the real-time execution audit results.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp (integrated processBlock and prepareToPlay from f.1)\n- tests/ProcessBlockRealtimeTests.cpp (the allocation and denormal audits from f.2)\n- CMakeLists.txt (the configure/build/ctest commands used)\n- Any existing docs/verification/*.md for the established document format\n\nImplementation requirements:\n1. Create docs/verification/phase_f_integration.md.\n2. Document the integration: how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are wired into processBlock, buffer allocation in prepareToPlay, the lock-free double-buffered parameter snapshot, ScopedNoDenormals placement, and PDC/oversampling handling on the message thread.\n3. Document the real-time audit: what ProcessBlockRealtimeTests.cpp verifies (zero heap allocation during processBlock, denormal flushing) and the exact commands to reproduce.\n4. Include a 'Verification Commands' section listing the literal cmake configure, cmake build, and ctest commands.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+    "plan_template": {
+      "project_name": "shredboost",
+      "summary": "Task run: Write phase f integration verification document",
+      "phases": [
+        {
+          "name": "F",
+          "objective": "Write the phase F verification document summarizing full processor integration and the real-time execution audit results.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp (integrated processBlock and prepareToPlay from f.1)\n- tests/ProcessBlockRealtimeTests.cpp (the allocation and denormal audits from f.2)\n- CMakeLists.txt (the configure/build/ctest commands used)\n- Any existing docs/verification/*.md for the established document format\n\nImplementation requirements:\n1. Create docs/verification/phase_f_integration.md.\n2. Document the integration: how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are wired into processBlock, buffer allocation in prepareToPlay, the lock-free double-buffered parameter snapshot, ScopedNoDenormals placement, and PDC/oversampling handling on the message thread.\n3. Document the real-time audit: what ProcessBlockRealtimeTests.cpp verifies (zero heap allocation during processBlock, denormal flushing) and the exact commands to reproduce.\n4. Include a 'Verification Commands' section listing the literal cmake configure, cmake build, and ctest commands.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+          "status": "completed",
+          "tasks": [
+            {
+              "task": {
+                "task_id": "f.3",
+                "title": "Write phase f integration verification document",
+                "description": "Write the phase F verification document summarizing full processor integration and the real-time execution audit results.\n\nBefore editing, inspect:\n- Source/PluginProcessor.cpp (integrated processBlock and prepareToPlay from f.1)\n- tests/ProcessBlockRealtimeTests.cpp (the allocation and denormal audits from f.2)\n- CMakeLists.txt (the configure/build/ctest commands used)\n- Any existing docs/verification/*.md for the established document format\n\nImplementation requirements:\n1. Create docs/verification/phase_f_integration.md.\n2. Document the integration: how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are wired into processBlock, buffer allocation in prepareToPlay, the lock-free double-buffered parameter snapshot, ScopedNoDenormals placement, and PDC/oversampling handling on the message thread.\n3. Document the real-time audit: what ProcessBlockRealtimeTests.cpp verifies (zero heap allocation during processBlock, denormal flushing) and the exact commands to reproduce.\n4. Include a 'Verification Commands' section listing the literal cmake configure, cmake build, and ctest commands.\n\nSTRICT FILE SCOPE: Create or modify ONLY the files listed in this task's allowed_write_paths.",
+                "phase": "F",
+                "dependencies": [
+                  "f.2"
+                ],
+                "exclusivity_category": null,
+                "max_in_category": null,
+                "status": "completed",
+                "acceptance_criteria": [
+                  "docs/verification/phase_f_integration.md exists",
+                  "The document describes how ShredBoostEngine, OversamplingEngine, and AutoGainBypass are integrated into processBlock",
+                  "The document describes the zero-heap-allocation and denormal-flushing audits performed by tests/ProcessBlockRealtimeTests.cpp",
+                  "The document includes a Verification Commands section with the literal cmake and ctest commands",
+                  "No file outside the task's allowed_write_paths is created or modified"
+                ],
+                "created_at": "2026-07-25T20:05:39.613799",
+                "selected_backend": "pi_cli",
+                "model": "openrouter/z-ai/glm-5.2",
+                "task_timeout_seconds": 900.0,
+                "verification_profile": "focused",
+                "verification_commands": [],
+                "allowed_write_paths": [
+                  "docs/verification/phase_f_integration.md"
+                ],
+                "forbidden_patterns_override": null
+              },
+              "dependencies": [],
+              "status": "completed"
+            }
+          ],
+          "completed": true,
+          "completed_at": "2026-07-25T20:06:24.640838",
+          "human_checkpoint": null
+        }
+      ],
+      "version": "task-f.3",
+      "created_at": "2026-07-25T20:05:39.671633"
     }
   }
 ]
