@@ -1,0 +1,34 @@
+{
+  "project_name": "shredboost",
+  "plan_version": "task-a.2",
+  "active_phase": "A",
+  "default_backend": "codex_cli",
+  "routing_mode": "manual",
+  "tasks": [
+    {
+      "task_id": "a.2",
+      "title": "Create resizable editor shell connected to processor",
+      "phase": "A",
+      "status": "planned",
+      "backend": "antigravity_cli",
+      "last_run": null,
+      "notes": ""
+    }
+  ],
+  "history": [
+    {
+      "run_id": "00f20ef7-dc12-492a-9dd9-f7b13da1286f",
+      "task_id": "a.1",
+      "backend": "antigravity_cli",
+      "status": "failed",
+      "reviewer_status": "changes_requested",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:29:29.326663"
+    }
+  ],
+  "operator_overrides": {},
+  "completed_phases": [],
+  "remaining_phases": [
+    "A"
+  ]
+}
