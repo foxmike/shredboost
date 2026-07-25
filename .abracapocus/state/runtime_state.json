@@ -9,9 +9,9 @@
       "task_id": "a.5",
       "title": "Write phase a scaffold verification document",
       "phase": "A",
-      "status": "planned",
+      "status": "completed",
       "backend": "pi_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T15:56:54.680984",
       "notes": ""
     }
   ],
@@ -69,6 +69,15 @@
       "reviewer_status": "approved",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:56:20.971345"
+    },
+    {
+      "run_id": "1e564ed4-31f0-4a2a-95b3-8f9eedf4edf3",
+      "task_id": "a.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:56:54.681071"
     }
   ],
   "operator_overrides": {},
