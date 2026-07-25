@@ -9,9 +9,9 @@
       "task_id": "a.2",
       "title": "Create resizable editor shell connected to processor",
       "phase": "A",
-      "status": "planned",
+      "status": "completed",
       "backend": "antigravity_cli",
-      "last_run": null,
+      "last_run": "2026-07-25T15:30:10.835392",
       "notes": ""
     }
   ],
@@ -24,6 +24,15 @@
       "reviewer_status": "changes_requested",
       "verifier_status": "passed",
       "timestamp": "2026-07-25T15:29:29.326663"
+    },
+    {
+      "run_id": "091f56bc-4f45-480b-8654-3e92ff4e877b",
+      "task_id": "a.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:30:10.835551"
     }
   ],
   "operator_overrides": {},
