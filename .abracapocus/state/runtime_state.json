@@ -1,0 +1,349 @@
+{
+  "project_name": "shredboost",
+  "plan_version": "task-h.3",
+  "active_phase": "completed",
+  "default_backend": "codex_cli",
+  "routing_mode": "manual",
+  "tasks": [
+    {
+      "task_id": "h.3",
+      "title": "Write phase h release verification document",
+      "phase": "H",
+      "status": "completed",
+      "backend": "pi_cli",
+      "last_run": "2026-07-25T20:49:23.124997",
+      "notes": ""
+    }
+  ],
+  "history": [
+    {
+      "run_id": "00f20ef7-dc12-492a-9dd9-f7b13da1286f",
+      "task_id": "a.1",
+      "backend": "antigravity_cli",
+      "status": "failed",
+      "reviewer_status": "changes_requested",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:29:29.326663"
+    },
+    {
+      "run_id": "091f56bc-4f45-480b-8654-3e92ff4e877b",
+      "task_id": "a.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:30:10.835551"
+    },
+    {
+      "run_id": "6d5c40d9-b0ee-4890-8b46-417137c34d10",
+      "task_id": "a.1",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:53:46.850177"
+    },
+    {
+      "run_id": "d43b7ade-16d2-4f46-afdb-4d45708f45fc",
+      "task_id": "a.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:54:13.600489"
+    },
+    {
+      "run_id": "de3e55f6-b826-45fc-aaad-ea3af25d6f41",
+      "task_id": "a.3",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:55:45.381694"
+    },
+    {
+      "run_id": "4d84ecf7-cdaf-4758-8f2c-555eb5287a45",
+      "task_id": "a.4",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:56:20.971345"
+    },
+    {
+      "run_id": "1e564ed4-31f0-4a2a-95b3-8f9eedf4edf3",
+      "task_id": "a.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:56:54.681071"
+    },
+    {
+      "run_id": "1dc81047-34df-4a32-a87b-2b4a6f182c57",
+      "task_id": "b.1",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:57:18.257850"
+    },
+    {
+      "run_id": "191db605-540d-466c-990b-7d9b3a6b414d",
+      "task_id": "b.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T15:58:45.332761"
+    },
+    {
+      "run_id": "c84c97df-1f61-48a8-aee7-09d4273ee56a",
+      "task_id": "b.3",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:01:25.893793"
+    },
+    {
+      "run_id": "bca7772e-7cfc-4b1d-b71b-bc6e2c6062c2",
+      "task_id": "b.4",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:03:32.699717"
+    },
+    {
+      "run_id": "75422f09-6006-4766-a9e4-f498821f40ce",
+      "task_id": "b.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:15:19.807806"
+    },
+    {
+      "run_id": "d0585b08-8bce-443b-a0d7-7d7437418cbf",
+      "task_id": "c.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:19:40.490016"
+    },
+    {
+      "run_id": "166bde9a-3ecf-4403-9440-1c9c11c7b296",
+      "task_id": "c.2",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:21:54.474372"
+    },
+    {
+      "run_id": "4979c05e-a14f-449b-b4ab-ff1008076825",
+      "task_id": "c.3",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:23:52.411182"
+    },
+    {
+      "run_id": "ea2d1afa-5cdc-4626-839a-142db210ab4e",
+      "task_id": "c.4",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:28:10.448066"
+    },
+    {
+      "run_id": "c180a11f-9ebe-45de-a543-9c6245f38653",
+      "task_id": "d.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:42:21.089442"
+    },
+    {
+      "run_id": "d76bf785-fc81-4c57-97d8-71ca5dbd6ddc",
+      "task_id": "d.2",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:45:11.410422"
+    },
+    {
+      "run_id": "94ff25af-c6d0-46d1-9359-ba8a2ba1f167",
+      "task_id": "d.3",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:46:45.135320"
+    },
+    {
+      "run_id": "7de3217c-1329-4e9d-bbf1-c1a5b085c322",
+      "task_id": "d.4",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:48:48.847607"
+    },
+    {
+      "run_id": "4370e5c1-6fe0-4319-a649-0064577f66ec",
+      "task_id": "d.5",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T16:52:19.090234"
+    },
+    {
+      "run_id": "ff7cf5c7-96a9-4fb2-9a2e-c266b0736057",
+      "task_id": "e.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:24:43.268321"
+    },
+    {
+      "run_id": "7bac2b97-24ba-451a-9eb2-8bf0158a79e4",
+      "task_id": "e.2",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:29:15.835811"
+    },
+    {
+      "run_id": "bd3f3368-50f6-4cca-bfb6-950c46533f74",
+      "task_id": "e.3",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:31:39.893307"
+    },
+    {
+      "run_id": "202a658d-0b16-4f9e-9f2a-5e828b51d31e",
+      "task_id": "e.4",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:40:14.859165"
+    },
+    {
+      "run_id": "68731f2b-de4e-48a7-872e-206a3fd31e16",
+      "task_id": "f.1",
+      "backend": "codex_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T19:45:37.638307"
+    },
+    {
+      "run_id": "64ea95c7-a237-4566-9c41-156d3ba0f2f1",
+      "task_id": "f.2",
+      "backend": "pi_cli",
+      "status": "failed",
+      "reviewer_status": "changes_requested",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:05:39.509751"
+    },
+    {
+      "run_id": "d88b313c-3307-4aad-b624-d271d894960d",
+      "task_id": "f.3",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:06:24.680925"
+    },
+    {
+      "run_id": "1faaf077-1c5b-4f71-acec-5298860d2e51",
+      "task_id": "g.1",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:22:25.824344"
+    },
+    {
+      "run_id": "f1eba2b2-9b27-4f49-984c-bacd6be15f3f",
+      "task_id": "g.2",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:26:48.214927"
+    },
+    {
+      "run_id": "a9f38ebd-0dda-4d05-b7e9-56459ebcfad1",
+      "task_id": "g.3",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:31:21.195000"
+    },
+    {
+      "run_id": "f494a500-a062-4d97-8b8a-89273fa54f8b",
+      "task_id": "g.4",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:34:28.179913"
+    },
+    {
+      "run_id": "391efb2c-1665-49e0-a7c8-2880430858b6",
+      "task_id": "g.5",
+      "backend": "antigravity_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:36:40.881875"
+    },
+    {
+      "run_id": "30377c27-793c-4c43-97d2-9e497c95d2f9",
+      "task_id": "h.1",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:37:34.750347"
+    },
+    {
+      "run_id": "c6a06fbd-eb9f-48fc-97a7-015958469c10",
+      "task_id": "h.2",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:40:12.845648"
+    },
+    {
+      "run_id": "25ab1cbc-e7e7-405a-8f78-ced8593b443d",
+      "task_id": "h.3",
+      "backend": "pi_cli",
+      "status": "ok",
+      "reviewer_status": "approved",
+      "verifier_status": "passed",
+      "timestamp": "2026-07-25T20:49:23.125223"
+    }
+  ],
+  "operator_overrides": {},
+  "completed_phases": [
+    "H"
+  ],
+  "remaining_phases": []
+}

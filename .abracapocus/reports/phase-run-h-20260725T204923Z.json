@@ -1,0 +1,97 @@
+{
+  "run_at": "2026-07-25T20:49:23.229023",
+  "phase_dir": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h",
+  "status": "passed",
+  "counts": {
+    "passed": 3,
+    "blocked": 0,
+    "skipped": 0
+  },
+  "tasks": [
+    {
+      "task_id": "h.1",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.1_create_full_validation_script_with_build_test_and_artifact_checks.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "30377c27-793c-4c43-97d2-9e497c95d2f9",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "h.1:Review complete"
+    },
+    {
+      "task_id": "h.2",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.2_create_factory_presets_spanning_thrash_rhythm_and_singing_lead_voicings.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "c6a06fbd-eb9f-48fc-97a7-015958469c10",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "h.2:Review complete"
+    },
+    {
+      "task_id": "h.3",
+      "task_file": "/home/mike/dev/mike/music/plugins/shredboost/.abracapocus/h/task_h.3_write_phase_h_release_verification_document.json",
+      "status": "passed",
+      "acceptance_status": "accepted",
+      "task_verification": {
+        "status": "passed",
+        "checks": [],
+        "owner": "task"
+      },
+      "run_id": "25ab1cbc-e7e7-405a-8f78-ced8593b443d",
+      "write_policy_violations": [],
+      "failure_classification": null,
+      "reviewer_summary": "h.3:Review complete"
+    }
+  ],
+  "phase_verification": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "validate_script_syntax",
+        "status": "failed",
+        "detail": "bash: scripts/validate_plugin.sh: No such file or directory",
+        "command": [
+          "bash",
+          "-n",
+          "scripts/validate_plugin.sh"
+        ],
+        "exit_code": 127
+      },
+      {
+        "name": "presets_wellformed",
+        "status": "failed",
+        "detail": "warning: failed to load external entity \"Resources/Presets/FactoryPresets.xml\"",
+        "command": [
+          "xmllint",
+          "--noout",
+          "Resources/Presets/FactoryPresets.xml"
+        ],
+        "exit_code": 1
+      },
+      {
+        "name": "release_doc_exists",
+        "status": "failed",
+        "detail": "",
+        "command": [
+          "test",
+          "-f",
+          "docs/verification/phase_h_release.md"
+        ],
+        "exit_code": 1
+      }
+    ],
+    "notes": "phase verification complete",
+    "run_when": "all_tasks_pass"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "plan_summary": "Task run: Write phase h release verification document",
+  "backend_executions": [
+    {
+      "backend": "pi_cli",
+      "command": [
+        "pi",
+        "-p",
+        "--provider",
+        "openrouter",
+        "--model",
+        "z-ai/glm-5.2",
+        "Task: Write phase h release verification document\nDescription: Execute scripts/validate_plugin.sh (full clean build, CTest run, and artifact existence checks) and record the real, actually-executed results in docs/verification/phase_h_release.md.\n\nThe document MUST record real executed test results — do not fabricate or template values. Run the validation script, capture the true output, and write a verification report containing:\n1. The exact command(s) run (scripts/validate_plugin.sh and any cmake/ctest invocations).\n2. The build result (success/failure) with relevant output excerpts.\n3. The CTest results: number of tests run, passed, and failed, with the CTest summary line.\n4. The binary artifact existence check results listing the VST3, LV2, and Standalone artifacts and whether each was found.\n5. Confirmation that the four factory presets file (Resources/Presets/FactoryPresets.xml) is present and bundled.\n6. An overall PASS/FAIL conclusion for ShredBoost 1.0 phase h release validation, with the date of execution.\n\nBefore editing, inspect:\n- scripts/validate_plugin.sh (the script to execute; created in h.1)\n- Resources/Presets/FactoryPresets.xml and CMakeLists.txt registration (from h.2)\n- docs/verification/ prior phase documents to match the report format and heading style\nPhase: H\nAcceptance criteria:\n  - docs/verification/phase_h_release.md exists\n  - The document records the exact validation command(s) executed\n  - The document reports real CTest results including tests run/passed/failed counts\n  - The document reports the VST3, LV2, and Standalone artifact existence check outcomes\n  - The document states an overall PASS/FAIL conclusion with the execution date\n  - No file outside the task's allowed_write_paths is created or modified\nContext: AGENTS.md guidance:\n# AGENTS.md\n## Purpose\nThis repository is operated by an autonomous multi-agent system (abracapocus_2).\nAll agents must follow these rules when modifying the codebase.\n---\n## Core Principles\n- Minimal blast radius: only modify what is required for the task\n- Deterministic verification: all changes must be verifiable via code (tests, compile, scripts)\n- No architecture drift: do not introduce new frameworks or major design changes unless explicitly required\n- No unrelated refactors\n- All changes must be reproducible from a clean clone\n---\n## Project Structure\n- docs/ → design, plans, architecture constraints\n- plans/ → master plans\n- phases/ → phase definitions\n- tasks/ → executable task documents\n- backends/ → CLI backend adapters\n- agents/ → specialist agents\n- runtime/ → orchestration, routing, state\n...(truncated)\nAGENTS.md:\n# AGENTS.md\n\n## Purpose\n\nThis repository is operated by an autonomous multi-agent system (abracapocus_2).\nAll agents must follow these rules when modifying the codebase.\n\n---\n\n## Core Principles\n\n- Minimal blast radius: only modify what is required for the task\n- Deterministic verification: all changes must be verifiable via code (tests, compile, scripts)\n- No architecture drift: do not introduce new frameworks or major design changes unless explicitly required\n- No unrelated refactors\n- All changes must be reproducible from a clean clone\n\n---\n\n## Project Structure\n\n- docs/ → design, plans, architecture constraints\n- plans/ → master plans\n- phases/ → phase definitions\n- tasks/ → executable task documents\n- backends/ → CLI backend adapters\n- agents/ → specialist agents\n- runtime/ → orchestration, routing, state\n- reports/ → execution reports (DO NOT MODIFY MANUALLY)\n- state/runtime_state.json → runtime state (DO NOT COMMIT)\n\n---\n\n## Task Execution Rules\n\n- Always operate from a task document when available\n- Respect:\n  - selected_backend\n  - verification_profile\n  - acceptance_criteria\n- If a task conflicts with architecture constraints or phase scope:\n  - STOP and report conflict\n\n---\n\n## Backend Rules\n\n- Backends must:\n  - execute commands deterministically\n  - capture stdout, stderr, exit_code\n  - not silently fail\n- Do not invent backend interfaces; use existing adapters\n- Codex CLI, Aider, Gemini, Claude Code should be invoked through backends only\n\n---\n\n## Verification Rules\n\n- Verification must be deterministic\n- Preferred checks:\n  - pytest\n  - python -m py_compile\n- Do not rely on model self-evaluation\n\n---\n\n## Git Rules\n\n- Do not commit:\n  - runtime_state.json\n  - reports/\n  - logs/\n  - virtual environments\n- Do not modify .gitignore unless required by task\n- Do not create excessive commits; prefer grouped logical commits\n\n---\n\n## Allowed Changes\n\n- Implement task requirements\n- Fix failing verification\n- Update relevant tests\n- Improve documentation tied to the task\n\n---\n\n## Forbidden Changes\n\n- Changing architecture without explicit instruction\n- Adding dependencies without justification\n- Modifying unrelated files\n- Deleting important files\n- Bypassing verification\n\n---\n\n## Planning Rules\n\n- Plans are multi-phase\n- Completed sections are immutable\n- Remaining sections may be updated\n- Tasks must align with:\n  - project brief\n  - architecture constraints\n  - active phase\n\n---\n\n## Reporting\n\n- All executions must produce structured reports\n- Reports must include:\n  - changed files\n  - verification results\n  - assessment\n\n---\n\n## Behavior\n\n- Do not ask unnecessary questions\n- Do not stall execution\n- Do not perform broad scans unless required\n- Prefer direct action over analysis\n\n---\n\n## Priority Order\n\n1. Architecture constraints\n2. Task definition\n3. Verification results\n4. Plan guidance\n\nIf conflicts occur, follow this order.\n\nAGENTS metadata:\n{\"loaded\": true, \"path\": \"/home/mike/dev/mike/abracapocus/python/abracapocus_2/AGENTS.md\", \"rule_count\": 76, \"sha256_12\": \"3678fbe37c64\"}\n"
+      ],
+      "stdout": "The Phase H release verification document has been written to `docs/verification/phase_h_release.md`, recording the real results from executing `scripts/validate_plugin.sh`.\n\nSummary of what was actually executed and recorded:\n\n**Command run:** `bash scripts/validate_plugin.sh` (which internally runs `rm -rf build`, `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, `cmake --build build --config Release`, `ctest --test-dir build --output-on-failure`, and filesystem artifact checks). Exit code: `0`.\n\n**Real results captured in the document:**\n1. **Build:** PASS — all targets linked (`ShredBoost`, `ShredBoost_VST3`, `ShredBoost_LV2`, `ShredBoost_Standalone`, `ShredBoostUnitTests`, `ShredBoostTests`).\n2. **CTest:** 5 tests run, 5 passed, 0 failed — summary line `100% tests passed out of 5` (total time 0.12s). Tests: `ShredBoostParameterTests`, `ProcessBlockRealtimeTests`, `FilterTests`, `WaveshaperTests`, `OversamplingTests`.\n3. **Artifacts:** all three found under `build/ShredBoost_artefacts/Release/` — VST3 (`ShredBoost.vst3`), LV2 (`ShredBoost.lv2`), Standalone (`ShredBoost` executable, 6,231,616 bytes).\n4. **FactoryPresets.xml:** present (3381 bytes, 4 presets: Thrash Chug, Yngwie Lead, SD-1 Rhythm, Clean Tight Attack), registered in `CMakeLists.txt` via `juce_add_binary_data(ShredBoostResources ...)`, and confirmed bundled (`Built target ShredBoostResources`, `BinaryData.h` generated, `libShredBoostResources.a` linked into `ShredBoost`).\n5. **Overall:** PASS, executed 2026-07-25.\n\nThe document follows the heading style and format of the prior `docs/verification/phase_a_scaffold.md` and `phase_f_integration.md`. No file outside `docs/verification/phase_h_release.md` was created or modified.\n",
+      "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+      "exit_code": 0,
+      "duration_seconds": 549.0469968318939,
+      "model": "openrouter/z-ai/glm-5.2",
+      "model_tags": [],
+      "task_type": "coding",
+      "working_directory": "/home/mike/dev/mike/music/plugins/shredboost",
+      "changed_files": [
+        {
+          "path": "docs/verification/phase_h_release.md",
+          "status": "untracked",
+          "code": "??"
+        }
+      ],
+      "diff_summary": "git diff reported no changes",
+      "model_attempts": [
+        {
+          "backend": "pi_cli",
+          "model": "openrouter/z-ai/glm-5.2",
+          "exit_code": 0,
+          "stdout": "The Phase H release verification document has been written to `docs/verification/phase_h_release.md`, recording the real results from executing `scripts/validate_plugin.sh`.\n\nSummary of what was actually executed and recorded:\n\n**Command run:** `bash scripts/validate_plugin.sh` (which internally runs `rm -rf build`, `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, `cmake --build build --config Release`, `ctest --test-dir build --output-on-failure`, and filesystem artifact checks). Exit code: `0`.\n\n**Real results captured in the document:**\n1. **Build:** PASS — all targets linked (`ShredBoost`, `ShredBoost_VST3`, `ShredBoost_LV2`, `ShredBoost_Standalone`, `ShredBoostUnitTests`, `ShredBoostTests`).\n2. **CTest:** 5 tests run, 5 passed, 0 failed — summary line `100% tests passed out of 5` (total time 0.12s). Tests: `ShredBoostParameterTests`, `ProcessBlockRealtimeTests`, `FilterTests`, `WaveshaperTests`, `OversamplingTests`.\n3. **Artifacts:** all three found under `build/ShredBoost_artefacts/Release/` — VST3 (`ShredBoost.vst3`), LV2 (`ShredBoost.lv2`), Standalone (`ShredBoost` executable, 6,231,616 bytes).\n4. **FactoryPresets.xml:** present (3381 bytes, 4 presets: Thrash Chug, Yngwie Lead, SD-1 Rhythm, Clean Tight Attack), registered in `CMakeLists.txt` via `juce_add_binary_data(ShredBoostResources ...)`, and confirmed bundled (`Built target ShredBoostResources`, `BinaryData.h` generated, `libShredBoostResources.a` linked into `ShredBoost`).\n5. **Overall:** PASS, executed 2026-07-25.\n\nThe document follows the heading style and format of the prior `docs/verification/phase_a_scaffold.md` and `phase_f_integration.md`. No file outside `docs/verification/phase_h_release.md` was created or modified.\n",
+          "stderr": "Warning: Model \"z-ai/glm-5.2\" not found for provider \"openrouter\". Using custom model id.\n",
+          "duration_seconds": 549.0469968318939,
+          "changed_files": [
+            {
+              "path": "docs/verification/phase_h_release.md",
+              "status": "untracked",
+              "code": "??"
+            }
+          ],
+          "diff_summary": "git diff reported no changes",
+          "outcome_classification": "backend_completed_with_changes",
+          "backend_timeout": false,
+          "backend_verification_timeout": false,
+          "timeout_seconds": null
+        }
+      ],
+      "write_policy_violations": [],
+      "outcome_classification": "backend_completed_with_changes",
+      "backend_timeout": false,
+      "backend_verification_timeout": false,
+      "timeout_seconds": null,
+      "changed_files_at_timeout_exit": [],
+      "abracapocus_verification_ran_after_backend_timeout": false,
+      "verification_owner": "task",
+      "verification_result": "passed"
+    }
+  ],
+  "review": {
+    "status": "approved",
+    "findings": [],
+    "summary": "h.3:Review complete",
+    "created_at": "2026-07-25T20:49:23.159023"
+  },
+  "verification": {
+    "status": "passed",
+    "checks": [],
+    "created_at": "2026-07-25T20:49:23.159032",
+    "notes": "H:passed",
+    "profile": "focused"
+  },
+  "change_assessment": {
+    "task_intent": "Execute scripts/validate_plugin.sh (full clean build, CTest run, and artifact existence checks) and record the real, actually-executed results in docs/verification/phase_h_release.md.\n\nThe document MUST record real executed test results — do not fabricate or template values. Run the validation script, capture the true output, and write a verification report containing:\n1. The exact command(s) run (scripts/validate_plugin.sh and any cmake/ctest invocations).\n2. The build result (success/failure) with relevant output excerpts.\n3. The CTest results: number of tests run, passed, and failed, with the CTest summary line.\n4. The binary artifact existence check results listing the VST3, LV2, and Standalone artifacts and whether each was found.\n5. Confirmation that the four factory presets file (Resources/Presets/FactoryPresets.xml) is present and bundled.\n6. An overall PASS/FAIL conclusion for ShredBoost 1.0 phase h release validation, with the date of execution.\n\nBefore editing, inspect:\n- scripts/validate_plugin.sh (the script to execute; created in h.1)\n- Resources/Presets/FactoryPresets.xml and CMakeLists.txt registration (from h.2)\n- docs/verification/ prior phase documents to match the report format and heading style",
+    "changed_files_summary": "Change assessment disabled",
+    "verification_summary": "passed",
+    "assessment_status": "skipped",
+    "notes": "Change assessment disabled; set ABRACAPOCUS_CHANGE_ASSESSMENT_ENABLED=true to enable advisory telemetry",
+    "matches_intent": null,
+    "scope_status": "unknown",
+    "architecture_violation": false,
+    "affected_modules": [
+      "docs"
+    ],
+    "boundary_crossings": [],
+    "risk_level": "unknown",
+    "unrelated_changes": [],
+    "public_contract_changes": [],
+    "new_dependencies": [],
+    "assessment_summary": "change_assessment disabled"
+  },
+  "metadata": {
+    "run_id": "25ab1cbc-e7e7-405a-8f78-ced8593b443d",
+    "project_name": "shredboost",
+    "plan_version": "task-h.3",
+    "task_id": "h.3",
+    "task_title": "Write phase h release verification document",
+    "task_status": "completed",
+    "selected_backend": "pi_cli",
+    "verification_profile": "focused",
+    "backend_reason": "phase_based",
+    "frame_failures": [],
+    "agents_md": {
+      "loaded": true,
+      "path": "/home/mike/dev/mike/abracapocus/python/abracapocus_2/AGENTS.md",
+      "rule_count": 76,
+      "sha256_12": "3678fbe37c64"
+    },
+    "phase_results": [
+      {
+        "phase_name": "H",
+        "status": "passed",
+        "verification": "passed",
+        "task_results": [
+          {
+            "task_id": "h.3",
+            "status": "passed",
+            "acceptance_status": "accepted",
+            "backend": "pi_cli",
+            "backend_outcome_classification": "backend_completed_with_changes",
+            "changed_files": [
+              {
+                "path": "docs/verification/phase_h_release.md",
+                "status": "untracked",
+                "code": "??"
+              }
+            ],
+            "reconciliation_status": "satisfied",
+            "backend_timeout": false,
+            "backend_elapsed_seconds": 549.0469968318939,
+            "backend_timeout_seconds": null,
+            "changed_files_at_timeout_exit": [],
+            "abracapocus_verification_ran_after_backend_timeout": false,
+            "verification_owner": "task",
+            "verification_result": "passed",
+            "frame_failure": false,
+            "retry_attempts": []
+          }
+        ]
+      }
+    ]
+  }
+}

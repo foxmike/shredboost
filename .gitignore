@@ -20,3 +20,7 @@ cmake-build-*/
 
 # OS cruft
 .DS_Store
+
+# SQLite runtime
+*.db-shm
+*.db-wal
