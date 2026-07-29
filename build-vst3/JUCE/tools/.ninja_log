@@ -1,0 +1,18 @@
+# ninja log v5
+29	9288	1785201458294027698	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o	2d028d1e546329c8
+29	8423	1785201457429008892	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o	fbb8e97bfb1551e2
+28	6597	1785201455611969395	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o	1cf390f4a97d573b
+28	6127	1785201455141959179	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics_3.cpp.o	888ae69a9cb2de3f
+28	3971	1785201452995912536	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics_4.cpp.o	a7f27e63a4c21ece
+9288	10205	1785201459234048135	extras/Build/juceaide/juceaide_artefacts/Custom/juceaide	fa9b3041b5a04490
+29	3954	1785201452976912123	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o	dd14a9912f907b5f
+29	3875	1785201452898910428	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics_5.cpp.o	1c9e7f72eace0f6c
+28	3105	1785201452134893825	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics_2.cpp.o	df596e4bf638f078
+29	2034	1785201451062870531	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o	ca4094d56661252e
+29	43	1785201449082827509	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core_CompilationTime.cpp.o	ac2854473aad879a
+1	27	0	/home/mike/dev/mike/music/plugins/shredboost/build-vst3/JUCE/tools/CMakeFiles/cmake.verify_globs	303aabe237052312
+28	1858	1785201450892866837	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o	ba847c4b200eed4e
+29	1292	1785201450325854517	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o	8dc26461cee69e10
+29	161	1785201449198830030	extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics_Sheenbidi.c.o	146aa00b2ae19d93
+28	1932	1785201450965868423	extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o	a321d1449d71203
+1	28	0	/home/mike/dev/mike/music/plugins/shredboost/build-vst3/JUCE/tools/CMakeFiles/cmake.verify_globs	303aabe237052312
