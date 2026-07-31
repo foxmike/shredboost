@@ -24,3 +24,4 @@ cmake-build-*/
 # SQLite runtime
 *.db-shm
 *.db-wal
+build-vst3/
