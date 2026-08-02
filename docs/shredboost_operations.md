@@ -1,7 +1,10 @@
-# ShredBoost — Operations Guide
+# ShredBoost — Operations Manual
 
-## Purpose
-ShredBoost is an aggressive pre-amp attack shaper, overdrive, and low-end tightener engineered for high-gain thrash rhythm and fast lead guitar. By carving out muddy sub-bass frequencies and boosting critical mid-range frequencies before the nonlinear gain stages, it prevents intermodulation distortion downstream in the high-gain amplifier simulator. The plugin shapes pick transients and clipping characteristics to deliver a defined, articulate note attack that cuts through dense mixes.
+## Plugin Overview
+ShredBoost is an aggressive pre-amp attack shaper, overdrive, and low-end tightener engineered for high-gain thrash rhythm and fast lead guitar. By carving out muddy sub-bass frequencies and boosting critical mid-range frequencies before the nonlinear gain stages, it prevents intermodulation distortion downstream in the high-gain amplifier simulator.
+
+## Intended Use
+ShredBoost is designed to be placed before a high-gain amp simulator or amplifier to tighten the low end, voice the mid range, and shape the transient attack. The Pick Attack transient booster is most effective in Clean mode or when positioned ahead of low-to-moderate amp gain stages; when followed by extreme downstream saturation, transient dynamics are naturally limited by the amplifier's clipping characteristics.
 
 ## Signal Flow
 The internal audio processing chain consists of the following sequential stages:
@@ -21,10 +24,7 @@ The internal audio processing chain consists of the following sequential stages:
 10. **Output Level (`level`)**: Applies output gain (-24 to +12 dB) with ramping.
 11. **Auto Gain Bypass (`auto_gain`)**: When active, dynamically measures input and output RMS levels and compensates the output volume so that bypassing the plugin maintains consistent perceived loudness.
 
----
-
-## Controls Reference
-
+## Controls and Parameters
 All parameters are located on a single main interface panel:
 
 ### Input Trim
@@ -95,7 +95,7 @@ All parameters are located on a single main interface panel:
 - **Type:** choice
 - **Range:** 1x (0), 2x (1), 4x (2), default 2x (1)
 - **Unit:** none
-- **What it does:** Chooses the oversampling factor (1x, 2x, or 4x) for the clipping engine.
+- **What it does:** Chooses the oversampling factor (1x, 2x, or 4x) for the clipping engine. Modifying the oversampling factor dynamically during playback engages a brief 10 ms fade to ensure smooth, click-free transition during DSP re-initialization.
 
 ### Auto Gain
 - **Parameter ID:** `auto_gain`
@@ -104,28 +104,29 @@ All parameters are located on a single main interface panel:
 - **Unit:** none
 - **What it does:** Enables or disables automatic RMS-matching gain compensation to keep bypassed and wet levels balanced.
 
----
+## Stereo and Mono Behavior
+Left and Right channels are processed independently with separate processing paths, while parameters are applied concurrently across channels.
 
-## Metering and Visualization
-- **Level Meters (`LevelMeters`)**: Polled at 60 Hz. Renders Left and Right peak and RMS channels for input and output (-60 dB to +6 dB), alongside a central Peak Saturation reduction readout showing the instantaneous compression/clipping depth in dB. RMS metering is exponentially smoothed, peak hold decay decays at ~0.222 dB/frame after a 0.5s hold, and saturation reduction decays at 0.25 dB/frame after a 0.25s hold.
-- **Spectrum Display (`SpectrumOverlay`)**: Displays a real-time overlay comparing the pre-drive input spectrum (green) and post-drive output spectrum (orange).
-- **Transfer Curve Scope (`TransferCurveScope`)**: Renders a real-time X-Y input vs output transfer function plot corresponding to the selected clipping voicing and drive settings.
+## Latency and Lookahead
+- Oversampling filter stages introduce latency that varies with selection.
+- Latency is 0 samples at 1x oversampling. At 2x and 4x oversampling, the polyphase FIR filter's group delay is measured, stored, and reported dynamically to the host DAW using `setLatencySamples()`.
 
-## Preset System
+## Bypass Behavior
+Supported by the `auto_gain` dynamic compensation mode, which balances active and bypassed perceived loudness. The bypass parameter ID is `bypass`.
+
+## Presets and State Recall
 Four factory presets are compiled directly into the binary via `FactoryPresets.xml`:
 1. `Thrash Chug`: Steep low-cut at 280 Hz, mid bump at 620 Hz, high drive, and maximum pick attack.
 2. `Yngwie Lead`: Symmetric smooth clipping, 150 Hz tight cut, and +3 dB output volume.
 3. `SD-1 Rhythm`: SD-1 asymmetric clipping with a +6 dB mid-hump.
 4. `Clean Tight Attack`: Clipping bypassed, emphasizing transient pick shaping (+7 dB) and 220 Hz low-cut.
+
 Save and load behavior is managed by the host DAW using the APVTS standard XML serialization (`getStateInformation`/`setStateInformation`).
 
-## Latency
-- Oversampling filter stages introduce latency that varies with selection.
-- Latency is 0 samples at 1x oversampling. At 2x and 4x oversampling, the polyphase FIR filter's group delay is measured, stored, and reported dynamically to the host DAW using `setLatencySamples()`.
+## Metering and Visual Feedback
+- **Level Meters (`LevelMeters`)**: Polled at 60 Hz. Renders Left and Right peak and RMS channels for input and output (-60 dB to +6 dB), alongside a central Peak Saturation reduction readout showing the instantaneous compression/clipping depth in dB. RMS metering is exponentially smoothed, peak hold decay decays at ~0.222 dB/frame after a 0.5s hold, and saturation reduction decays at 0.25 dB/frame after a 0.25s hold.
+- **Spectrum Display (`SpectrumOverlay`)**: Displays a real-time overlay comparing the pre-drive input spectrum (green) and post-drive output spectrum (orange).
+- **Transfer Curve Scope (`TransferCurveScope`)**: Renders a real-time X-Y input vs output transfer function plot corresponding to the selected clipping voicing and drive settings.
 
 ## Supported Formats
 - VST3, LV2, Standalone (specified in `CMakeLists.txt`).
-
-## Known Limitations
-- **Transient Compression Downstream**: Because high-gain amplifiers act as limiters, the Pick Attack transient booster is most effective in Clean mode or ahead of low-to-moderate amp gain; its effect is compressed out under extreme downstream high-gain saturation.
-- **Oversampling Selection Mute**: Modifying the oversampling factor causes a brief 10 ms mute-fade to allow the DSP to re-initialize safely without clicks.
